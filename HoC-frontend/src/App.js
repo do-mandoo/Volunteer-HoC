@@ -1,5 +1,6 @@
 import './App.css';
 import { Route } from 'react-router-dom';
+import Container from './components/common/Container';
 import PostListPage from './pages/PostListPage';
 import LoginPage from './pages/LoginPage';
 import DivisionPage from './pages/DivisionPage';
