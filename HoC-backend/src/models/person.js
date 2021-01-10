@@ -5,7 +5,6 @@ import jwt from 'jsonwebtoken';
 const PersonSchema = new Schema({
   username: String,
   hashedPassword: String,
-  companyName: String,
   address: String,
   phoneNumber: String,
 });

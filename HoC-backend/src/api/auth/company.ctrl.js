@@ -10,7 +10,7 @@ export const register = async ctx => {
     passwordConfirm: Joi.string().required(),
     companyName: Joi.string().required(),
     address: Joi.string().required(),
-    phoneNumber: Joi.number().required(),
+    phoneNumber: Joi.string().required(),
     position: Joi.string().required(),
   });
   const result = schema.validate(ctx.request.body);

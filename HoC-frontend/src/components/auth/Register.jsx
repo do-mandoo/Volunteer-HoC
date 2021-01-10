@@ -113,7 +113,7 @@ const Register = ({ position, onChange, onSubmit, form }) => {
           />
         
 
-        <ButtonWithMarginTop green fullWidth>로그인</ButtonWithMarginTop>
+        <ButtonWithMarginTop green fullWidth>회원가입</ButtonWithMarginTop>
       </form>
       <Footer>
           <Link to="/login">로그인</Link>

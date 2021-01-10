@@ -8,11 +8,18 @@ export const REGISTER_FAIL = 'REGISTER_FAIL';
 
 // initialState
 export const AuthInitial = {
-  register: {
+  company: {
     username: '',
     password: '',
     passwordConfirm: '',
     companyName: '',
+    address: '',
+    phoneNumber: '',
+  },
+  person: {
+    username: '',
+    password: '',
+    passwordConfirm: '',
     address: '',
     phoneNumber: '',
   },
@@ -25,6 +32,8 @@ export const AuthInitial = {
 };
 
 export function AuthReducer(state, action) {
+  console.log(state);
+  console.log(action);
   switch (action.type) {
     case CHANGE_FIELD:
       return {

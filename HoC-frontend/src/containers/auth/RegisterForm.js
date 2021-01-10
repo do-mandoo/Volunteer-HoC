@@ -3,25 +3,48 @@ import axios from 'axios';
 import { CHANGE_FIELD, INITAILIZE_FORM } from '../../contexts/auth';
 import { Auth } from '../../contexts/store';
 import Register from '../../components/auth/Register';
+const url = window.location.href;
+const parse = url.split('/');
 
 const RegisterForm = () => {
   const { AuthState, AuthDispatch } = useContext(Auth);
-  const url = window.location.href;
-  const parse = url.split('/');
 
   // 비동기
   const companyRegister = async () => {
-    console.log(AuthState.register);
+    console.log(AuthState);
     try {
-      const response = await axios.post('api/auth/register/company', {
-        username: AuthState.register.username,
-        password: AuthState.register.password,
-        passwordConfirm: AuthState.register.passwordConfirm,
-        position: parse[parse.length - 1],
-        companyName: AuthState.register.companyName,
-        address: AuthState.register.address,
-        phoneNumber: AuthState.register.phoneNumber,
-      });
+      const response = await axios.post(
+        'http://localhost:3000/api/auth/register/company',
+        {
+          username: AuthState.company.username,
+          password: AuthState.company.password,
+          passwordConfirm: AuthState.company.passwordConfirm,
+          position: parse[parse.length - 1],
+          companyName: AuthState.company.companyName,
+          address: AuthState.company.address,
+          phoneNumber: AuthState.company.phoneNumber,
+        }
+      );
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const personRegister = async () => {
+    console.log(AuthState.person);
+    try {
+      const response = await axios.post(
+        'http://localhost:3000/api/auth/register/person',
+        {
+          username: AuthState.person.username,
+          password: AuthState.person.password,
+          passwordConfirm: AuthState.person.passwordConfirm,
+          position: parse[parse.length - 1],
+          address: AuthState.person.address,
+          phoneNumber: AuthState.person.phoneNumber,
+        }
+      );
       console.log(response);
     } catch (error) {
       console.log(error);
@@ -32,7 +55,7 @@ const RegisterForm = () => {
     const { value, name } = e.target;
     AuthDispatch({
       type: CHANGE_FIELD,
-      form: 'register',
+      form: parse[parse.length - 1],
       key: name,
       value,
     });
@@ -40,20 +63,21 @@ const RegisterForm = () => {
 
   const onSubmit = e => {
     e.preventDefault();
-    companyRegister();
+    if (parse[parse.length - 1] === 'company') companyRegister();
+    if (parse[parse.length - 1] === 'person') personRegister();
   };
 
   useEffect(() => {
     AuthDispatch({
       type: INITAILIZE_FORM,
-      form: 'register',
+      form: parse[parse.length - 1],
     });
   }, [AuthDispatch]);
 
   return (
     <Register
       position={parse[parse.length - 1]}
-      form="register"
+      form={parse[parse.length - 1]}
       onChange={onChange}
       onSubmit={onSubmit}
     />

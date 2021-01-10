@@ -1,6 +1,6 @@
 import Joi from 'joi';
 // import { getLineInfo } from '../../../node_modules/acorn/dist/acorn';
-import User from '../../models/user';
+import Person from '../../models/person';
 
 export const register = async ctx => {
   // Request Body
@@ -8,9 +8,8 @@ export const register = async ctx => {
     username: Joi.string().alphanum().min(3).max(20).required(),
     password: Joi.string().required(),
     passwordConfirm: Joi.string().required(),
-    companyName: Joi.string().required(),
     address: Joi.string().required(),
-    phoneNumber: Joi.number().required(),
+    phoneNumber: Joi.string().required(),
     position: Joi.string().required(),
   });
   const result = schema.validate(ctx.request.body);
@@ -23,22 +22,20 @@ export const register = async ctx => {
   const {
     username,
     password,
-    companyName,
     address,
     phoneNumber,
     position,
   } = ctx.request.body;
 
   try {
-    const exists = await User.findByUsername(username);
+    const exists = await Person.findByUsername(username);
     if (exists) {
       ctx.status = 409; // Conflict
       return;
     }
 
-    const user = new User({
+    const user = new Person({
       username,
-      companyName,
       address,
       phoneNumber,
       position,
@@ -69,7 +66,7 @@ export const login = async ctx => {
   }
 
   try {
-    const user = await User.findByUsername(username);
+    const user = await Person.findByUsername(username);
 
     if (!user) {
       ctx.status = 401;
