@@ -13,6 +13,7 @@ export const AuthInitial = {
     password: '',
     passwordConfirm: '',
     companyName: '',
+    address: '',
     phoneNumber: '',
   },
   login: {

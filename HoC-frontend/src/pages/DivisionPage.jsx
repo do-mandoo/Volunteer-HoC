@@ -6,11 +6,11 @@ import LoginForm from '../containers/auth/LoginForm';
 const Division = () => {
   return (
     <>
-    <Link to="/register?position=company">
+    <Link to="/register/company">
       기업으로 회원가입
     </Link>
     
-    <Link to="/register?position=person">
+    <Link to="/register/person">
     개인으로 회원가입
     </Link>
     </>

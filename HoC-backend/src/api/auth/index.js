@@ -1,11 +1,16 @@
 import Router from 'koa-router';
-import * as authCtrl from './auth.ctrl';
+import * as companyCtrl from './company.ctrl';
 
 const auth = new Router();
 
-auth.post('/register', authCtrl.register);
-auth.post('/login', authCtrl.login);
-auth.get('/check', authCtrl.check);
-auth.post('/logout', authCtrl.logout);
+auth.post('/register/company', companyCtrl.register);
+auth.post('/login/company', companyCtrl.login);
+auth.get('/check/company', companyCtrl.check);
+auth.post('/logout/company', companyCtrl.logout);
+
+// auth.post('/register?position=company', authCtrl.register);
+// auth.post('/login?position=company', authCtrl.login);
+// auth.get('/check?position=company', authCtrl.check);
+// auth.post('/logout?position=company', authCtrl.logout);
 
 export default auth;

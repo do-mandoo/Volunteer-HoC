@@ -252,12 +252,8 @@ Temporary Items
 
 # End of https://www.toptal.com/developers/gitignore/api/macos
 
-package.json
-package-lock.json
 node
 local
-.eslintcache
-.prettierrc
 HoC-backend/.eslintrc.json
 HoC-backend/yarn.lock
 HoC-backend/jsconfig.json
