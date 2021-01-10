@@ -10,7 +10,7 @@ const RegisterForm = () => {
   const parse = url.split('/');
 
   // 비동기
-  const register = async () => {
+  const companyRegister = async () => {
     console.log(AuthState.register);
     try {
       const response = await axios.post('api/auth/register/company', {
@@ -40,7 +40,7 @@ const RegisterForm = () => {
 
   const onSubmit = e => {
     e.preventDefault();
-    register();
+    companyRegister();
   };
 
   useEffect(() => {
