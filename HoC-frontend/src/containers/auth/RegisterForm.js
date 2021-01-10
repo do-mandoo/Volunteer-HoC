@@ -1,17 +1,22 @@
 import React, { useContext, useEffect } from 'react';
 import axios from 'axios';
-import { CHANGE_FIELD, INITAILIZE_FORM } from '../../contexts/auth';
+import {
+  CHANGE_FIELD,
+  INITAILIZE_FORM,
+  REGISTER_FAIL,
+  REGISTER_SUCCESS,
+} from '../../contexts/auth';
 import { Auth } from '../../contexts/store';
 import Register from '../../components/auth/Register';
+import { withRouter } from 'react-router-dom';
 const url = window.location.href;
 const parse = url.split('/');
 
-const RegisterForm = () => {
+const RegisterForm = ({ history }) => {
   const { AuthState, AuthDispatch } = useContext(Auth);
 
   // 비동기
   const companyRegister = async () => {
-    console.log(AuthState);
     try {
       const response = await axios.post(
         'http://localhost:3000/api/auth/register/company',
@@ -26,13 +31,23 @@ const RegisterForm = () => {
         }
       );
       console.log(response);
+      await AuthDispatch({
+        type: REGISTER_SUCCESS,
+        auth: response,
+      });
+      await console.log('회원가입성공');
+      await history.push('/');
     } catch (error) {
       console.log(error);
+      await AuthDispatch({
+        type: REGISTER_FAIL,
+        authError: error,
+      });
+      await console.log('오류');
     }
   };
 
   const personRegister = async () => {
-    console.log(AuthState.person);
     try {
       const response = await axios.post(
         'http://localhost:3000/api/auth/register/person',
@@ -45,9 +60,19 @@ const RegisterForm = () => {
           phoneNumber: AuthState.person.phoneNumber,
         }
       );
-      console.log(response);
+      await AuthDispatch({
+        type: REGISTER_SUCCESS,
+        auth: response,
+      });
+      await console.log('회원가입성공');
     } catch (error) {
       console.log(error);
+      await AuthDispatch({
+        type: REGISTER_FAIL,
+        authError: error,
+      });
+      await console.log('오류');
+      await console.log(AuthState);
     }
   };
 
@@ -67,13 +92,6 @@ const RegisterForm = () => {
     if (parse[parse.length - 1] === 'person') personRegister();
   };
 
-  useEffect(() => {
-    AuthDispatch({
-      type: INITAILIZE_FORM,
-      form: parse[parse.length - 1],
-    });
-  }, [AuthDispatch]);
-
   return (
     <Register
       position={parse[parse.length - 1]}
@@ -84,4 +102,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default withRouter(RegisterForm);

@@ -6,6 +6,9 @@ export const REGISTER = 'REGISTER';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_FAIL = 'REGISTER_FAIL';
 
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAIL = 'LOGIN_FAIL';
+
 // initialState
 export const AuthInitial = {
   company: {
@@ -51,6 +54,12 @@ export function AuthReducer(state, action) {
 
     case REGISTER_FAIL:
       return { ...state, authError: null };
+
+    case LOGIN_SUCCESS:
+      return { ...state, authError: null, auth: action.auth };
+
+    case LOGIN_FAIL:
+      return { ...state, authError: action.error };
     default:
       return state;
   }
