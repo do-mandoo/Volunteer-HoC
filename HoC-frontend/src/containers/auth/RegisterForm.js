@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import {
   CHANGE_FIELD,
@@ -14,6 +14,7 @@ const parse = url.split('/');
 
 const RegisterForm = ({ history }) => {
   const { AuthState, AuthDispatch } = useContext(Auth);
+  const [error, setError] = useState(null);
 
   // 비동기
   const companyRegister = async () => {
@@ -41,8 +42,9 @@ const RegisterForm = ({ history }) => {
       console.log(error);
       await AuthDispatch({
         type: REGISTER_FAIL,
-        authError: error,
+        error,
       });
+      await console.log(AuthState);
       await console.log('오류');
     }
   };
@@ -71,6 +73,7 @@ const RegisterForm = ({ history }) => {
         type: REGISTER_FAIL,
         authError: error,
       });
+      await console.log(AuthState.authError);
       await console.log('오류');
       await console.log(AuthState);
     }
@@ -98,6 +101,7 @@ const RegisterForm = ({ history }) => {
       form={parse[parse.length - 1]}
       onChange={onChange}
       onSubmit={onSubmit}
+      error={AuthState.authError}
     />
   );
 };

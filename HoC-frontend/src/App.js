@@ -24,7 +24,8 @@ function App() {
       <Loading.Provider value={{ LoadingState, LoadingDispatch }}>
         <Auth.Provider value={{ AuthState, AuthDispatch }}>
           <Route path={['/@:username', '/']} component={PostListPage} exact />
-          <Route path="/login" component={LoginPage} />
+          <Route path="/login/company" component={LoginPage} />
+          <Route path="/login/person" component={LoginPage} />
           <Route path="/division" component={DivisionPage} />
           <Route path="/register/company" exact component={RegisterPage} />
           <Route path="/register/person" exact component={RegisterPage} />
