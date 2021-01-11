@@ -14,7 +14,7 @@ const AuthFormBlock = styled.div`
   }
 `;
 
-const StyledInput = styled.input`
+export const StyledInput = styled.input`
   font-size: 1rem;
   border: none;
   border-bottom: 1px solid ${palette.gray[5]};

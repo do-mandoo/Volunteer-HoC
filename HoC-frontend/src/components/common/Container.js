@@ -6,6 +6,7 @@ const Container = styled.div`
   margin:30px auto;
   padding:50px;
   background-color: yellowgreen;
+  box-sizing:border-box;
 `;
 
 function StyledContainer({ children }) {
