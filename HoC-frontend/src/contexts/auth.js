@@ -6,6 +6,9 @@ export const REGISTER = 'REGISTER';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_FAIL = 'REGISTER_FAIL';
 
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAIL = 'LOGIN_FAIL';
+
 // initialState
 export const AuthInitial = {
   company: {
@@ -32,8 +35,6 @@ export const AuthInitial = {
 };
 
 export function AuthReducer(state, action) {
-  console.log(state);
-  console.log(action);
   switch (action.type) {
     case CHANGE_FIELD:
       return {
@@ -50,7 +51,13 @@ export function AuthReducer(state, action) {
       return { ...state, authError: null, auth: action.auth };
 
     case REGISTER_FAIL:
-      return { ...state, authError: null };
+      return { ...state, authError: action.error.response };
+
+    case LOGIN_SUCCESS:
+      return { ...state, authError: null, auth: action.auth };
+
+    case LOGIN_FAIL:
+      return { ...state, authError: action.error };
     default:
       return state;
   }

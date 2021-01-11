@@ -6,6 +6,13 @@ import Button from "../common/Button";
 
 // 로그인 폼을 보여주는 컴포넌트
 
+const ErrorMessage = styled.div`
+  color: red;
+  text-align: center;
+  font-size: 0.875rem;
+  margin-top: 1rem;
+`;
+
 const AuthFormBlock = styled.div`
   h3 {
     margin: 0;
@@ -14,7 +21,7 @@ const AuthFormBlock = styled.div`
   }
 `;
 
-const StyledInput = styled.input`
+export const StyledInput = styled.input`
   font-size: 1rem;
   border: none;
   border-bottom: 1px solid ${palette.gray[5]};
@@ -49,7 +56,7 @@ const ButtonWithMarginTop = styled(Button)`
 `;
 
 
-const Register = ({ position, onChange, onSubmit, form }) => {
+const Register = ({ position, onChange, onSubmit, form, error }) => {
   return (
     <AuthFormBlock>
       {position === 'company' ?
@@ -110,9 +117,9 @@ const Register = ({ position, onChange, onSubmit, form }) => {
             type="tel"  
             onChange={onChange}
             value={form.phoneNumber}
-          />
-        
-
+        />
+        {error && error.status === 409 && <ErrorMessage>이미 존재하는 아이디입니다.</ErrorMessage>}
+        {error && error.status === 400 && <ErrorMessage>회원 가입 양식을 지켜주세요.</ErrorMessage>}
         <ButtonWithMarginTop green fullWidth>회원가입</ButtonWithMarginTop>
       </form>
       <Footer>

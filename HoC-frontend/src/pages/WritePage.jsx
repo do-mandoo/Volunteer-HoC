@@ -1,11 +1,9 @@
 import React from 'react';
-import StyledContainer from '../components/common/Container';
+import WritePageForm from '../containers/post/WritePageForm';
 
 const WritePage = () => {
   return (
-    <StyledContainer>
-      <div>글쓰기</div>
-    </StyledContainer>
+      <WritePageForm />
   );
 };
 
