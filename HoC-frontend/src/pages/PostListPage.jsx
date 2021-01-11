@@ -9,7 +9,7 @@ const PostListPage = () => {
       <Header />
       <StyledContainer>
         <Button>버튼</Button>
-        </StyledContainer>
+      </StyledContainer>
     </div>
   );
 };
