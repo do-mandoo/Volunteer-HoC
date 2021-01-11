@@ -8,6 +8,7 @@ const Container = styled.div`
   padding-left: 1rem;
   padding-right: 1rem;
   background-color: yellowgreen;
+  box-sizing:border-box;
 `;
 
 // const ResponsiveBlock = styled.div`
