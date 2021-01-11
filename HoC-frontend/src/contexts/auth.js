@@ -35,8 +35,6 @@ export const AuthInitial = {
 };
 
 export function AuthReducer(state, action) {
-  console.log(state);
-  console.log(action);
   switch (action.type) {
     case CHANGE_FIELD:
       return {
@@ -53,7 +51,7 @@ export function AuthReducer(state, action) {
       return { ...state, authError: null, auth: action.auth };
 
     case REGISTER_FAIL:
-      return { ...state, authError: null };
+      return { ...state, authError: action.error.response };
 
     case LOGIN_SUCCESS:
       return { ...state, authError: null, auth: action.auth };
