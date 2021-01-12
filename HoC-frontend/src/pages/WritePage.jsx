@@ -1,9 +1,11 @@
 import React from 'react';
-import WritePageForm from '../containers/post/WritePageForm';
+import WritePageForm from '../components/post/WritePageForm';
 
 const WritePage = () => {
   return (
+    <>
       <WritePageForm />
+    </>
   );
 };
 
