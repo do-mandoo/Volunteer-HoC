@@ -37,23 +37,30 @@ const BodyList = styled.div`
     height: 100%;
     background-color:white;
     margin: 5px;
+    padding:10px;
+    text-align:center;
+    font-weight:700;
+    font-size:26px;
   }
 
   .Left{
-    width: 80%;
+    width: 70%;
     list-style: none;
     display:inline-block;
   }
   
   .Right{
-    width: 20%;
+    width: 30%;
   }
 
   li{
     padding-bottom: 10px;
-    padding:0px;
+    padding:10px 0;
     margin:0px;
     background-color: #eee;
+    text-align:left;
+    font-weight:400;
+    font-size:16px;
   }
 
 `;
@@ -71,7 +78,7 @@ const MyForm = () => {
       <GlobalList>
         <HeaderName>
           <div>
-            <h1>나의 모집 공고</h1>
+            <h1>내가 작성한 모집 공고</h1>
           </div>
         </HeaderName>
         <BodyList>
@@ -105,3 +112,16 @@ const MyForm = () => {
 };
 
 export default MyForm;
+
+
+//action
+export const MODIFY_SUCCESS = 'MODIFY_SUCCESS';
+export const MODIFY_FAIL = 'MODIFY_FAIL';
+
+export const DELETE_SUCCESS = 'DELETE_SUCCESS';
+export const DELETE_FAIL = 'DELETE_FAIL';
+
+export function MyPageReducer(state, action){
+  console.log("dd");
+  return;
+}

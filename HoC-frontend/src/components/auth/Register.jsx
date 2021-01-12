@@ -55,7 +55,6 @@ const ButtonWithMarginTop = styled(Button)`
   margin-top: 1rem;
 `;
 
-
 const Register = ({ position, onChange, onSubmit, form, error }) => {
   return (
     <AuthFormBlock>
