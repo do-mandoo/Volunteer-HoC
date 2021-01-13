@@ -3,6 +3,7 @@ import axios from 'axios';
 import {
   CHANGE_FIELD,
   INITAILIZE_FORM,
+  REGISTER_INFO,
   LOGIN_FAIL,
   LOGIN_SUCCESS,
 } from '../../contexts/auth';
@@ -18,7 +19,6 @@ const LoginForm = ({ history }) => {
 
   // 비동기 작업
   const login = async () => {
-    console.log(AuthState.login);
     try {
       const response = await axios({
         method: 'POST',
@@ -32,7 +32,14 @@ const LoginForm = ({ history }) => {
         type: LOGIN_SUCCESS,
         auth: response,
       });
-      await console.log('로그인 성공');
+      await AuthDispatch({
+        type: REGISTER_INFO,
+        form: parse[parse.length - 1],
+        username: response.data.username,
+        address: response.data.address,
+        phoneNumber: response.data.phoneNumber,
+        companyName: response.data.companyName,
+      });
       await history.push('/');
     } catch (error) {
       console.log(error);

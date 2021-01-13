@@ -1,6 +1,7 @@
 // action type
 export const CHANGE_FIELD = 'auth/CHANGE_FIELD';
 export const INITAILIZE_FORM = 'auth/INITAILIZE_FORM';
+export const REGISTER_INFO = 'auth/REGISTER_INFO';
 
 export const REGISTER = 'REGISTER';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
@@ -41,6 +42,15 @@ export function AuthReducer(state, action) {
         [action.form]: {
           ...state[action.form],
           [action.key]: action.value,
+        },
+      };
+    case REGISTER_INFO:
+      return {
+        [action.form]: {
+          username: action.username,
+          address: action.address,
+          phoneNumber: action.phoneNumber,
+          companyName: action.companyName,
         },
       };
     case INITAILIZE_FORM:
