@@ -4,7 +4,6 @@ import StyledContainer from './Container';
 import Responsive from './Responsive';
 
 const HeaderBlock = styled.div`
-  position: fixed;
   width: 100%;
   height: 80px;
   background: white;
