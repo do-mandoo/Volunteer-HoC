@@ -13,74 +13,25 @@ import { withRouter } from 'react-router-dom';
 const url = window.location.href;
 const parse = url.split('/');
 
-const LoginForm = ({ history }) => {
-  const { AuthState, AuthDispatch } = useContext(Auth);
-  const [error, setError] = useState(null);
+const LoginForm = () => {
+  // 액션도 받아와야하고
+  // 그리고 디스패치도 날려주어야 한다.
+  // 여기서 모든일이 이루어진다.
 
-  // 비동기 작업
-  const login = async () => {
-    try {
-      const response = await axios({
-        method: 'POST',
-        url: `http://localhost:3000/api/auth/login/${parse[parse.length - 1]}`,
-        data: {
-          username: AuthState.login.username,
-          password: AuthState.login.password,
-        },
-      });
-      await AuthDispatch({
-        type: LOGIN_SUCCESS,
-        auth: response,
-      });
-      await AuthDispatch({
-        type: REGISTER_INFO,
-        form: parse[parse.length - 1],
-        username: response.data.username,
-        address: response.data.address,
-        phoneNumber: response.data.phoneNumber,
-        companyName: response.data.companyName,
-      });
-      await history.push('/');
-    } catch (error) {
-      console.log(error);
-      await AuthDispatch({
-        type: LOGIN_FAIL,
-        authError: error,
-      });
-      // (await AuthState.authError) === 401 &&
-      //   setError('등록된 아이디와 비밀번호가 아닙니다.');
-    }
-  };
+  // 1. consumer => 사용법이 불편
+  // 2. this.contextType => class
+  // 3. useContext => hook
 
-  const onChange = e => {
-    const { value, name } = e.target;
-    AuthDispatch({
-      type: CHANGE_FIELD,
-      form: 'login',
-      key: name,
-      value,
-    });
-  };
+  // useContext로 액션(상태)와 디스패치(리듀서)를 받아왔는데
+  // 이제 뭐하지?
 
-  const onSubmit = e => {
-    e.preventDefault();
-    const { username, password } = AuthState.login;
-    if ([username, password].includes('')) {
-      setError('빈 칸을 모두 입력해주세요');
-    }
-    login();
-  };
+  // input에 onChange 이벤트가 발생했을때 상태가 변해야 하고
 
-  useEffect(() => {
-    AuthDispatch({
-      type: INITAILIZE_FORM,
-      form: 'login',
-    });
-  }, [AuthDispatch]);
+  // submit 이벤트가 일어났을때 어떤일을 해야하는지 정의
 
-  return (
-    <Login form="login" onChange={onChange} onSubmit={onSubmit} error={error} />
-  );
+  // 이벤트가 발생했을 때 비동기처리
+
+  return <Login />;
 };
 
 export default withRouter(LoginForm);

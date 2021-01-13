@@ -36,7 +36,8 @@ const MapContainer = props => {
       }
     }
 
-    geocoder.addressSearch(props.company.address, translate);
+    // geocoder.addressSearch(props.company.address, translate);
+    geocoder.addressSearch('종로구 창경궁로 265', translate);
   }, [props]);
 
   return (

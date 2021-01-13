@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import StyledContainer from '../../components/common/Container';
 import { StyledInput } from '../../components/auth/Register';
-import { Auth } from '../../contexts/store';
+// import { Auth } from '../../contexts/store';
 import MapContainer from '../MapContainer';
 
 const WritePageContainer = styled.div`
@@ -58,15 +58,13 @@ const StyledTextarea = styled.textarea`
   /* height:100%; */
 `;
 const WritePageForm = () => {
-  const { AuthState, AuthDispatch } = useContext(Auth);
-  console.log(AuthState);
   return (
     <StyledContainer>
       <WritePageContainer>
         <div>
           <h1 className="a11y">모집 공고 등록 페이지</h1>
           <h2>모집 공고 등록</h2>
-          <MapContainer {...AuthState} />
+          <MapContainer />
           <form>
             <legend>
               <fieldset>

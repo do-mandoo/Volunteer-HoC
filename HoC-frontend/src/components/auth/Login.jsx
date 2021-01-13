@@ -56,28 +56,28 @@ const ButtonWithMarginTop = styled(Button)`
 `;
 
 
-const Login = ({ onChange, onSubmit, form, error }) => {
+const Login = ({ onChange, AuthState }) => {
   return (
     <AuthFormBlock>
       <h3>로그인</h3>
-      <form onSubmit={onSubmit}>
+      <form >
         <StyledInput
           authoComplete="username"
           name="username"
           placeholder="아이디"
+          value={AuthState.username}
           onChange={onChange}
-          value={form.username}
         />
         <StyledInput
           autoComplete="new-password"
           name="password"
           placeholder="비밀번호"
           type="password"
+          value={AuthState.password}
           onChange={onChange}
-          value={form.password}
         />
-        {error && error.status === 401 && <ErrorMessage>{error}</ErrorMessage>}
-        {error && <ErrorMessage>{error}</ErrorMessage>}
+        {/* {error && error.status === 401 && <ErrorMessage>{error}</ErrorMessage>} */}
+        {/* {error && <ErrorMessage>{error}</ErrorMessage>} */}
         {/* {error && <ErrorMessage>등록된 아이디와 비밀번호가 아닙니다.</ErrorMessage>} */}
         <ButtonWithMarginTop green fullWidth>로그인</ButtonWithMarginTop>
       </form>
