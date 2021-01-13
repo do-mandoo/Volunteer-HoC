@@ -56,97 +56,27 @@ const ButtonWithMarginTop = styled(Button)`
 `;
 
 
-// const Register = ({ position, onChange, onSubmit, form, error }) => {
-//   return (
-//     <AuthFormBlock>
-//       {position === 'company' ?
-//         (<h3>기업 회원가입</h3>)
-//         : (<h3>개인 회원가입</h3>)}
-//       <form onSubmit={onSubmit}>
-//         <StyledInput
-//           authoComplete="username"
-//           name="username"
-//           placeholder="아이디"
-//           onChange={onChange}
-//           value={form.username}
-//         />
-//         <StyledInput
-//           autoComplete="new-password"
-//           name="password"
-//           placeholder="비밀번호"
-//           type="password"
-//           onChange={onChange}
-//           value={form.password}
-//         />
-
-//         <StyledInput
-//             autoComplete="new-password"
-//             name="passwordConfirm"
-//             placeholder="비밀번호 확인"
-//             type="password"  
-//             onChange={onChange}
-//             value={form.passwordConfirm}
-//         />
-
-//       {position === 'company' && (
-//         <>
-//           <StyledInput
-//             autoComplete="company-name"
-//             name="companyName"
-//             placeholder="기관명"
-//             type="text"  
-//             onChange={onChange}
-//             value={form.companyName}
-//           />
-//         </>
-//         )}
-
-//           <StyledInput
-//             autoComplete="address"
-//             name="address"
-//             placeholder="주소"
-//             type="text"  
-//             onChange={onChange}
-//             value={form.address}
-//         />
-        
-//         <StyledInput
-//             autoComplete="phone-number"
-//             name="phoneNumber"
-//             placeholder="전화번호"
-//             type="tel"  
-//             onChange={onChange}
-//             value={form.phoneNumber}
-//         />
-//         {error && error.status === 409 && <ErrorMessage>이미 존재하는 아이디입니다.</ErrorMessage>}
-//         {error && error.status === 400 && <ErrorMessage>회원 가입 양식을 지켜주세요.</ErrorMessage>}
-//         <ButtonWithMarginTop green fullWidth>회원가입</ButtonWithMarginTop>
-//       </form>
-//       <Footer>
-//           <Link to="/login">로그인</Link>
-//       </Footer>
-//     </AuthFormBlock>
-//   );
-// };
-
-
-const Register = ({position}) => {
+const Register = ({ position, onChange, onSubmit, form, error }) => {
   return (
     <AuthFormBlock>
       {position === 'company' ?
         (<h3>기업 회원가입</h3>)
         : (<h3>개인 회원가입</h3>)}
-      <form>
+      <form onSubmit={onSubmit}>
         <StyledInput
-          authoComplete="username"
+          autoComplete="username"
           name="username"
           placeholder="아이디"
+          onChange={onChange}
+          value={form.username}
         />
         <StyledInput
           autoComplete="new-password"
           name="password"
           placeholder="비밀번호"
           type="password"
+          onChange={onChange}
+          value={form.password}
         />
 
         <StyledInput
@@ -154,6 +84,8 @@ const Register = ({position}) => {
             name="passwordConfirm"
             placeholder="비밀번호 확인"
             type="password"  
+            onChange={onChange}
+            value={form.passwordConfirm}
         />
 
       {position === 'company' && (
@@ -163,6 +95,8 @@ const Register = ({position}) => {
             name="companyName"
             placeholder="기관명"
             type="text"  
+            onChange={onChange}
+            value={form.companyName}
           />
         </>
         )}
@@ -172,6 +106,8 @@ const Register = ({position}) => {
             name="address"
             placeholder="주소"
             type="text"  
+            onChange={onChange}
+            value={form.address}
         />
         
         <StyledInput
@@ -179,9 +115,11 @@ const Register = ({position}) => {
             name="phoneNumber"
             placeholder="전화번호"
             type="tel"  
+            onChange={onChange}
+            value={form.phoneNumber}
         />
-        {/* {error && error.status === 409 && <ErrorMessage>이미 존재하는 아이디입니다.</ErrorMessage>} */}
-        {/* {error && error.status === 400 && <ErrorMessage>회원 가입 양식을 지켜주세요.</ErrorMessage>} */}
+        {error && error.status === 409 && <ErrorMessage>이미 존재하는 아이디입니다.</ErrorMessage>}
+        {error && error.status === 400 && <ErrorMessage>회원 가입 양식을 지켜주세요.</ErrorMessage>}
         <ButtonWithMarginTop green fullWidth>회원가입</ButtonWithMarginTop>
       </form>
       <Footer>
