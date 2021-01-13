@@ -14,7 +14,6 @@ import { LoadingReducer, LoadingInitial } from './contexts/loading';
 
 function App() {
   const [AuthState, AuthDispatch] = useReducer(AuthReducer, AuthInitial);
-  console.log(AuthState);
   const [LoadingState, LoadingDispatch] = useReducer(
     LoadingReducer,
     LoadingInitial
