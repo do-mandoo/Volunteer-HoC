@@ -129,7 +129,7 @@ const url = window.location.href;
 const parse = url.split('/');
 
 const RegisterForm = ({ history }) => {
-  const { AuthState, AuthDispatch } = useContext(Auth);
+  const { AuthState, AuthDispatch } = useContext(Auth); //app.js에서 프로바이더로 내려준걸 디스트럭처링할당한거다.
 
   // 비동기
   const companyRegister = async () => {
@@ -179,7 +179,7 @@ const RegisterForm = ({ history }) => {
         }
       );
       console.log(response);
-      await AuthDispatch({
+      await AuthDispatch({ // 디스패치날리면 리듀서로 날라감.
         type: REGISTER_SUCCESS,
         auth: response,
       });

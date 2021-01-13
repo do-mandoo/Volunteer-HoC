@@ -1,6 +1,7 @@
 // action type
 export const CHANGE_FIELD = 'auth/CHANGE_FIELD';
 export const INITAILIZE_FORM = 'auth/INITAILIZE_FORM';
+export const REGISTER_INFO = 'auth/REGISTER_INFO';
 
 export const REGISTER = 'REGISTER';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
@@ -35,7 +36,7 @@ export const AuthInitial = {
 };
 
 //Reducer
-export function AuthReducer(state, action) {
+export function AuthReducer(state, action) {   // dispatch에서 날린거 받아옴.
   switch (action.type) { // RegisterForm.js의 
     case CHANGE_FIELD: // 198번 줄, onChange의 이벤트발생했을때
       return {
@@ -44,7 +45,17 @@ export function AuthReducer(state, action) {
           [action.key]: action.value,
         },
       };
-    case INITAILIZE_FORM: // 초기설정 값.
+
+    case REGISTER_INFO:
+      return {
+        [action.form]: {
+          username: action.username,
+          address: action.address,
+          phoneNumber: action.phoneNumber,
+          companyName: action.companyName,
+        },
+      };
+    case INITAILIZE_FORM:
       return {
         ...state,
       };

@@ -56,6 +56,7 @@ const ButtonWithMarginTop = styled(Button)`
 `;
 
 const Register = ({ position, onChange, onSubmit, form, error }) => {
+
   return (
     <AuthFormBlock>
       {position === 'company' ?
@@ -63,7 +64,7 @@ const Register = ({ position, onChange, onSubmit, form, error }) => {
         : (<h3>개인 회원가입</h3>)}
       <form onSubmit={onSubmit}>
         <StyledInput
-          authoComplete="username"
+          autoComplete="username"
           name="username"
           placeholder="아이디"
           onChange={onChange}
