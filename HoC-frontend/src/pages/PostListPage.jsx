@@ -1,15 +1,16 @@
 import React from 'react';
-import Header from '../components/common/Header';
+import Button from '../components/common/Button';
 import StyledContainer from '../components/common/Container';
+import Header from '../components/common/Header';
 
 const PostListPage = () => {
   return (
-    <>
+    <div>
       <Header />
       <StyledContainer>
-        <div>안녕하세요</div>
-        </StyledContainer>
-    </>
+        <Button>버튼</Button>
+      </StyledContainer>
+    </div>
   );
 };
 
