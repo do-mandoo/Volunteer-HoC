@@ -57,6 +57,7 @@ const ButtonWithMarginTop = styled(Button)`
 
 
 const Register = ({ position, onChange, onSubmit, form, error }) => {
+  
   return (
     <AuthFormBlock>
       {position === 'company' ?
