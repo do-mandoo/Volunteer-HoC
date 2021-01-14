@@ -12,6 +12,7 @@ import { useReducer } from 'react';
 import { AuthReducer, AuthInitial } from './contexts/auth';
 import { LoadingReducer, LoadingInitial } from './contexts/loading';
 import FindAddr from './lib/api/AddressApi';
+import MyPage from './pages/MyPage';
 
 function App() {
   const [AuthState, AuthDispatch] = useReducer(AuthReducer, AuthInitial);
@@ -30,6 +31,7 @@ function App() {
           <Route path="/register/company" exact component={RegisterPage} />
           <Route path="/register/person" exact component={RegisterPage} />
           <Route path="/write" component={WritePage} />
+          <Route path="/mypage" component={MyPage} />
           <Route path="/address" component={FindAddr} />
           <Route path="/@:username/:postId" component={PostPage} />
         </Auth.Provider>
