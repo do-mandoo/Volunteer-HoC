@@ -46,6 +46,7 @@ export function AuthReducer(state, action) {
       };
     case REGISTER_INFO:
       return {
+        ...state,
         [action.form]: {
           username: action.username,
           address: action.address,
