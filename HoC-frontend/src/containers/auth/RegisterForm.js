@@ -114,7 +114,7 @@
 // };
 
 // export default withRouter(RegisterForm);
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import {
   CHANGE_FIELD,
@@ -130,6 +130,7 @@ const parse = url.split('/');
 
 const RegisterForm = ({ history }) => {
   const { AuthState, AuthDispatch } = useContext(Auth);
+  const [error, setError] = useState(null);
 
   // 비동기
   const companyRegister = async () => {
@@ -158,9 +159,9 @@ const RegisterForm = ({ history }) => {
       console.log(error);
       await AuthDispatch({
         type: REGISTER_FAIL,
-        authError: error,
+        error: error.response,
       });
-      await console.log('오류');
+      await setError(error.response.status);
     }
   };
 
@@ -184,14 +185,15 @@ const RegisterForm = ({ history }) => {
         auth: response,
       });
       await console.log('회원가입성공');
+
+      await history.push('/');
     } catch (error) {
       console.log(error);
       await AuthDispatch({
         type: REGISTER_FAIL,
-        error,
+        error: error.response,
       });
-      await console.log('오류');
-      await console.log(AuthState);
+      await setError(error.response.status);
     }
   };
 
@@ -206,11 +208,7 @@ const RegisterForm = ({ history }) => {
   };
   const onSubmit = async e => {
     e.preventDefault();
-    const { username, password, passwordConfirm } = AuthState.company;
-    if ([username, password, passwordConfirm].includes(''))
-      AuthState.authError = {
-        error: '빈 칸을 모두 채워주세요',
-      };
+
     if (parse[parse.length - 1] === 'company') companyRegister();
     if (parse[parse.length - 1] === 'person') personRegister();
   };
@@ -228,7 +226,7 @@ const RegisterForm = ({ history }) => {
       form={parse[parse.length - 1]}
       onChange={onChange}
       onSubmit={onSubmit}
-      error={AuthState.authError}
+      error={error}
     />
   );
 };
