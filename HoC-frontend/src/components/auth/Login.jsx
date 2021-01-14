@@ -76,9 +76,8 @@ const Login = ({ onChange, onSubmit, form, error }) => {
           onChange={onChange}
           value={form.password}
         />
-        {error && error.status === 401 && <ErrorMessage>{error}</ErrorMessage>}
-        {error && <ErrorMessage>{error}</ErrorMessage>}
-        {/* {error && <ErrorMessage>등록된 아이디와 비밀번호가 아닙니다.</ErrorMessage>} */}
+        {error === 401 && <ErrorMessage>등록된 아이디와 비밀번호가 아닙니다.</ErrorMessage>}
+        {error === 400 && <ErrorMessage>빈 칸을 모두 입력해주세요</ErrorMessage>}
         <ButtonWithMarginTop green fullWidth>로그인</ButtonWithMarginTop>
       </form>
       <Footer>

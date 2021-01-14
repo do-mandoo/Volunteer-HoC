@@ -38,17 +38,15 @@ const LoginForm = ({ history }) => {
         username: response.data.username,
         address: response.data.address,
         phoneNumber: response.data.phoneNumber,
-        companyName: response.data.companyName,
+        companyName: response.data.companyName || null,
       });
       await history.push('/');
     } catch (error) {
-      console.log(error);
       await AuthDispatch({
         type: LOGIN_FAIL,
-        authError: error,
+        error: error.response,
       });
-      // (await AuthState.authError) === 401 &&
-      //   setError('등록된 아이디와 비밀번호가 아닙니다.');
+      await setError(error.response.status);
     }
   };
 
@@ -64,10 +62,7 @@ const LoginForm = ({ history }) => {
 
   const onSubmit = e => {
     e.preventDefault();
-    const { username, password } = AuthState.login;
-    if ([username, password].includes('')) {
-      setError('빈 칸을 모두 입력해주세요');
-    }
+
     login();
   };
 

@@ -36,7 +36,7 @@ const MapContainer = props => {
       }
     }
 
-    geocoder.addressSearch(props.company.address, translate);
+    geocoder.addressSearch(props.address, translate);
   }, [props]);
 
   return (

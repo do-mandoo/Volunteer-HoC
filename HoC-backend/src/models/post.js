@@ -5,7 +5,10 @@ const { Schema } = mongoose;
 const PostSchema = new Schema({
   title: String,
   body: String,
-  tags: [String],
+  // tags: [String],
+  period: String,
+  number: Number,
+  gender: String,
   publishedDate: {
     type: Date,
     default: Date.now,
