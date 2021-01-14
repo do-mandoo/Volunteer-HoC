@@ -102,11 +102,12 @@ const Register = ({ position, onChange, onSubmit, form, error }) => {
         </>
         )}
 
+        <label htmlFor="address">주소 :</label>
           <StyledInput
             autoComplete="address"
             name="address"
             placeholder="주소"
-            type="text"  
+            type="address"  
             onChange={onChange}
             value={form.address}
         />
@@ -119,8 +120,8 @@ const Register = ({ position, onChange, onSubmit, form, error }) => {
             onChange={onChange}
             value={form.phoneNumber}
         />
-        {error && error.status === 409 && <ErrorMessage>이미 존재하는 아이디입니다.</ErrorMessage>}
-        {error && error.status === 400 && <ErrorMessage>회원 가입 양식을 지켜주세요.</ErrorMessage>}
+        {error === 409 && <ErrorMessage>이미 존재하는 아이디입니다.</ErrorMessage>}
+        {error === 400 && <ErrorMessage>회원 가입 양식을 지켜주세요.</ErrorMessage>}
         <ButtonWithMarginTop green fullWidth>회원가입</ButtonWithMarginTop>
       </form>
       <Footer>
