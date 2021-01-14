@@ -18,4 +18,17 @@ export const AuthInitial = {
   },
 };
 
-export function AuthReducer(previousState, action) {}
+export function AuthReducer(previousState, action) {
+  switch(action.type) {
+    case CHANGE_FIELD :
+      return {
+        ...previousState,
+        login: {
+          ...previousState.login,
+          [action.key] : action.value
+        }
+      };
+    default:
+      return previousState;
+  }
+}
