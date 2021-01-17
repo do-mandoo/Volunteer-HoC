@@ -24,8 +24,10 @@ const AuthFormBlock = styled.div`
 export const StyledInput = styled.input`
   font-size: 1rem;
   border: none;
-  border-bottom: 1px solid ${palette.gray[5]};
+  border: 1px solid ${palette.gray[5]};
   padding-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   outline: none;
   width: 100%;
 
@@ -63,13 +65,17 @@ const Register = ({ position, onChange, onSubmit, form, error }) => {
         (<h3>기업 회원가입</h3>)
         : (<h3>개인 회원가입</h3>)}
       <form onSubmit={onSubmit}>
+        <label style={{fontWeight: 700, paddingBottom: '3px'}} htmlFor="username">아이디</label>
         <StyledInput
           autoComplete="username"
+          id="username"
           name="username"
           placeholder="아이디"
           onChange={onChange}
           value={form.username}
         />
+
+<label style={{fontWeight: 700}} htmlFor="username">비밀번호</label>
         <StyledInput
           autoComplete="new-password"
           name="password"
@@ -78,7 +84,7 @@ const Register = ({ position, onChange, onSubmit, form, error }) => {
           onChange={onChange}
           value={form.password}
         />
-
+<label style={{fontWeight: 700}} htmlFor="username">비밀번호 확인</label>
         <StyledInput
             autoComplete="new-password"
             name="passwordConfirm"
@@ -89,7 +95,8 @@ const Register = ({ position, onChange, onSubmit, form, error }) => {
         />
 
       {position === 'company' && (
-        <>
+          <>
+            <label style={{fontWeight: 700}} htmlFor="username">기관명</label>
           <StyledInput
             autoComplete="company-name"
             name="companyName"
@@ -101,7 +108,7 @@ const Register = ({ position, onChange, onSubmit, form, error }) => {
         </>
         )}
 
-        <label htmlFor="address">주소 :</label>
+        <label style={{fontWeight: 700}} htmlFor="username">주소</label>
           <StyledInput
             autoComplete="address"
             name="address"
@@ -110,7 +117,7 @@ const Register = ({ position, onChange, onSubmit, form, error }) => {
             onChange={onChange}
             value={form.address}
         />
-        
+        <label style={{fontWeight: 700}} htmlFor="username">전화번호</label>
         <StyledInput
             autoComplete="phone-number"
             name="phoneNumber"

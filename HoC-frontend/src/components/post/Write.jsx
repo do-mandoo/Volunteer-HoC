@@ -8,52 +8,54 @@ import Header from '../common/Header';
 
 
 const WritePageContainer = styled.div`
+  position:relative;
   background-color: skyblue;
   width: 100%;
   min-height: 700px;
-
-  .a11y {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    margin: -1px;
-    clip-path: polygon(0 0, 0 0, 0 0);
-    clip: rect(0 0 0 0);
-    clip: rect(0, 0, 0, 0);
-  }
-  .post-content-wrap {
-    display: flex;
-    align-content: center;
-    background-color: #fff;
-  }
-
-  .post-content-left,
-  .post-content-right {
-    width: 50%;
-  }
-  .post-content-right {
-    display: flex;
-    flex-flow: row wrap;
-  }
-  .post-content-right label {
-    width: 20%;
-  }
-  .post-content-right input {
-    width: 80%;
-  }
-`;
-
-const StyledTextarea = styled.textarea`
-  width: 100%;
-  /* height: 300px; */
-  /* display:flex; */
-  /* flex:1; */
-  /* display: flex; */
-  flex-grow: 1;
-  /* height:100%; */
-`;
-
+.a11y {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  margin: -1px;
+  clip-path: polygon(0 0, 0 0, 0 0);
+  clip: rect(0 0 0 0);
+  clip: rect(0, 0, 0, 0);
+}
+.post-content-wrap {
+  display:flex;
+  align-content:center;
+  background-color: #fff;
+}
+.post-content-left,
+.post-content-right {
+  width:50%;
+}
+.post-content-right {
+  display:flex;
+  flex-flow: row wrap;
+}
+.post-content-right label {
+  width:20%;
+}
+.post-content-right input,
+.post-content-right select {
+  width: 80%;
+}
+.btn-cancel,
+.btn-add {
+}
+.btn-cancel{
+  position:absolute;
+  top:0;
+  right:40px;
+}
+.btn-add{
+  position:absolute;
+  top:0;
+  right:0;
+}
+`
 const StyledSelect = styled.select`
   font-size: 1rem;
   border: none;
@@ -70,7 +72,13 @@ const StyledSelect = styled.select`
     margin-top: 1rem;
   }
 `;
-
+const StyledTextarea = styled.textarea`
+  width:100%;
+  min-height: 500px;
+  resize:none;
+  outline:none;
+  border:none;
+`
 
 const Write = ({ company }) => {
   console.log(company);
@@ -86,7 +94,7 @@ const Write = ({ company }) => {
           <legend>
             <fieldset>
               <p>
-                <label className="a11y" for="post-title">공고 제목</label>
+                <label className="a11y" htmlFor="post-title">공고 제목</label>
                 <StyledInput 
                   id="post-title" 
                   type="text" 

@@ -5,6 +5,7 @@ import Joi from 'joi';
 const { ObjectId } = mongoose.Types;
 
 export const checkOwnPost = (ctx, next) => {
+  console.log(ctx.state);
   const { user, post } = ctx.state;
   if (post.user_id.toString() !== user._id) {
     ctx.status = 403;
@@ -39,6 +40,11 @@ export const write = async ctx => {
     // Joi를 통해서 객체가 다음 필드를 가지고 있음을 검증한다.
     title: Joi.string().required(),
     body: Joi.string().required(),
+    companyName: Joi.string().required(),
+    phoneNumber: Joi.string().required(),
+    address: Joi.string().required(),
+    period: Joi.string().required(),
+    gender: Joi.string().required(),
     tags: Joi.array().items(Joi.string()).required(),
   });
 
@@ -49,10 +55,22 @@ export const write = async ctx => {
     return;
   }
 
-  const { title, body, tags } = ctx.request.body;
+  const {
+    title,
+    body,
+    companyName,
+    address,
+    period,
+    gender,
+    tags,
+  } = ctx.request.body;
   const post = new Post({
     title,
     body,
+    companyName,
+    address,
+    period,
+    gender,
     tags,
     user: ctx.state.user,
   });
@@ -102,6 +120,7 @@ export const list = async ctx => {
 
 export const read = ctx => {
   ctx.body = ctx.state.post;
+  console.log(ctx.state);
 };
 
 export const remove = async ctx => {
