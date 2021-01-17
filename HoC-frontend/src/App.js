@@ -12,6 +12,8 @@ import { Auth, Loading } from './contexts/store';
 import { useReducer } from 'react';
 import { AuthReducer, AuthInitial } from './contexts/auth';
 import { LoadingReducer, LoadingInitial } from './contexts/loading';
+import FindAddr from './lib/api/AddressApi';
+import { PostInitial, PostReducer } from './contexts/post';
 
 function App() {
   const [AuthState, AuthDispatch] = useReducer(AuthReducer, AuthInitial);

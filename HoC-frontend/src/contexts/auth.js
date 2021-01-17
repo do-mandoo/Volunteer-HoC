@@ -48,6 +48,7 @@ export function AuthReducer(state, action) {   // dispatch에서 날린거 받�
 
     case REGISTER_INFO:
       return {
+        ...state,
         [action.form]: {
           username: action.username,
           address: action.address,

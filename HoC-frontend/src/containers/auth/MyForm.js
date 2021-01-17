@@ -73,7 +73,7 @@ const Footer = styled.div`
 const MyForm = () => {
   return (
     <>
-    <Header />
+      <Header />
       <StyledContainer>
       <GlobalList>
         <HeaderName>
