@@ -23,7 +23,6 @@ function App() {
   //   LoadingInitial
   // );
 
-  const [PostState, PostDispatch] = useReducer(PostReducer, PostInitial);
   return (
     <>
     <Post.Provider value={{ PostState, PostDispatch }}>
