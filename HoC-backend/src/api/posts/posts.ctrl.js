@@ -45,7 +45,6 @@ export const write = async ctx => {
     address: Joi.string().required(),
     period: Joi.string().required(),
     gender: Joi.string().required(),
-    number: Joi.string().required(),
     // tags: Joi.array().items(Joi.string()).required(),
   });
 
@@ -73,7 +72,6 @@ export const write = async ctx => {
     address,
     period,
     gender,
-    phoneNumber,
     // tags,
     user: ctx.state.user,
   });

@@ -23,6 +23,8 @@ const WritePageContainer = styled.div`
 .post-content-wrap {
   display:flex;
   align-content:center;
+  justify-content:center;
+  text-align:center;
   background-color: #fff;
 }
 .post-content-left,
@@ -34,11 +36,28 @@ const WritePageContainer = styled.div`
   flex-flow: row wrap;
 }
 .post-content-right label {
+  display:flex;
+  align-items:center;
+  justify-content:center;
   width:20%;
 }
 .post-content-right input,
 .post-content-right select {
   width: 80%;
+}
+.period-wrap {
+  width:100%;
+  display: flex;
+  text-align:center;
+  justify-content:center;
+  align-items:center;
+  /* background-color: skyblue; */
+}
+.period-wrap label:first-child {
+  width:50%;
+}
+.period-wrap input {
+  /* width:70%; */
 }
 .btn-cancel,
 .btn-add {
@@ -132,14 +151,24 @@ const Write = ({ AuthState, onChange, onSubmit}) => {
                   value={AuthState.company.address} 
                   onChange={onChange}
                   />
-                  <label htmlFor="post-period">기간</label>
+                  <div className="period-wrap">
+                  <label htmlFor="post-period-start">봉사 기간</label>
                   <StyledInput 
-                  id="post-period" 
-                  name="period"
+                  id="post-period-start" 
+                  name="periodstart"
                   type="date" 
-                  placeholder="원하는 봉사 기간을 입력해주세요." 
                   onChange={onChange}
                   />
+
+                  <label htmlFor="post-period-end">~</label>
+                  <StyledInput 
+                  id="post-period-end" 
+                  name="periodend"
+                  type="date" 
+                  onChange={onChange}
+                  />
+
+                  </div>
                   <label 
                   htmlFor="post-people">인원수</label>
                   {/* <StyledInput 
