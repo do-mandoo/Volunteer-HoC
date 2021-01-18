@@ -41,49 +41,36 @@ const PostListBlock = styled.div`
     width:10%;
   }
   `;
-function PostList({AuthState,ListState}) {
+function PostList({ AuthState, ListState }) {
   return (
     <div>
       <Header />
       <StyledContainer>
-         <PostListBlock>
-        <h1>봉사자 모집 공고</h1>
-      {AuthState.company.username &&<Button><Link to="/write" >글쓰기</Link></Button>}
-      {AuthState.company.username &&<Button><Link to="/mypage" >내가쓴글</Link></Button>}
-      <ul>
-        <li>
-          <span className="recruitTitle">제목</span>
-          <span className="recruitNumber">인원수</span>
-          <span className="recruitPeriod">기간</span>
-          <span className="recruitGender">성별</span>
-        </li>
-        {ListState.lists.map(list=>(
-          <li key={list.user.id}>
-            <span>{list.title}</span>
-            <span>{list.number}</span>
-            <span>{list.period}</span>
-            <span>{list.gender}</span>
-          </li>
-        )
-        )}
-    </ul>
-      </PostListBlock>
-
-const PostList = ({AuthState}) => {
-  return (
-      <div>
-      <Header AuthState={AuthState} />
-      <Button>버튼</Button>
-      {AuthState.company && (<Link to="/write" >글쓰기</Link>)}
-      {AuthState.company && (<Link to="/mypage" >내가 쓴 글</Link>)}
-      <StyledContainer>
-        <ul>
-        </ul>
+        <PostListBlock>
+          <h1>봉사자 모집 공고</h1>
+          {AuthState.company.username && <Button><Link to="/write" >글쓰기</Link></Button>}
+          {AuthState.company.username && <Button><Link to="/mypage" >내가쓴글</Link></Button>}
+          <ul>
+            <li>
+              <span className="recruitTitle">제목</span>
+              <span className="recruitNumber">인원수</span>
+              <span className="recruitPeriod">기간</span>
+              <span className="recruitGender">성별</span>
+            </li>
+            {ListState.lists.map(list => (
+              <li key={list.user.id}>
+                <span>{list.title}</span>
+                <span>{list.number}</span>
+                <span>{list.period}</span>
+                <span>{list.gender}</span>
+              </li>
+            )
+            )}
+          </ul>
+        </PostListBlock>
       </StyledContainer>
     </div>
-
-    
-  );
+  )
 }
 
 export default PostList;
