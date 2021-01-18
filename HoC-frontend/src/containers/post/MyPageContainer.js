@@ -7,7 +7,7 @@ const MyPageContainer = () => {
   const { PostState, PostDispatch } = useContext(Post);
   console.log(PostState);
   console.log(AuthState);
-  return <MyPage />;
+  return <MyPage AuthState={AuthState} PostState={PostState} />;
 };
 
 export default MyPageContainer;

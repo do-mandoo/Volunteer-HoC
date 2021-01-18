@@ -125,16 +125,15 @@ import {
 import { Auth } from '../../contexts/store';
 import Register from '../../components/auth/Register';
 import { withRouter } from 'react-router-dom';
-const url = window.location.href;
-const parse = url.split('/');
 
 const RegisterForm = ({ history }) => {
+  const url = window.location.pathname;
+  const parse = url.split('/');
   const { AuthState, AuthDispatch } = useContext(Auth);
   const [error, setError] = useState(null);
 
   // 비동기
   const companyRegister = async () => {
-    console.log(AuthState);
     try {
       const response = await axios.post(
         'http://localhost:3000/api/auth/register/company',
