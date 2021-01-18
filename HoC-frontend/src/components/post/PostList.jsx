@@ -42,9 +42,10 @@ const PostListBlock = styled.div`
   }
   `;
 function PostList({ AuthState, ListState }) {
+  console.log(ListState.lists);
   return (
     <div>
-      <Header />
+      <Header AuthState={AuthState} />
       <StyledContainer>
         <PostListBlock>
           <h1>봉사자 모집 공고</h1>
@@ -59,10 +60,12 @@ function PostList({ AuthState, ListState }) {
             </li>
             {ListState.lists.map(list => (
               <li key={list.user.id}>
-                <span>{list.title}</span>
-                <span>{list.number}</span>
-                <span>{list.period}</span>
-                <span>{list.gender}</span>
+                <Link to={`/@${AuthState.login.username}/${list._id}`}>
+                  <span>{list.title}</span>
+                  <span>{list.number}</span>
+                  <span>{list.period}</span>
+                  <span>{list.gender}</span>
+                </Link>
               </li>
             )
             )}

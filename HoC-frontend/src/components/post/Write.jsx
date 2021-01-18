@@ -99,7 +99,7 @@ const StyledTextarea = styled.textarea`
 const Write = ({ AuthState, onChange, onSubmit}) => {
   return (
     <>
-    <Header />
+    <Header AuthState={AuthState} />
     <StyledContainer>
     <WritePageContainer>
     <div>
