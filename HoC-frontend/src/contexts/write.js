@@ -57,4 +57,3 @@ export function PostReducer(state, action) {
       return state
   }
 }
-

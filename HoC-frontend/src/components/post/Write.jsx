@@ -5,8 +5,6 @@ import MapContainer from '../../lib/api/MapContainer';
 import StyledContainer from '../common/Container';
 import palette from '../../lib/styles/palette';
 import Header from '../common/Header';
-
-
 const WritePageContainer = styled.div`
   position:relative;
   background-color: skyblue;
@@ -98,7 +96,6 @@ const StyledTextarea = styled.textarea`
   outline:none;
   border:none;
 `
-
 const Write = ({ AuthState, onChange, onSubmit}) => {
   return (
     <>
@@ -233,5 +230,4 @@ const Write = ({ AuthState, onChange, onSubmit}) => {
     </>
   );
 };
-
 export default Write;

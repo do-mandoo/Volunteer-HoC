@@ -59,6 +59,7 @@ export const write = async ctx => {
     title,
     body,
     companyName,
+    phoneNumber,
     address,
     period,
     gender,

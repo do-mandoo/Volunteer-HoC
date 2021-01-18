@@ -10,7 +10,6 @@ import {
 } from '../../contexts/write';
 import { Auth, Post } from '../../contexts/store';
 import Write from '../../components/post/Write';
-
 const WritePageForm = () => {
   const { AuthState } = useContext(Auth);
   const { PostState, PostDispatch } = useContext(Post);
@@ -70,7 +69,6 @@ const WritePageForm = () => {
 
   return <Write AuthState={AuthState} onChange={onChange} onSubmit={onSubmit}/>;
 };
-
 export default WritePageForm;
 
 
