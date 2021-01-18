@@ -49,8 +49,8 @@ function PostList({ AuthState, ListState }) {
       <StyledContainer>
         <PostListBlock>
           <h1>봉사자 모집 공고</h1>
-          {AuthState.company.username && <Button><Link to="/write" >글쓰기</Link></Button>}
-          {AuthState.company.username && <Button><Link to="/mypage" >내가쓴글</Link></Button>}
+          {AuthState.company && <Button><Link to="/write" >글쓰기</Link></Button>}
+          {AuthState.company && <Button><Link to="/mypage" >내가쓴글</Link></Button>}
           <ul>
             <li>
               <span className="recruitTitle">제목</span>
@@ -59,7 +59,7 @@ function PostList({ AuthState, ListState }) {
               <span className="recruitGender">성별</span>
             </li>
             {ListState.lists.map(list => (
-              <li key={list.user.id}>
+              <li key={list._id}>
                 <Link to={`/@${AuthState.login.username}/${list._id}`}>
                   <span>{list.title}</span>
                   <span>{list.number}</span>
