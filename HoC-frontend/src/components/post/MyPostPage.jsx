@@ -70,7 +70,8 @@ const Footer = styled.div`
 
 `;
 
-const MyPage = () => {
+const MyPage = ({ AuthState, PostState }) => {
+  console.log(AuthState, PostState);
   return (
     <>
       <Header />

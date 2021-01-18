@@ -125,15 +125,12 @@ import {
 import { Auth } from '../../contexts/store';
 import Register from '../../components/auth/Register';
 import { withRouter } from 'react-router-dom';
-const url = window.location.href;
-const parse = url.split('/');
 
 const RegisterForm = ({ history }) => {
   const { AuthState, AuthDispatch } = useContext(Auth); //app.js에서 프로바이더로 내려준걸 디스트럭처링할당한거다.
   const [error, setError] = useState(null);
   // 비동기
   const companyRegister = async () => {
-    console.log(AuthState);
     try {
       const response = await axios.post(
         'http://localhost:3000/api/auth/register/company',

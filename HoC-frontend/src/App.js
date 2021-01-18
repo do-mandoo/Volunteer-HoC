@@ -7,7 +7,7 @@ import DivisionPage from './pages/DivisionPage';
 import RegisterPage from './pages/RegisterPage';
 import WritePage from './pages/WritePage';
 import PostPage from './pages/PostPage';
-import MyPage from './pages/MyPage';
+import MyPage from './pages/MyPostPage';
 import { Auth, Loading } from './contexts/store';
 import { useReducer } from 'react';
 import { AuthReducer, AuthInitial } from './contexts/auth';

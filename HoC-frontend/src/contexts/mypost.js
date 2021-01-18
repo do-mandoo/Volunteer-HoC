@@ -7,6 +7,10 @@ export const DELETE_LOADING = 'DELETE_LOADING';
 export const DELETE_SUCCESS = 'DELETE_SUCCESS';
 export const DELETE_ERROR = 'DELETE_ERROR';
 
+//Initial state
+
+
+//Reducer
 export function MyPageReducer(state, action){
   console.log("dd");
   return;

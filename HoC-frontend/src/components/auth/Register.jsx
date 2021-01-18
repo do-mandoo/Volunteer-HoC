@@ -58,7 +58,6 @@ const ButtonWithMarginTop = styled(Button)`
 `;
 
 const Register = ({ position, onChange, onSubmit, form, error }) => {
-
   return (
     <AuthFormBlock>
       {position === 'company' ?
@@ -138,3 +137,4 @@ const Register = ({ position, onChange, onSubmit, form, error }) => {
 };
 
 export default Register;
+
