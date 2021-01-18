@@ -12,11 +12,11 @@ const PostList = ({AuthState, PostState}) => {
       {AuthState.company.username && (<Link to="/write" >글쓰기</Link>)}
       {AuthState.company.username && (<Link to="/mypage" >내가 쓴 글</Link>)}
       <StyledContainer>
-        <ul>
+        {/* <ul>
           {PostState.posts.map(post => (
             <Link to="" ><li>{post.title} {post.companyName}</li></Link>
           ))}
-        </ul>
+        </ul> */}
       </StyledContainer>
     </div>
   );
