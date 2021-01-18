@@ -1,10 +1,9 @@
 import React from 'react';
+import MyPageContainer from '../containers/post/MyPageContainer';
 
 const MyPage = () => {
   return (
-    <div>
-      <div>내가 쓴 글 보기</div>
-    </div>
+    <MyPageContainer />
   );
 };
 

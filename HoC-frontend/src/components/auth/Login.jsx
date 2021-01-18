@@ -6,6 +6,13 @@ import Button from "../common/Button";
 
 // 회원가입 로그인 폼을 보여주는 컴포넌트
 
+const ErrorMessage = styled.div`
+  color: red;
+  text-align: center;
+  font-size: 0.875rem;
+  margin-top: 1rem;
+`;
+
 const AuthFormBlock = styled.div`
   h3 {
     margin: 0;
@@ -49,7 +56,7 @@ const ButtonWithMarginTop = styled(Button)`
 `;
 
 
-const Login = ({ onChange, onSubmit, form }) => {
+const Login = ({ onChange, onSubmit, form, error }) => {
   return (
     <AuthFormBlock>
       <h3>로그인</h3>
@@ -69,8 +76,8 @@ const Login = ({ onChange, onSubmit, form }) => {
           onChange={onChange}
           value={form.password}
         />
-
-
+        {error === 401 && <ErrorMessage>등록된 아이디와 비밀번호가 아닙니다.</ErrorMessage>}
+        {error === 400 && <ErrorMessage>빈 칸을 모두 입력해주세요</ErrorMessage>}
         <ButtonWithMarginTop green fullWidth>로그인</ButtonWithMarginTop>
       </form>
       <Footer>

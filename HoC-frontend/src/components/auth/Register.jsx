@@ -6,6 +6,13 @@ import Button from "../common/Button";
 
 // 로그인 폼을 보여주는 컴포넌트
 
+const ErrorMessage = styled.div`
+  color: red;
+  text-align: center;
+  font-size: 0.875rem;
+  margin-top: 1rem;
+`;
+
 const AuthFormBlock = styled.div`
   h3 {
     margin: 0;
@@ -14,11 +21,13 @@ const AuthFormBlock = styled.div`
   }
 `;
 
-const StyledInput = styled.input`
+export const StyledInput = styled.input`
   font-size: 1rem;
   border: none;
-  border-bottom: 1px solid ${palette.gray[5]};
+  border: 1px solid ${palette.gray[5]};
   padding-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   outline: none;
   width: 100%;
 
@@ -49,20 +58,25 @@ const ButtonWithMarginTop = styled(Button)`
 `;
 
 
-const Register = ({ position, onChange, onSubmit, form }) => {
+const Register = ({ position, onChange, onSubmit, form, error }) => {
+
   return (
     <AuthFormBlock>
       {position === 'company' ?
         (<h3>기업 회원가입</h3>)
         : (<h3>개인 회원가입</h3>)}
       <form onSubmit={onSubmit}>
+        <label style={{fontWeight: 700, paddingBottom: '3px'}} htmlFor="username">아이디</label>
         <StyledInput
-          authoComplete="username"
+          autoComplete="username"
+          id="username"
           name="username"
           placeholder="아이디"
           onChange={onChange}
           value={form.username}
         />
+
+<label style={{fontWeight: 700}} htmlFor="username">비밀번호</label>
         <StyledInput
           autoComplete="new-password"
           name="password"
@@ -71,7 +85,7 @@ const Register = ({ position, onChange, onSubmit, form }) => {
           onChange={onChange}
           value={form.password}
         />
-
+<label style={{fontWeight: 700}} htmlFor="username">비밀번호 확인</label>
         <StyledInput
             autoComplete="new-password"
             name="passwordConfirm"
@@ -82,7 +96,8 @@ const Register = ({ position, onChange, onSubmit, form }) => {
         />
 
       {position === 'company' && (
-        <>
+          <>
+            <label style={{fontWeight: 700}} htmlFor="username">기관명</label>
           <StyledInput
             autoComplete="company-name"
             name="companyName"
@@ -94,15 +109,16 @@ const Register = ({ position, onChange, onSubmit, form }) => {
         </>
         )}
 
+        <label style={{fontWeight: 700}} htmlFor="username">주소</label>
           <StyledInput
             autoComplete="address"
             name="address"
             placeholder="주소"
-            type="text"  
+            type="address"  
             onChange={onChange}
             value={form.address}
         />
-        
+        <label style={{fontWeight: 700}} htmlFor="username">전화번호</label>
         <StyledInput
             autoComplete="phone-number"
             name="phoneNumber"
@@ -110,9 +126,9 @@ const Register = ({ position, onChange, onSubmit, form }) => {
             type="tel"  
             onChange={onChange}
             value={form.phoneNumber}
-          />
-        
-
+        />
+        {error === 409 && <ErrorMessage>이미 존재하는 아이디입니다.</ErrorMessage>}
+        {error === 400 && <ErrorMessage>회원 가입 양식을 지켜주세요.</ErrorMessage>}
         <ButtonWithMarginTop green fullWidth>회원가입</ButtonWithMarginTop>
       </form>
       <Footer>

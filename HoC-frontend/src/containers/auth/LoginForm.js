@@ -1,27 +1,52 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import { CHANGE_FIELD, INITAILIZE_FORM } from '../../contexts/auth';
+import {
+  CHANGE_FIELD,
+  INITAILIZE_FORM,
+  REGISTER_INFO,
+  LOGIN_FAIL,
+  LOGIN_SUCCESS,
+} from '../../contexts/auth';
 import { Auth } from '../../contexts/store';
 import Login from '../../components/auth/Login';
+import { withRouter } from 'react-router-dom';
+const url = window.location.href;
+const parse = url.split('/');
 
-const LoginForm = () => {
+const LoginForm = ({ history }) => {
   const { AuthState, AuthDispatch } = useContext(Auth);
-  console.log(AuthState);
+  const [error, setError] = useState(null);
 
   // 비동기 작업
   const login = async () => {
-    console.log(AuthState.login);
     try {
-      await axios({
+      const response = await axios({
         method: 'POST',
-        url: 'api/auth/login',
+        url: `http://localhost:3000/api/auth/login/${parse[parse.length - 1]}`,
         data: {
           username: AuthState.login.username,
           password: AuthState.login.password,
         },
       });
-    } catch (e) {
-      console.log(e);
+      await AuthDispatch({
+        type: LOGIN_SUCCESS,
+        auth: response,
+      });
+      await AuthDispatch({
+        type: REGISTER_INFO,
+        form: parse[parse.length - 1],
+        username: response.data.username,
+        address: response.data.address,
+        phoneNumber: response.data.phoneNumber,
+        companyName: response.data.companyName || null,
+      });
+      await history.push('/');
+    } catch (error) {
+      await AuthDispatch({
+        type: LOGIN_FAIL,
+        error: error.response,
+      });
+      await setError(error.response.status);
     }
   };
 
@@ -37,6 +62,7 @@ const LoginForm = () => {
 
   const onSubmit = e => {
     e.preventDefault();
+
     login();
   };
 
@@ -47,7 +73,9 @@ const LoginForm = () => {
     });
   }, [AuthDispatch]);
 
-  return <Login form="login" onChange={onChange} onSubmit={onSubmit} />;
+  return (
+    <Login form="login" onChange={onChange} onSubmit={onSubmit} error={error} />
+  );
 };
 
-export default LoginForm;
+export default withRouter(LoginForm);

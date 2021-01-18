@@ -1,7 +1,10 @@
 import React from 'react';
+import WritePageForm from '../containers/post/WritePageForm';
 
 const WritePage = () => {
-  return <div>글쓰기</div>;
+  return (
+      <WritePageForm />
+  );
 };
 
 export default WritePage;

@@ -63,6 +63,11 @@ export const login = async ctx => {
   const { username, password } = ctx.request.body;
   console.log(username, password);
 
+  if (username === '' || password === '') {
+    ctx.status = 400;
+    return;
+  }
+
   if (!username || !password) {
     ctx.status = 401; // Unauthorized
     return;
