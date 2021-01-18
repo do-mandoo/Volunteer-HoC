@@ -8,6 +8,11 @@ export const DELETE_SUCCESS = 'DELETE_SUCCESS';
 export const DELETE_ERROR = 'DELETE_ERROR';
 
 //Initial state
+export const MyPostInitial = {
+  lists:[],
+  loading: false,
+  error: null
+};
 
 
 //Reducer

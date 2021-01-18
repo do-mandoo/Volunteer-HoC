@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Header from '../../components/common/Header';
-import StyledContainer from '../../components/common/Container';
+import Header from '../common/Header';
+import StyledContainer from '../common/Container';
 
 const GlobalList = styled.div`
   width: 100%;

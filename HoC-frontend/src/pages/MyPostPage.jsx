@@ -1,9 +1,10 @@
 import React from 'react';
+import MyPage from '../components/post/MyPostPage';
 
-const MyPage = () => {
+const MyPagee = () => {
   return (
-    
+    <MyPage />
   );
 };
 
-export default MyPage;
+export default MyPagee;
