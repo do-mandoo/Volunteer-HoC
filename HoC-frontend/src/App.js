@@ -16,16 +16,21 @@ import MyPage from './pages/MyPage';
 import { PostInitial, PostReducer } from './contexts/post';
 import { ListInitial, ListReducer } from './contexts/list';
 
+
 function App() {
   const [AuthState, AuthDispatch] = useReducer(AuthReducer, AuthInitial);
+  const [PostState, PostDispatch] = useReducer(PostReducer, PostInitial)
   // const [LoadingState, LoadingDispatch] = useReducer(
   //   LoadingReducer,
   //   LoadingInitial
   // );
 
+
   const [ListState,ListDispatch] = useReducer(ListReducer,ListInitial);
+
   return (
     <>
+    <Post.Provider value={{ PostState, PostDispatch }}>
       <Auth.Provider value={{ AuthState, AuthDispatch }}>
         <List.Provider value={{ListState,ListDispatch}}>
         <Route path={['/@:username', '/']} component={PostListPage} exact />
@@ -40,6 +45,7 @@ function App() {
         <Route path="/@:username/:postId" component={PostPage} />
         </List.Provider>
       </Auth.Provider>
+    </Post.Provider>
     </>
   );
 }

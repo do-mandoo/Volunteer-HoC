@@ -44,6 +44,11 @@ import {
   return (
     <PostList AuthState={AuthState} ListState={ListState}/>
   );
+
+const PostListForm = () => {
+  const { AuthState, AuthDispatch } = useContext(Auth);
+  return <PostList AuthState={AuthState} />;
+
 };
 
 export default PostListForm;
