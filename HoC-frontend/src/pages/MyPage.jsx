@@ -1,9 +1,10 @@
 import React from 'react';
-import MyForm from '../containers/auth/MyForm';
+import ListForm from '../containers/post/ListForm';
+import MyPageContainer from '../containers/post/MyPageContainer';
 
 const MyPage = () => {
   return (
-    <MyForm />
+    <MyPageContainer />
   );
 };
 

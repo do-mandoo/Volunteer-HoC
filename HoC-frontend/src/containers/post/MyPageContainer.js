@@ -4,8 +4,7 @@ import { Auth, Post } from '../../contexts/store';
 
 const MyPageContainer = () => {
   const { AuthState, AuthDispatch } = useContext(Auth);
-  const { PostState, PostDispatch } = useContext(Post);
-  console.log(PostState);
+  // const { PostState, PostDispatch } = useContext(Post);
   console.log(AuthState);
   return <MyPage />;
 };
