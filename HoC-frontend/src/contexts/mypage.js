@@ -1,0 +1,13 @@
+//action
+export const MODIFY_LOADING = 'MODIFY_LOADING';
+export const MODIFY_SUCCESS = 'MODIFY_SUCCESS';
+export const MODIFY_ERROR = 'MODIFY_ERROR';
+
+export const DELETE_LOADING = 'DELETE_LOADING';
+export const DELETE_SUCCESS = 'DELETE_SUCCESS';
+export const DELETE_ERROR = 'DELETE_ERROR';
+
+export function MyPageReducer(state, action){
+  console.log("dd");
+  return;
+}
