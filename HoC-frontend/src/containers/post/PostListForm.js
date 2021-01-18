@@ -5,7 +5,8 @@ import { Auth, Post } from '../../contexts/store';
 import { POST_SUCCESS } from '../../contexts/post';
 
 const PostListForm = () => {
-  return <PostList />;
+  const { AuthState, AuthDispatch } = useContext(Auth);
+  return <PostList AuthState={AuthState} />;
 };
 
 export default PostListForm;

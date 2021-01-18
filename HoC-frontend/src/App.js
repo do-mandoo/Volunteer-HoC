@@ -13,16 +13,18 @@ import { AuthReducer, AuthInitial } from './contexts/auth';
 import { LoadingReducer, LoadingInitial } from './contexts/loading';
 import FindAddr from './lib/api/AddressApi';
 import MyPage from './pages/MyPage';
-import { PostInitial, PostReducer } from './contexts/post';
+import { PostInitial, PostReducer } from './contexts/write';
 
 function App() {
   const [AuthState, AuthDispatch] = useReducer(AuthReducer, AuthInitial);
+  const [PostState, PostDispatch] = useReducer(PostReducer, PostInitial)
   // const [LoadingState, LoadingDispatch] = useReducer(
   //   LoadingReducer,
   //   LoadingInitial
   // );
   return (
     <>
+    <Post.Provider value={{ PostState, PostDispatch }}>
       <Auth.Provider value={{ AuthState, AuthDispatch }}>
         <Route path={['/@:username', '/']} component={PostListPage} exact />
         <Route path="/login/company" component={LoginPage} />
@@ -35,6 +37,7 @@ function App() {
         <Route path="/address" component={FindAddr} />
         <Route path="/@:username/:postId" component={PostPage} />
       </Auth.Provider>
+    </Post.Provider>
     </>
   );
 }

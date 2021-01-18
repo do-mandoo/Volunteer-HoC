@@ -45,7 +45,7 @@ export const write = async ctx => {
     address: Joi.string().required(),
     period: Joi.string().required(),
     gender: Joi.string().required(),
-    tags: Joi.array().items(Joi.string()).required(),
+    // tags: Joi.array().items(Joi.string()).required(),
   });
 
   const result = schema.validate(ctx.request.body);
@@ -62,7 +62,7 @@ export const write = async ctx => {
     address,
     period,
     gender,
-    tags,
+    // tags,
   } = ctx.request.body;
   const post = new Post({
     title,
@@ -71,7 +71,7 @@ export const write = async ctx => {
     address,
     period,
     gender,
-    tags,
+    // tags,
     user: ctx.state.user,
   });
   try {

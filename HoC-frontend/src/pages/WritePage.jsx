@@ -1,5 +1,6 @@
 import React from 'react';
-import WritePageForm from '../components/post/WritePageForm';
+import Write from '../components/post/Write';
+import WritePageForm from '../containers/post/WritePageForm';
 
 const WritePage = () => {
   return (
