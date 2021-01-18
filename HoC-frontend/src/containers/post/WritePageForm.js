@@ -1,19 +1,6 @@
-<<<<<<< HEAD
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import React, { useContext } from 'react';
-=======
-import React, { useContext, useEffect } from 'react';
-import axios from 'axios';
-import {
-  AUTHSTATE_INPUT_VALUE,
-  CHANGE_FIELD,
-  POST_SUCCESS,
-  POST_FAIL,
-  CANCEL_SUCCESS,
-  CANCEL_FAIL,
-} from '../../contexts/write';
->>>>>>> dfdcc37666faf2fd3921bef940d5fcd3869b6827
 import { Auth, Post } from '../../contexts/store';
 import Write from '../../components/post/Write';
 const WritePageForm = () => {
