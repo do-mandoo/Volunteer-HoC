@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from './Button';
 import StyledContainer from './Container';
@@ -32,13 +33,24 @@ const Spacer = styled.div`
   height: 4rem;
 `;
 
-const Header = () => {
+const UserInfo = styled.div`
+  font-weight: 800;
+  margin-right: 1rem;
+`;
+
+const Header = ({ AuthState }) => {
+  console.log(AuthState);
   return (
     <HeaderBlock>
       <Wrapper>
         <div className="logo">심봉사</div>
         <div className="right">
-          <Button>로그인</Button>
+          <UserInfo>{AuthState.login.username}</UserInfo>
+          {AuthState.login.username ? (
+            <Button to="/login">로그아웃</Button>
+          ) : (
+            <Button to="/login">로그인</Button>
+          )}
         </div>
       </Wrapper>
       <Spacer />
