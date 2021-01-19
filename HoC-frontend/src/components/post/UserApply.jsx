@@ -6,6 +6,9 @@ import StyledContainer from '../common/Container';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import AskRemoveModal from './AskRemoveModal';
+
+import { Link, withRouter } from 'react-router-dom';
+
 // import MapContainer from '../../lib/api/MapContainer';
 // import WritePageContainer from '../post/Write';
 
@@ -69,10 +72,8 @@ const UserApplyPageContainer = styled.div`
   }
 `
 
-const UserApply = ({ AuthState,post, modal, onCancel, onConfirm, onRemoveClick }) => {
-  console.log(AuthState);
-  console.log(post);
 
+const UserApply = ({ AuthState,post, modal, onCancel, onConfirm, onRemoveClick }) => {
   
   return (
     <>
@@ -144,6 +145,7 @@ const UserApply = ({ AuthState,post, modal, onCancel, onConfirm, onRemoveClick }
           />
           </>
           )}
+
     </div>
     </UserApplyPageContainer>
     </StyledContainer>
@@ -151,4 +153,4 @@ const UserApply = ({ AuthState,post, modal, onCancel, onConfirm, onRemoveClick }
   );
 };
 
-export default UserApply;
+export default withRouter(UserApply);

@@ -23,7 +23,6 @@ function App() {
   //   LoadingInitial
   // );
   const [ListState, ListDispatch] = useReducer(ListReducer, ListInitial);
-  console.log(ListState);
   return (
     <>
       <Post.Provider value={{ PostState, PostDispatch }}>
@@ -45,4 +44,6 @@ function App() {
     </>
   );
 }
+
 export default App;
+

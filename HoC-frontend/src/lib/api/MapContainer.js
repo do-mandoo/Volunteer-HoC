@@ -2,8 +2,7 @@ import React, { useEffect } from 'react';
 
 const { kakao } = window;
 
-const MapContainer = props => {
-  console.log(props);
+const MapContainer = ({ address, companyName }) => {
   useEffect(() => {
     const container = document.getElementById('myMap');
     const options = {
@@ -29,7 +28,7 @@ const MapContainer = props => {
 
         // 인포윈도우로 장소에 대한 설명을 표시합니다
         var infowindow = new kakao.maps.InfoWindow({
-          content: `<div style="width:150px;text-align:center;padding:6px 0;">${props.companyName}</div>`,
+          content: `<div style="width:150px;text-align:center;padding:6px 0;">${companyName}</div>`,
         });
         infowindow.open(map, marker);
 
@@ -38,8 +37,8 @@ const MapContainer = props => {
       }
     }
 
-    geocoder.addressSearch(props.address, translate);
-  }, [props]);
+    geocoder.addressSearch(address, translate);
+  }, [address, companyName]);
 
   return (
     <div
@@ -52,4 +51,4 @@ const MapContainer = props => {
   );
 };
 
-export default MapContainer;
+export default React.memo(MapContainer);

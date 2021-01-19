@@ -21,6 +21,7 @@ const AskModalBlock = styled.div`
   padding: 1.5rem;
   border-radius: 4px;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.125);
+
   h2{
     margin-top:0;
     margin-bottom:1rem;
@@ -35,7 +36,8 @@ const AskModalBlock = styled.div`
 `;
 
 const StyledButton = styled(Button)`
-  height:2rem;
+  height: 2rem;
+
   & + & {
     margin-left: 0.75rem;
   }
@@ -45,6 +47,7 @@ const AskModal = ({
   visible,
   title,
   description,
+
   confirmText = '확인',
   cancelText = '취소',
   onConfirm,
@@ -62,9 +65,12 @@ const AskModal = ({
             {confirmText}
           </StyledButton>
          </div>
+
       </AskModalBlock>
     </Fullscreen>
   );
 };
 
+
 export default AskModal;
+

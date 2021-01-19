@@ -5,7 +5,7 @@ import Joi from 'joi';
 // const { ObjectId } = mongoose.Types;
 
 export const checkOwnPost = (ctx, next) => {
-  console.log(ctx.state);
+  console.log('check', ctx.state);
   const { user, post } = ctx.state;
   if (post.user_id.toString() !== user._id) {
     ctx.status = 403;
@@ -136,13 +136,13 @@ export const list = async ctx => {
 
 export const read = ctx => {
   ctx.body = ctx.state.post;
-  console.log(ctx.state);
 };
 
 export const remove = async ctx => {
+  console.log('ctx', ctx.params);
   const { id } = ctx.params;
   try {
-    await Post.findByIdAndRemove(id).exec();
+    await Post.findByIdAndRemove({ _id: id }).exec();
     ctx.status = 204; // No Content
   } catch (e) {
     ctx.throw(500, e);
