@@ -5,6 +5,7 @@ import MapContainer from '../../lib/api/MapContainer';
 import StyledContainer from '../common/Container';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
+import { Link, withRouter } from 'react-router-dom';
 // import MapContainer from '../../lib/api/MapContainer';
 // import WritePageContainer from '../post/Write';
 
@@ -68,7 +69,8 @@ const UserApplyPageContainer = styled.div`
   }
 `
 
-const UserApply = ({ AuthState, post }) => {
+const UserApply = ({ AuthState, post, history }) => {
+  if (post === undefined) history.push('/');
   console.log(post);
   return (
     <>
@@ -125,7 +127,10 @@ const UserApply = ({ AuthState, post }) => {
               
             </div>
         </div>
-          {localStorage.getItem('token') && AuthState.company && AuthState.company.username === post.user._id && (<><Button>수정</Button> <Button>삭제</Button></>) }
+            {localStorage.getItem('token')
+              && AuthState.company
+              && AuthState.company.username === post.user._id
+              && (<><Button as={Link} to="write">수정</Button> <Button>삭제</Button></>)}
     </div>
     </UserApplyPageContainer>
     </StyledContainer>
@@ -133,4 +138,4 @@ const UserApply = ({ AuthState, post }) => {
   );
 };
 
-export default UserApply;
+export default withRouter(UserApply);

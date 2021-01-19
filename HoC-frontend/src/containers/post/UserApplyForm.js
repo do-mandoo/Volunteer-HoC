@@ -11,7 +11,6 @@ const UserApplyForm = () => {
   const post = ListState.lists.find(
     list => list._id === parse[parse.length - 1]
   );
-  console.log(post.address);
 
   console.log(post);
 

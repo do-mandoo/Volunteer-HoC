@@ -10,10 +10,10 @@ import {
 import { Auth } from '../../contexts/store';
 import Login from '../../components/auth/Login';
 import { withRouter } from 'react-router-dom';
-const url = window.location.href;
-const parse = url.split('/');
 
 const LoginForm = ({ history }) => {
+  const url = window.location.href;
+  const parse = url.split('/');
   const { AuthState, AuthDispatch } = useContext(Auth);
   const [error, setError] = useState(null);
 
@@ -28,10 +28,12 @@ const LoginForm = ({ history }) => {
           password: AuthState.login.password,
         },
       });
+
       await localStorage.setItem('token', response.data._id);
       await localStorage.setItem('companyName', response.data.companyName);
       await localStorage.setItem('address', response.data.address);
       await localStorage.setItem('phoneNumber', response.data.phoneNumber);
+
       await AuthDispatch({
         type: LOGIN_SUCCESS,
         auth: response,

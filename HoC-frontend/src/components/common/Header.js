@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from './Button';
 import StyledContainer from './Container';
@@ -38,7 +38,12 @@ const UserInfo = styled.div`
   margin-right: 1rem;
 `;
 
-const Header = ({ AuthState }) => {
+const Header = ({ AuthState, history }) => {
+  const onClick = () => {
+    localStorage.removeItem('token');
+    history.push('/');
+  };
+
   return (
     <HeaderBlock>
       <Wrapper>
@@ -46,7 +51,7 @@ const Header = ({ AuthState }) => {
         <div className="right">
           <UserInfo>{AuthState.login && AuthState.login.username}</UserInfo>
           {AuthState.login.username ? (
-            <Button to="/login">로그아웃</Button>
+            <Button onClick={onClick}>로그아웃</Button>
           ) : (
             <Button as="a" href="/login">
               로그인
@@ -59,4 +64,4 @@ const Header = ({ AuthState }) => {
   );
 };
 
-export default Header;
+export default withRouter(Header);
