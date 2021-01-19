@@ -105,7 +105,7 @@ const UserApply = ({ AuthState,post }) => {
 
                 <dl>
                   <dt>봉사기간</dt>
-                  <dd>{post.period} ~ {post.period} </dd>
+                  <dd>{post.periodStart} ~ {post.periodEnd} </dd>
                 </dl>
 
                 <dl>
