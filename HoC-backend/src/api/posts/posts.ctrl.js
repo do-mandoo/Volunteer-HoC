@@ -72,6 +72,7 @@ export const write = async ctx => {
     address,
     period,
     gender,
+    phoneNumber,
     // tags,
     user: ctx.state.user,
   });

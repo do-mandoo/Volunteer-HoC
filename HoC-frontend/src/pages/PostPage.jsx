@@ -1,7 +1,8 @@
 import React from 'react';
+import UserApplyForm from '../containers/post/UserApplyForm';
 
 const PostPage = () => {
-  return <div>포스트 읽기</div>;
+  return (<UserApplyForm />);
 };
 
 export default PostPage;

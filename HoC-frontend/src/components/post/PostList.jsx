@@ -70,7 +70,7 @@ function PostList({ AuthState, ListState }) {
               <span className="recruitGender">성별</span>
             </li>
             {ListState.lists.map(list => (
-              <li key={list.user.id}>
+              <li key={list._id}>
                 <Link to={`/@${AuthState.login.username}/${list._id}`}>
                   <span>{list.companyName}</span>
                   <span>{list.title}</span>
