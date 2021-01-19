@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import UserApply from '../../components/post/UserApply';
-import { Auth, List } from '../../contexts/store';
+import { Auth, List, Post } from '../../contexts/store';
 
 const UserApplyForm = () => {
   const url = window.location.pathname;
@@ -12,7 +12,11 @@ const UserApplyForm = () => {
   const post = ListState.lists.find(
     list => list._id === parse[parse.length - 1]
   );
-  return <UserApply AuthState={AuthState} post={post} />;
+  console.log(post.address);
+
+  console.log(post);
+
+  return <UserApply AuthState={AuthState} post={post} ListState={ListState} />;
 };
 
 export default UserApplyForm;

@@ -1,8 +1,8 @@
 import React from 'react';
 import UserApplyForm from '../containers/post/UserApplyForm';
 
-const PostPage = () => {
+const UserApplyPage = () => {
   return (<UserApplyForm />);
 };
 
-export default PostPage;
+export default UserApplyPage;

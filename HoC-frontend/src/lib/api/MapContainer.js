@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 const { kakao } = window;
 
 const MapContainer = props => {
+  console.log(props);
   useEffect(() => {
     const container = document.getElementById('myMap');
     const options = {
@@ -15,6 +16,8 @@ const MapContainer = props => {
 
     function translate(result, status) {
       // 정상적으로 검색이 완료됐으면
+      console.log(result, status);
+      
       if (status === kakao.maps.services.Status.OK) {
         var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
@@ -43,8 +46,8 @@ const MapContainer = props => {
     <div
       id="myMap"
       style={{
-        width: '500px',
-        height: '500px',
+        width: '100%',
+        height: '450px',
       }}
     ></div>
   );
