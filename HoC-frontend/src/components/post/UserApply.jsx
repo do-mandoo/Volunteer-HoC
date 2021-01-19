@@ -5,7 +5,10 @@ import MapContainer from '../../lib/api/MapContainer';
 import StyledContainer from '../common/Container';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
+import AskRemoveModal from './AskRemoveModal';
+
 import { Link, withRouter } from 'react-router-dom';
+
 // import MapContainer from '../../lib/api/MapContainer';
 // import WritePageContainer from '../post/Write';
 
@@ -69,9 +72,9 @@ const UserApplyPageContainer = styled.div`
   }
 `
 
-const UserApply = ({ AuthState, post, history }) => {
-  if (post === undefined) history.push('/');
-  console.log(post);
+
+const UserApply = ({ AuthState,post, modal, onCancel, onConfirm, onRemoveClick }) => {
+  
   return (
     <>
     <Header AuthState={AuthState} />
@@ -106,10 +109,13 @@ const UserApply = ({ AuthState, post, history }) => {
                 </dl>
 
                 <dl>
-                  <dt>봉사기간</dt>
-                  <dd>{post.periodStart} ~ {post.periodEnd} </dd>
+                  <dt>봉사 기간</dt>
+                  <dd>{post.periodStart} ~ {post.periodEnd}</dd>
                 </dl>
-
+                <dl>
+                  <dt>봉사 시간</dt>
+                  <dd>{post.timeStart} ~ {post.timeEnd}</dd>
+                </dl>
                 <dl>
                   <dt>인원수</dt>
                   <dd>{post.number}</dd>
@@ -127,10 +133,19 @@ const UserApply = ({ AuthState, post, history }) => {
               
             </div>
         </div>
-            {localStorage.getItem('token')
-              && AuthState.company
-              && AuthState.company.username === post.user._id
-              && (<><Button as={Link} to="write">수정</Button> <Button>삭제</Button></>)}
+          {/* {localStorage.getItem('token') && AuthState.company && AuthState.company.username === post.user._id && (<><Button>수정</Button> <Button onClick={onClick}>삭제</Button></>) } */}
+          {localStorage.getItem('token') && AuthState.company && AuthState.company.username === post.user._id && (
+          <>
+          <Button>수정</Button> 
+          <Button onClick={onRemoveClick}>삭제</Button>
+          <AskRemoveModal 
+            visible={modal}
+            onConfirm={onConfirm}
+            onCancel={onCancel} 
+          />
+          </>
+          )}
+
     </div>
     </UserApplyPageContainer>
     </StyledContainer>

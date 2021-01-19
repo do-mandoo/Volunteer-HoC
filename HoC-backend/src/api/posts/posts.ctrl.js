@@ -37,6 +37,7 @@ export const checkOwnPost = (ctx, next) => {
 // };
 
 export const write = async ctx => {
+  console.log(1);
   const schema = Joi.object().keys({
     // Joi를 통해서 객체가 다음 필드를 가지고 있음을 검증한다.
     title: Joi.string().required(),

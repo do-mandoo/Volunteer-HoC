@@ -21,6 +21,7 @@ const PostListForm = () => {
         type: POST_SUCCESS,
         data: response.data,
       });
+
     } catch (e) {
       await ListDispatch({
         type: POST_FAIL,
