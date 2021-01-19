@@ -117,6 +117,11 @@ const UserApply = ({ AuthState,post, modal, onCancel, onConfirm, onRemoveClick }
                   <dd>{post.timeStart} ~ {post.timeEnd}</dd>
                 </dl>
                 <dl>
+                  <dt>봉사시간</dt>
+                  <dd>{post.timeStart} ~ {post.timeEnd} </dd>
+                </dl>
+
+                <dl>
                   <dt>인원수</dt>
                   <dd>{post.number}</dd>
                 </dl>

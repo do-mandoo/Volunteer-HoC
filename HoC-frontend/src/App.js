@@ -17,12 +17,14 @@ import { PostInitial, PostReducer } from './contexts/write';
 import { ListInitial, ListReducer } from './contexts/list';
 function App() {
   const [AuthState, AuthDispatch] = useReducer(AuthReducer, AuthInitial);
+
   const [PostState, PostDispatch] = useReducer(PostReducer, PostInitial);
   // const [LoadingState, LoadingDispatch] = useReducer(
   //   LoadingReducer,
   //   LoadingInitial
   // );
   const [ListState, ListDispatch] = useReducer(ListReducer, ListInitial);
+
   return (
     <>
       <Post.Provider value={{ PostState, PostDispatch }}>
@@ -38,6 +40,7 @@ function App() {
             <Route path="/mypage" component={MyPage} />
             <Route path="/address" component={FindAddr} />
             <Route path="/@:username/:postId" component={UserApplyPage} />
+            </Post.Provider>
           </List.Provider>
         </Auth.Provider>
       </Post.Provider>
