@@ -125,7 +125,7 @@ const UserApply = ({ AuthState,post }) => {
               
             </div>
         </div>
-          {AuthState.login.username === post.user.username && (<><Button>수정</Button> <Button>삭제</Button></>) }
+          {localStorage.getItem('token') && AuthState.company.username === post.user._id && (<><Button>수정</Button> <Button>삭제</Button></>) }
     </div>
     </UserApplyPageContainer>
     </StyledContainer>

@@ -13,6 +13,7 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 // initialState
 export const AuthInitial = {
   company: {
+    id: '',
     username: '',
     password: '',
     passwordConfirm: '',
@@ -21,6 +22,7 @@ export const AuthInitial = {
     phoneNumber: '',
   },
   person: {
+    id: '',
     username: '',
     password: '',
     passwordConfirm: '',
@@ -48,7 +50,7 @@ export function AuthReducer(state, action) {
       return {
         ...state,
         [action.form]: {
-          username: action.username,
+          username: action.id,
           address: action.address,
           phoneNumber: action.phoneNumber,
           companyName: action.companyName,

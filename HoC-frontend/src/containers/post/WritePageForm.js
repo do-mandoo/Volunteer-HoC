@@ -1,13 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import axios from 'axios';
-import {
-  AUTHSTATE_INPUT_VALUE,
-  CHANGE_FIELD,
-  POST_SUCCESS,
-  POST_FAIL,
-  CANCEL_SUCCESS,
-  CANCEL_FAIL,
-} from '../../contexts/write';
+import { AUTHSTATE_INPUT_VALUE, CHANGE_FIELD } from '../../contexts/write';
 import { Auth, Post } from '../../contexts/store';
 import Write from '../../components/post/Write';
 const WritePageForm = () => {
@@ -18,6 +11,7 @@ const WritePageForm = () => {
 
 
   const post = async () => {
+    console.log(PostState.posts);
     try {
     const response =  await axios.post(
       'http://localhost:3000/api/posts',
@@ -39,19 +33,18 @@ const WritePageForm = () => {
     } catch(error) {
       console.log(error);
     }
-  }
+  };
   const onChange = e => {
     // console.log(e.target.value);
     // console.log(e.target.name);
     
     const {value, name} = e.target;
     PostDispatch({
-      type:CHANGE_FIELD,
+      type: CHANGE_FIELD,
       key: name,
       value,
-    });    
+    });
   };
-
 
   const onSubmit = async e => {
     e.preventDefault();
@@ -60,17 +53,20 @@ const WritePageForm = () => {
 
   useEffect(() => {
     PostDispatch({
-      type:AUTHSTATE_INPUT_VALUE,
-      address: AuthState.company.address,
-      companyName:AuthState.company.companyName,
-      phoneNumber:AuthState.company.phoneNumber,
-    })
-  }, [])
+      type: AUTHSTATE_INPUT_VALUE,
+      address: localStorage.getItem('address'),
+      companyName: localStorage.getItem('companyName'),
+      phoneNumber: localStorage.getItem('phoneNumber'),
+    });
+  }, []);
 
-  return <Write AuthState={AuthState} onChange={onChange} onSubmit={onSubmit}/>;
+  return (
+    <Write
+      AuthState={AuthState}
+      PostState={PostState}
+      onChange={onChange}
+      onSubmit={onSubmit}
+    />
+  );
 };
 export default WritePageForm;
-
-
-
-

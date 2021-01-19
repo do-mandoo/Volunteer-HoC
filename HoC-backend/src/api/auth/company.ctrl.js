@@ -75,7 +75,7 @@ export const login = async ctx => {
 
   try {
     const user = await Company.findByUsername(username);
-
+    console.log('user', user);
     if (!user) {
       ctx.status = 401;
       return;
@@ -89,6 +89,7 @@ export const login = async ctx => {
     }
 
     ctx.body = user.serialize();
+    console.log('ctx.body', ctx.body);
 
     const token = user.generateToken();
     ctx.cookies.set('access_token', token, {

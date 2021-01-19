@@ -3,7 +3,7 @@ import Header from '../../components/common/Header';
 import Button from '../../components/common/Button';
 import StyledContainer from '../common/Container';
 import styled from 'styled-components'
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 const PostListBlock = styled.div`
   h1{
@@ -22,23 +22,33 @@ const PostListBlock = styled.div`
     padding:10px 0;
     text-align:center
   }
-  li:first-child{
-  }
   span{
     display:inline-block;
     padding:0 5px
   }
   li span:nth-child(1){
-    width:50%;
+    width:20%;
   }
+  
   li span:nth-child(2){
-    width:10%;
+    width:40%;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    word-wrap:normal;
+    overflow:hidden;
+    text-align:left;
   }
   li span:nth-child(3){
-    width:30%;
+    width:10%;
   }
   li span:nth-child(4){
+    width:20%;
+  }
+  li span:nth-child(5){
     width:10%;
+  }
+  li span.recruitTitle{
+    text-align:center
   }
   `;
 function PostList({ AuthState, ListState }) {
@@ -51,10 +61,11 @@ function PostList({ AuthState, ListState }) {
       <StyledContainer>
         <PostListBlock>
           <h1>봉사자 모집 공고</h1>
-          {AuthState.company && <Button><Link to="/write" >글쓰기</Link></Button>}
-          {AuthState.company && <Button><Link to="/mypage" >내가쓴글</Link></Button>}
+          {AuthState.company && AuthState.company.username && <Button as={Link} to="/write">글쓰기</Button>}
+          {AuthState.company && AuthState.company.username && <Button as={Link} to="/mypage">내가쓴글</Button>}
           <ul>
             <li>
+              <span className="recruitTitle">회사이름</span>
               <span className="recruitTitle">제목</span>
               <span className="recruitNumber">인원수</span>
               <span className="recruitPeriod">기간</span>
@@ -63,9 +74,10 @@ function PostList({ AuthState, ListState }) {
             {ListState.lists.map(list => (
               <li key={list._id}>
                 <Link to={`/@${AuthState.login.username}/${list._id}`}>
+                  <span>{list.companyName}</span>
                   <span>{list.title}</span>
                   <span>{list.number}</span>
-                  <span>{list.period}</span>
+                  <span>{list.periodStart}~{list.periodEnd}</span>
                   <span>{list.gender}</span>
                 </Link>
               </li>
@@ -78,4 +90,4 @@ function PostList({ AuthState, ListState }) {
   )
 }
 
-export default PostList;
+export default withRouter(PostList);
