@@ -84,7 +84,6 @@ const UserApply = ({ AuthState,post }) => {
               <div className="user-content-left">
                 <MapContainer 
                   {...post}
-                  
                 />
               </div>
               <div className="user-content-right">
@@ -105,7 +104,7 @@ const UserApply = ({ AuthState,post }) => {
 
                 <dl>
                   <dt>봉사기간</dt>
-                  <dd>{post.period} ~ {post.period} </dd>
+                  <dd>{post.periodStart} ~ {post.periodEnd} </dd>
                 </dl>
 
                 <dl>
