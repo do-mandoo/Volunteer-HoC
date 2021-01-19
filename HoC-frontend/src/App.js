@@ -6,7 +6,7 @@ import LoginPage from './pages/LoginPage';
 import DivisionPage from './pages/DivisionPage';
 import RegisterPage from './pages/RegisterPage';
 import WritePage from './pages/WritePage';
-import PostPage from './pages/PostPage';
+import UserApplyPage from './pages/UserApplyPage';
 import { Auth, Loading, Post, List } from './contexts/store';
 import { useReducer } from 'react';
 import { AuthReducer, AuthInitial } from './contexts/auth';
@@ -40,7 +40,7 @@ function App() {
             <Route path="/write" component={WritePage} />
             <Route path="/mypage" component={MyPage} />
             <Route path="/address" component={FindAddr} />
-            <Route path="/@:username/:postId" component={PostPage} />
+            <Route path="/@:username/:postId" component={UserApplyPage} />
           </List.Provider>
         </Auth.Provider>
       </Post.Provider>

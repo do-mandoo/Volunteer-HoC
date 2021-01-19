@@ -13,8 +13,8 @@ import Write from '../../components/post/Write';
 const WritePageForm = () => {
   const { AuthState } = useContext(Auth);
   const { PostState, PostDispatch } = useContext(Post);
-  console.log(AuthState);
-  console.log(PostState);
+  // console.log(AuthState);
+  // console.log(PostState);
 
 
   const post = async () => {
@@ -33,7 +33,7 @@ const WritePageForm = () => {
           companyName:PostState.posts.companyName,
         }
       )
-    console.log(response);
+    // console.log(response);
     
 
     } catch(error) {
@@ -41,8 +41,8 @@ const WritePageForm = () => {
     }
   }
   const onChange = e => {
-    console.log(e.target.value);
-    console.log(e.target.name);
+    // console.log(e.target.value);
+    // console.log(e.target.name);
     
     const {value, name} = e.target;
     PostDispatch({

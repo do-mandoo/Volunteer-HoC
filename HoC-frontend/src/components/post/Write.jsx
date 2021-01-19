@@ -22,7 +22,7 @@ const WritePageContainer = styled.div`
 }
 .post-content-wrap {
   display:flex;
-  align-content:center;
+  /* align-content:center; */
   justify-content:center;
   text-align:center;
   background-color: #fff;
@@ -97,6 +97,8 @@ const StyledTextarea = styled.textarea`
   border:none;
 `
 const Write = ({ AuthState, onChange, onSubmit}) => {
+  console.log(AuthState);
+  
   return (
     <>
     <Header AuthState={AuthState} />
@@ -124,7 +126,7 @@ const Write = ({ AuthState, onChange, onSubmit}) => {
                   />
                 </div>
                 <div className="post-content-right">
-                  <label htmlFor="post-name-">업체명</label>
+                  <label htmlFor="post-name">업체명</label>
                   <StyledInput 
                   id="post-name" 
                   name="companyName"
