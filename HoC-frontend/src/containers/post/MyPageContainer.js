@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useContext, useEffect } from 'react';
-import MyPage from '../../components/post/MyPostPage';
+import MyPost from '../../components/post/MyPost';
 import { MODIFY_ERROR, MODIFY_LOADING, MODIFY_SUCCESS } from '../../contexts/mypost';
 import { Auth, List } from '../../contexts/store';
 
@@ -32,7 +32,7 @@ const MyPageContainer = () => {
     fetchMyPage()
   },[])
 
-  return <MyPage AuthState={AuthState} ListState={ListState} />;
+  return <MyPost AuthState={AuthState} ListState={ListState} />;
 };
 
 export default MyPageContainer;

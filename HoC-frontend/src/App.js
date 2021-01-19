@@ -12,7 +12,7 @@ import { useReducer } from 'react';
 import { AuthReducer, AuthInitial } from './contexts/auth';
 import { LoadingReducer, LoadingInitial } from './contexts/loading';
 import FindAddr from './lib/api/AddressApi';
-import MyPage from './pages/MyPostPage';
+import MyPage from './pages/MyPage';
 import { PostInitial, PostReducer } from './contexts/post';
 import { ListInitial, ListReducer } from './contexts/list';
 

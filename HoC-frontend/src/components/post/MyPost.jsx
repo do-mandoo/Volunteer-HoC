@@ -70,7 +70,7 @@ const Footer = styled.div`
 
 `;
 
-const MyPage = ({ AuthState, ListState }) => {
+const MyPost = ({ AuthState, ListState }) => {
   console.log(ListState);
   return (
     <>
@@ -110,4 +110,4 @@ const MyPage = ({ AuthState, ListState }) => {
   );
 };
 
-export default MyPage;
+export default MyPost;
