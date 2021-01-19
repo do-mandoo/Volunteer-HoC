@@ -39,11 +39,6 @@ const UserInfo = styled.div`
 `;
 
 const Header = ({ AuthState, history }) => {
-  const onClick = () => {
-    localStorage.removeItem('token');
-    history.push('/');
-  };
-
   return (
     <HeaderBlock>
       <Wrapper>
@@ -51,7 +46,7 @@ const Header = ({ AuthState, history }) => {
         <div className="right">
           <UserInfo>{AuthState.login && AuthState.login.username}</UserInfo>
           {AuthState.login.username ? (
-            <Button onClick={onClick}>로그아웃</Button>
+            <Button>로그아웃</Button>
           ) : (
             <Button as="a" href="/login">
               로그인
