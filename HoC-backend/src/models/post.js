@@ -9,8 +9,11 @@ const PostSchema = new Schema({
   companyName: String,
   phoneNumber: String,
   address: String,
-  period: String,
-  number: Number,
+  periodStart: String,
+  periodEnd: String,
+  timeStart: String,
+  timeEnd: String,
+  number: String,
   gender: String,
   publishedDate: {
     type: Date,

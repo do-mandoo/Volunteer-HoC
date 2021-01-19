@@ -4,7 +4,8 @@ import Button from '../common/Button';
 import StyledContainer from '../common/Container';
 
 const UserApply = ({ AuthState, post }) => {
-  console.log(post);
+  console.log('post', post);
+  console.log(AuthState);
   return (
     <>
     <Header AuthState={AuthState} />
@@ -18,7 +19,7 @@ const UserApply = ({ AuthState, post }) => {
               {post.body}
             </p>
         </div>
-          {AuthState.login.username === post.user.username && (<><Button>수정</Button> <Button>삭제</Button></>) }
+          {localStorage.getItem('token') && AuthState.company.username === post.user._id && (<><Button>수정</Button> <Button>삭제</Button></>) }
     </div>
     </StyledContainer>
     </>

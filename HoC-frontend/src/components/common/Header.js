@@ -39,17 +39,18 @@ const UserInfo = styled.div`
 `;
 
 const Header = ({ AuthState }) => {
-  console.log(AuthState);
   return (
     <HeaderBlock>
       <Wrapper>
         <div className="logo">심봉사</div>
         <div className="right">
           <UserInfo>{AuthState.login && AuthState.login.username}</UserInfo>
-          {AuthState.login ? (
+          {AuthState.login.username ? (
             <Button to="/login">로그아웃</Button>
           ) : (
-            <Button to="/login">로그인</Button>
+            <Button as="a" href="/login">
+              로그인
+            </Button>
           )}
         </div>
       </Wrapper>

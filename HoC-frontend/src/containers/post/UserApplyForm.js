@@ -8,7 +8,6 @@ const UserApplyForm = () => {
   console.log(parse);
   const { AuthState } = useContext(Auth);
   const { ListState } = useContext(List);
-  console.log(ListState.lists);
 
   const post = ListState.lists.find(
     list => list._id === parse[parse.length - 1]

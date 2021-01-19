@@ -3,7 +3,7 @@ import Header from '../../components/common/Header';
 import Button from '../../components/common/Button';
 import StyledContainer from '../common/Container';
 import styled from 'styled-components'
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 const PostListBlock = styled.div`
   h1{
@@ -59,15 +59,15 @@ function PostList({ AuthState, ListState }) {
               <span className="recruitGender">성별</span>
             </li>
             {ListState.lists.map(list => (
-              <li key={list._id}>
-                <Link to={`/@${AuthState.login.username}/${list._id}`}>
-                  <span>{list.title}</span>
-                  <span>{list.number}</span>
-                  <span>{list.period}</span>
-                  <span>{list.gender}</span>
-                </Link>
-              </li>
-            )
+                <li key={list._id}>
+                  <Link to={`/@${list.user.username}/${list._id}`}>
+                    <span>{list.title}</span>
+                    <span>{list.number}</span>
+                    <span>{list.period}</span>
+                    <span>{list.gender}</span>
+                  </Link>
+                </li>
+              )
             )}
           </ul>
         </PostListBlock>
@@ -76,4 +76,4 @@ function PostList({ AuthState, ListState }) {
   )
 }
 
-export default PostList;
+export default withRouter(PostList);

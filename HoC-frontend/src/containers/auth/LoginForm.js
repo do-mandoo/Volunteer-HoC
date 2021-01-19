@@ -28,6 +28,10 @@ const LoginForm = ({ history }) => {
           password: AuthState.login.password,
         },
       });
+      await localStorage.setItem('token', response.data._id);
+      await localStorage.setItem('companyName', response.data.companyName);
+      await localStorage.setItem('address', response.data.address);
+      await localStorage.setItem('phoneNumber', response.data.phoneNumber);
       await AuthDispatch({
         type: LOGIN_SUCCESS,
         auth: response,
@@ -35,6 +39,7 @@ const LoginForm = ({ history }) => {
       await AuthDispatch({
         type: REGISTER_INFO,
         form: parse[parse.length - 1],
+        id: response.data._id,
         username: response.data.username,
         address: response.data.address,
         phoneNumber: response.data.phoneNumber,

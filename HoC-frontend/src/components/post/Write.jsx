@@ -130,7 +130,8 @@ const Write = ({ AuthState, onChange, onSubmit}) => {
                   name="companyName"
                   type="text" 
                   placeholder="업체명을 입력해주세요." 
-                  value={AuthState.company.username}
+                  defaultValue={AuthState.company.companyName}
+                  value={AuthState.company.companyName}
                   onChange={onChange}
                   />
                   <label htmlFor="post-phone">전화번호</label>
@@ -155,7 +156,7 @@ const Write = ({ AuthState, onChange, onSubmit}) => {
                   <label htmlFor="post-period-start">봉사 기간</label>
                   <StyledInput 
                   id="post-period-start" 
-                  name="periodstart"
+                  name="periodStart"
                   type="date" 
                   onChange={onChange}
                   />
@@ -163,8 +164,25 @@ const Write = ({ AuthState, onChange, onSubmit}) => {
                   <label htmlFor="post-period-end">~</label>
                   <StyledInput 
                   id="post-period-end" 
-                  name="periodend"
+                  name="periodEnd"
                   type="date" 
+                  onChange={onChange}
+                        />
+                </div>
+                <div className="period-wrap">
+                  <label htmlFor="post-period-start">봉사 시간</label>
+                  <StyledInput 
+                  id="post-period-start" 
+                  name="timeStart"
+                  type="time" 
+                  onChange={onChange}
+                        />
+                        
+                  <label htmlFor="post-period-start">~</label>
+                  <StyledInput 
+                  id="post-period-start" 
+                  name="timeEnd"
+                  type="time" 
                   onChange={onChange}
                   />
 

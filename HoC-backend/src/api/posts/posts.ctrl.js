@@ -1,8 +1,8 @@
 import Post from '../../models/post';
-import mongoose from 'mongoose';
+// import mongooxse from 'mongoose';
 import Joi from 'joi';
 
-const { ObjectId } = mongoose.Types;
+// const { ObjectId } = mongoose.Types;
 
 export const checkOwnPost = (ctx, next) => {
   console.log(ctx.state);
@@ -15,25 +15,26 @@ export const checkOwnPost = (ctx, next) => {
 };
 
 // ObjectId를 체크하는 로직
-export const getPostById = async (ctx, next) => {
-  const { id } = ctx.params;
-  if (!ObjectId.isValid(id)) {
-    ctx.status = 400; // Bad Request
-    return;
-  }
+// export const getPostById = async (ctx, next) => {
+//   console.log('ctx', ctx);
+//   const { id } = ctx.params;
+//   if (!ObjectId.isValid(id)) {
+//     ctx.status = 400; // Bad Request
+//     return;
+//   }
 
-  try {
-    const post = await Post.findById(id);
-    if (!post) {
-      ctx.status = 404;
-      return;
-    }
-    ctx.state.post = post;
-    return next();
-  } catch (e) {
-    ctx.throw(500, e);
-  }
-};
+//   try {
+//     const post = await Post.findById(id);
+//     if (!post) {
+//       ctx.status = 404;
+//       return;
+//     }
+//     ctx.state.post = post;
+//     return next();
+//   } catch (e) {
+//     ctx.throw(500, e);
+//   }
+// };
 
 export const write = async ctx => {
   const schema = Joi.object().keys({
@@ -43,7 +44,11 @@ export const write = async ctx => {
     companyName: Joi.string().required(),
     phoneNumber: Joi.string().required(),
     address: Joi.string().required(),
-    period: Joi.string().required(),
+    periodStart: Joi.string().required(),
+    periodEnd: Joi.string().required(),
+    timeStart: Joi.string().required(),
+    timeEnd: Joi.string().required(),
+    number: Joi.string().required(),
     gender: Joi.string().required(),
     // tags: Joi.array().items(Joi.string()).required(),
   });
@@ -61,8 +66,12 @@ export const write = async ctx => {
     companyName,
     phoneNumber,
     address,
-    period,
+    periodStart,
+    periodEnd,
+    timeStart,
+    timeEnd,
     gender,
+    number,
     // tags,
   } = ctx.request.body;
   const post = new Post({
@@ -70,9 +79,13 @@ export const write = async ctx => {
     body,
     companyName,
     address,
-    period,
+    periodStart,
+    periodEnd,
+    timeStart,
+    timeEnd,
     gender,
     phoneNumber,
+    number,
     // tags,
     user: ctx.state.user,
   });
@@ -96,7 +109,7 @@ export const list = async ctx => {
   const { tag, username } = ctx.query;
   const query = {
     ...(username ? { 'user.username': username } : {}),
-    ...getPostById(tag ? { tags: tag } : {}),
+    // ...getPostById(tag ? { tags: tag } : {}),
   };
 
   try {
