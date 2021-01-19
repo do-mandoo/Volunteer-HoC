@@ -17,7 +17,7 @@ const MapContainer = props => {
     function translate(result, status) {
       // 정상적으로 검색이 완료됐으면
       console.log(result, status);
-      
+
       if (status === kakao.maps.services.Status.OK) {
         var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
@@ -29,8 +29,7 @@ const MapContainer = props => {
 
         // 인포윈도우로 장소에 대한 설명을 표시합니다
         var infowindow = new kakao.maps.InfoWindow({
-          content:
-            '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>',
+          content: `<div style="width:150px;text-align:center;padding:6px 0;">${props.companyName}</div>`,
         });
         infowindow.open(map, marker);
 
