@@ -15,9 +15,9 @@ const UserApplyForm = () => {
     list => list._id === parse[parse.length - 1]
   );
   console.log(post.address);
-  
+
   console.log(post);
-  
+
   return <UserApply AuthState={AuthState} post={post} ListState={ListState} />;
 };
 

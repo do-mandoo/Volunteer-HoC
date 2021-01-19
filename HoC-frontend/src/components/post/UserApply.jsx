@@ -84,7 +84,6 @@ const UserApply = ({ AuthState,post }) => {
               <div className="user-content-left">
                 <MapContainer 
                   {...post}
-                  
                 />
               </div>
               <div className="user-content-right">
