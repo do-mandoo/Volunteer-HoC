@@ -126,7 +126,10 @@ import { Auth } from '../../contexts/store';
 import Register from '../../components/auth/Register';
 import { withRouter } from 'react-router-dom';
 
+
 const RegisterForm = ({ history }) => {
+  const url = window.location.pathname;
+  const parse = url.split('/');
   const { AuthState, AuthDispatch } = useContext(Auth); //app.js에서 프로바이더로 내려준걸 디스트럭처링할당한거다.
   const [error, setError] = useState(null);
   // 비동기

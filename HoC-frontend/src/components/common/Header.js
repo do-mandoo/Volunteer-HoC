@@ -45,8 +45,8 @@ const Header = ({ AuthState }) => {
       <Wrapper>
         <div className="logo">심봉사</div>
         <div className="right">
-          <UserInfo>{AuthState.login.username}</UserInfo>
-          {AuthState.login.username ? (
+          <UserInfo>{AuthState.login && AuthState.login.username}</UserInfo>
+          {AuthState.login ? (
             <Button to="/login">로그아웃</Button>
           ) : (
             <Button to="/login">로그인</Button>

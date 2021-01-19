@@ -1,16 +1,38 @@
+import axios from 'axios';
 import React, { useContext, useEffect } from 'react';
-import MyPage from '../../components/post/MyPage';
-import { Auth, Post } from '../../contexts/store';
+import MyPage from '../../components/post/MyPostPage';
+import { MODIFY_ERROR, MODIFY_LOADING, MODIFY_SUCCESS } from '../../contexts/mypost';
+import { Auth, List } from '../../contexts/store';
 
 const MyPageContainer = () => {
   const { AuthState, AuthDispatch } = useContext(Auth);
-  const { PostState, PostDispatch } = useContext(Post);
-  console.log(PostState);
+  const { ListState, ListDispatch } = useContext(List);
   console.log(AuthState);
 
-  // useEffect
+  const fetchMyPage = async () => {
+    await ListDispatch({
+      type : MODIFY_LOADING,
+      loading: true,
+    });
+    try{
+      const response = await axios.get('http://localhost:3000/api/posts');
+      // await ListDispatch({
+      //   type: MODIFY_SUCCESS,
+      //   data : response.data,
+      // })
+    }catch (e){
+      // await ListDispatch({
+      //   type : MODIFY_ERROR,
+      // })
+      console.log(e);
+    }
+  }
 
-  return <MyPage AuthState={AuthState} PostState={PostState} />;
+  useEffect(()=>{
+    fetchMyPage()
+  },[])
+
+  return <MyPage AuthState={AuthState} ListState={ListState} />;
 };
 
 export default MyPageContainer;

@@ -70,11 +70,11 @@ const Footer = styled.div`
 
 `;
 
-const MyPage = ({ AuthState, PostState }) => {
-  console.log(AuthState, PostState);
+const MyPage = ({ AuthState, ListState }) => {
+  console.log(ListState);
   return (
     <>
-      <Header />
+      <Header AuthState={AuthState} />
       <StyledContainer>
       <GlobalList>
         <HeaderName>
@@ -88,17 +88,15 @@ const MyPage = ({ AuthState, PostState }) => {
               <ul className='Left'>
                 모집공고
                 <li>
-                  목록 : 내용ahdfafdvfrva
+                  <span>제목</span>
+                  <span>자세히 보기</span>
                 </li>
-                <li>
-                  목록 : 내용
-                </li>
-              </ul>
-              <ul className='Right'>
-                지원현황
-                <li>
-                  목록 : 인원dddddddd
-                </li>
+                {/* {ListState.lists.map(list=>(
+                  <li key = {list.user.id}>
+                    <span>{list.title}</span>
+                    <span>{list.period}</span>
+                  </li>
+                ))} */}
               </ul>
             </div>
           </div>
