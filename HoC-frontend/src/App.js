@@ -15,25 +15,25 @@ import FindAddr from './lib/api/AddressApi';
 import MyPage from './pages/MyPage';
 import { PostInitial, PostReducer } from './contexts/write';
 import { ListInitial, ListReducer } from './contexts/list';
-
 function App() {
   const [AuthState, AuthDispatch] = useReducer(AuthReducer, AuthInitial);
-  const [LoadingState, LoadingDispatch] = useReducer(
-    LoadingReducer,
-    LoadingInitial
-  );
-  const [ListState,ListDispatch] = useReducer(ListReducer,ListInitial);
-  const [PostState,PostDispatch] = useReducer(PostReducer,PostInitial)
+
+  const [PostState, PostDispatch] = useReducer(PostReducer, PostInitial);
+  // const [LoadingState, LoadingDispatch] = useReducer(
+  //   LoadingReducer,
+  //   LoadingInitial
+  // );
+  const [ListState, ListDispatch] = useReducer(ListReducer, ListInitial);
+
   return (
     <>
-      <Loading.Provider value={{ LoadingState, LoadingDispatch }}>
+      <Post.Provider value={{ PostState, PostDispatch }}>
         <Auth.Provider value={{ AuthState, AuthDispatch }}>
-          <List.Provider value={{ListState,ListDispatch}}>
-            <Post.Provider value={{PostState,PostDispatch}}>
+          <List.Provider value={{ ListState, ListDispatch }}>
             <Route path={['/@:username', '/']} component={PostListPage} exact />
             <Route path="/login/company" component={LoginPage} />
             <Route path="/login/person" component={LoginPage} />
-            <Route path="/division" component={DivisionPage} />
+            <Route path={['/register', '/login']} component={DivisionPage} />
             <Route path="/register/company" exact component={RegisterPage} />
             <Route path="/register/person" exact component={RegisterPage} />
             <Route path="/write" component={WritePage} />
@@ -43,9 +43,10 @@ function App() {
             </Post.Provider>
           </List.Provider>
         </Auth.Provider>
-      </Loading.Provider>
+      </Post.Provider>
     </>
   );
 }
 
 export default App;
+
