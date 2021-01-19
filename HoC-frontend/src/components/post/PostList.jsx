@@ -49,8 +49,8 @@ function PostList({ AuthState, ListState }) {
       <StyledContainer>
         <PostListBlock>
           <h1>봉사자 모집 공고</h1>
-          {AuthState.company && <Button><Link to="/write" >글쓰기</Link></Button>}
-          {AuthState.company && <Button><Link to="/mypage" >내가쓴글</Link></Button>}
+          {AuthState.company && AuthState.company.username && <Button as={Link} to="/write">글쓰기</Button>}
+          {AuthState.company && AuthState.company.username && <Button as={Link} to="/mypage">내가쓴글</Button>}
           <ul>
             <li>
               <span className="recruitTitle">제목</span>

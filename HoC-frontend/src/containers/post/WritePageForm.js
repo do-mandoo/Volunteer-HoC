@@ -15,8 +15,8 @@ const WritePageForm = () => {
         title: PostState.posts.title,
         body: PostState.posts.body,
         address: PostState.posts.address,
-        periodstart: PostState.posts.periodstart,
-        periodend: PostState.posts.periodend,
+        periodStart: PostState.posts.periodStart,
+        periodEnd: PostState.posts.periodEnd,
         timeStart: PostState.posts.timeStart,
         timeEnd: PostState.posts.timeEnd,
         gender: PostState.posts.gender,
@@ -42,21 +42,22 @@ const WritePageForm = () => {
     post();
   };
 
-  const address = localStorage.getItem('address');
-  const companyName = localStorage.getItem('companyName');
-  const phoneNumber = localStorage.getItem('phoneNumber');
-
   useEffect(() => {
     PostDispatch({
       type: AUTHSTATE_INPUT_VALUE,
-      address: AuthState.company.address,
-      companyName: AuthState.company.companyName,
-      phoneNumber: AuthState.company.phoneNumber,
+      address: localStorage.getItem('address'),
+      companyName: localStorage.getItem('companyName'),
+      phoneNumber: localStorage.getItem('phoneNumber'),
     });
   }, []);
 
   return (
-    <Write AuthState={AuthState} onChange={onChange} onSubmit={onSubmit} />
+    <Write
+      AuthState={AuthState}
+      PostState={PostState}
+      onChange={onChange}
+      onSubmit={onSubmit}
+    />
   );
 };
 export default WritePageForm;
