@@ -18,12 +18,16 @@ const PostListForm = () => {
     });
     try {
       const response = await axios.get('http://localhost:3000/api/posts');
+      
       await ListDispatch({
         type: POST_SUCCESS,
         data: response.data,
       });
       console.log(response.data);
       console.log(ListState);
+      console.log(response);
+      
+      
     } catch (e) {
       await ListDispatch({
         type: POST_FAIL,

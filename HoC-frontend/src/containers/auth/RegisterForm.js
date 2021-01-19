@@ -60,12 +60,8 @@ const RegisterForm = ({ history }) => {
           phoneNumber: AuthState.person.phoneNumber,
         }
       );
-<<<<<<< HEAD
       console.log(response);
       await AuthDispatch({ // 디스패치날리면 리듀서로 날라감.
-=======
-      await AuthDispatch({
->>>>>>> e557cd8ea691645912238289f270b6e99d99af85
         type: REGISTER_SUCCESS,
         auth: response,
       });
