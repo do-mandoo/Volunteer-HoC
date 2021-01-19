@@ -7,10 +7,6 @@ const WritePageForm = () => {
   
   const { AuthState } = useContext(Auth);
   const { PostState, PostDispatch } = useContext(Post);
-  // console.log(AuthState);
-  // console.log(PostState);
-
-
   const post = async () => {
     console.log(PostState.posts);
     try {

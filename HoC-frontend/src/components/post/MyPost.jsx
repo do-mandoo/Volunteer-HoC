@@ -3,108 +3,76 @@ import styled from 'styled-components';
 import Header from '../common/Header';
 import StyledContainer from '../common/Container';
 
-const GlobalList = styled.div`
-  width: 100%;
-  background-color: #aaa;
+const MyPostBlock = styled.div`
+h1{
+  text-align:center;
+  font-size:2rem;
+
+}
+button{
+  margin-right:30px
+}
+ul{
+  margin-top:100px;
+}
+li{
+  border-bottom:1px solid black;
+  padding:10px 0;
+  text-align:center
+}
+span{
+  display:inline-block;
+  padding:0 5px
+}
+
+li span:nth-child(1){
+  width:40%;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  word-wrap:normal;
+  overflow:hidden;
+  text-align:left;
+}
+li span:nth-child(2){
+  width:10%;
+}
+li span:nth-child(3){
+  width:30%;
+}
+li span:nth-child(4){
+  width:10%;
+}
+li span.recruitTitle{
+  text-align:center
+}
 `
-const HeaderName = styled.div`
-  background : black;
-  text-decoration : underline;
-  color : white;
-  margin-bottom: 10px;
-  padding: 20px 0;
 
-  h1{
-    font-size : 24px;
-    text-align : center;
-  }
-`;
-
-const BodyList = styled.div`
-  width : 100%;
-  height : 500px;
-  border: 1px solid red;
-  padding: 4px;
-
-  .ListWrap{
-    display:flex;
-    flex-flow: row nowrap;
-    justify-content: space-around;
-  }
-
-  .Left, .Right{
-    width: 50%;
-    height: 100%;
-    background-color:white;
-    margin: 5px;
-    padding:10px;
-    text-align:center;
-    font-weight:700;
-    font-size:26px;
-  }
-
-  .Left{
-    width: 70%;
-    list-style: none;
-    display:inline-block;
-  }
-  
-  .Right{
-    width: 30%;
-  }
-
-  li{
-    padding-bottom: 10px;
-    padding:10px 0;
-    margin:0px;
-    background-color: #eee;
-    text-align:left;
-    font-weight:400;
-    font-size:16px;
-  }
-
-`;
-
-const Footer = styled.div`
-  width : 100%
-
-`;
-
-const MyPost = ({ AuthState, ListState }) => {
+const MyPost = ({ AuthState, ListState, tokenId }) => {
   console.log(ListState);
+  const filterlist = ListState.lists.filter(list => list.user._id === tokenId);
   return (
     <>
       <Header AuthState={AuthState} />
       <StyledContainer>
-      <GlobalList>
-        <HeaderName>
-          <div>
-            <h1>내가 작성한 모집 공고</h1>
-          </div>
-        </HeaderName>
-        <BodyList>
-          <div>
-            <div className="ListWrap">
-              <ul className='Left'>
-                모집공고
-                <li>
-                  <span>제목</span>
-                  <span>자세히 보기</span>
-                </li>
-                {/* {ListState.lists.map(list=>(
-                  <li key = {list.user.id}>
-                    <span>{list.title}</span>
-                    <span>{list.period}</span>
-                  </li>
-                ))} */}
-              </ul>
-            </div>
-          </div>
-        </BodyList>
-        <Footer>
-          心봉사
-        </Footer>
-      </GlobalList>
+        <MyPostBlock>
+          <h1>내가 작성한 모집 공고</h1>
+        <ul>
+            <li>
+              <span className="recruitTitle">제목</span>
+              <span className="recruitNumber">인원수</span>
+              <span className="recruitPeriod">기간</span>
+              <span className="recruitGender">성별</span>
+            </li>
+            {filterlist.map(mylist=>(
+              <li key={mylist._id}>
+                <span>{mylist.title}</span>
+                <span>{mylist.number}</span>
+                <span>{mylist.periodStart}~{mylist.periodEnd}</span>
+                <span>{mylist.gender}</span>
+              </li>
+            ))}
+        </ul>
+        </MyPostBlock>
       </StyledContainer>
     </>
   );
