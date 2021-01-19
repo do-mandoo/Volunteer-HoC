@@ -24,7 +24,7 @@ const PostListForm = () => {
       });
       console.log(response.data);
       console.log(ListState);
-      console.log(response);
+      // console.log(response);
       
       
     } catch (e) {
