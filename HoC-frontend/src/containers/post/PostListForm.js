@@ -5,10 +5,11 @@ import PostList from '../../components/post/PostList';
 
 import { POST_FAIL, POST_LOADING, POST_SUCCESS } from '../../contexts/list';
 
-const PostListForm = () => {
-  const { AuthState } = useContext(Auth);
-
-  const { ListState, ListDispatch } = useContext(List);
+  
+const PostListForm = () => {  
+    
+  const {AuthState} = useContext(Auth);
+  const {ListState, ListDispatch} = useContext(List);
 
   const fetchList = async () => {
     await ListDispatch({
@@ -34,10 +35,15 @@ const PostListForm = () => {
     }
   };
 
-  useEffect(() => {
-    fetchList();
-  }, []);
+  useEffect(()=>{
+    fetchList()
+  },[])
+  
+  
+  return (
+    <PostList AuthState={AuthState} ListState={ListState}/>
+  );
 
-  return <PostList AuthState={AuthState} ListState={ListState} />;
-};
+}
+
 export default PostListForm;

@@ -37,15 +37,17 @@ export const AuthInitial = {
   authError: null,
 };
 
-export function AuthReducer(state, action) {
-  switch (action.type) {
-    case CHANGE_FIELD:
+//Reducer
+export function AuthReducer(state, action) {   // dispatch에서 날린거 받아옴.
+  switch (action.type) { // RegisterForm.js의 
+    case CHANGE_FIELD: // 198번 줄, onChange의 이벤트발생했을때
       return {
-        [action.form]: {
-          ...state[action.form],
+        [action.form]: {   //parse[parse.length-1] 이라고 되어있는 것처럼 뒷부분이 company인지, person인지 구별.
+          ...state[action.form], // 스프레드문법을 사용해서 초기 state를 복사함. 
           [action.key]: action.value,
         },
       };
+
     case REGISTER_INFO:
       return {
         ...state,
@@ -61,10 +63,10 @@ export function AuthReducer(state, action) {
         ...state,
       };
     case REGISTER_SUCCESS:
-      return { ...state, authError: null, auth: action.auth };
+      return { ...state, authError: null, auth: action.auth }; // auth: action.auth === 153번 줄 auth:response.
 
     case REGISTER_FAIL:
-      return { ...state, authError: action.error.response };
+      return { ...state, authError: action.error.response }; // authError: action.error.response === 
 
     case LOGIN_SUCCESS:
       return { ...state, authError: null, auth: action.auth };

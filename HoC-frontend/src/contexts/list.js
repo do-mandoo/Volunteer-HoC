@@ -13,14 +13,13 @@ export const ListReducer = (state,action) => {
     // console.log(address);
     switch (action.type) {
         case POST_SUCCESS:
-            // console.log('성공',action.data)
-          return {
-              ...state,
-              lists:action.data,
-              loading:false,
-              error:null
-            }
-            
+            console.log('성공',action.data)
+            return {
+                ...state,
+                lists:action.data,
+                loading:false,
+                error:null
+                }
         case POST_LOADING:
             return {
                 ...state,

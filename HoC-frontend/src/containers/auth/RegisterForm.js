@@ -10,12 +10,12 @@ import { Auth } from '../../contexts/store';
 import Register from '../../components/auth/Register';
 import { withRouter } from 'react-router-dom';
 
+
 const RegisterForm = ({ history }) => {
   const url = window.location.pathname;
   const parse = url.split('/');
-  const { AuthState, AuthDispatch } = useContext(Auth);
+  const { AuthState, AuthDispatch } = useContext(Auth); //app.js에서 프로바이더로 내려준걸 디스트럭처링할당한거다.
   const [error, setError] = useState(null);
-
   // 비동기
   const companyRegister = async () => {
     try {
@@ -60,7 +60,8 @@ const RegisterForm = ({ history }) => {
           phoneNumber: AuthState.person.phoneNumber,
         }
       );
-      await AuthDispatch({
+      console.log(response);
+      await AuthDispatch({ // 디스패치날리면 리듀서로 날라감.
         type: REGISTER_SUCCESS,
         auth: response,
       });
