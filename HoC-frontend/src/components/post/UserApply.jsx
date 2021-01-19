@@ -5,6 +5,7 @@ import MapContainer from '../../lib/api/MapContainer';
 import StyledContainer from '../common/Container';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
+import AskRemoveModal from './AskRemoveModal';
 // import MapContainer from '../../lib/api/MapContainer';
 // import WritePageContainer from '../post/Write';
 
@@ -68,9 +69,10 @@ const UserApplyPageContainer = styled.div`
   }
 `
 
-const UserApply = ({ AuthState,post }) => {
+const UserApply = ({ AuthState,post, modal, onCancel, onConfirm, onRemoveClick }) => {
   console.log(AuthState);
   console.log(post);
+
   
   return (
     <>
@@ -130,7 +132,18 @@ const UserApply = ({ AuthState,post }) => {
               
             </div>
         </div>
-          {localStorage.getItem('token') && AuthState.company && AuthState.company.username === post.user._id && (<><Button>수정</Button> <Button>삭제</Button></>) }
+          {/* {localStorage.getItem('token') && AuthState.company && AuthState.company.username === post.user._id && (<><Button>수정</Button> <Button onClick={onClick}>삭제</Button></>) } */}
+          {localStorage.getItem('token') && AuthState.company && AuthState.company.username === post.user._id && (
+          <>
+          <Button>수정</Button> 
+          <Button onClick={onRemoveClick}>삭제</Button>
+          <AskRemoveModal 
+            visible={modal}
+            onConfirm={onConfirm}
+            onCancel={onCancel} 
+          />
+          </>
+          )}
     </div>
     </UserApplyPageContainer>
     </StyledContainer>

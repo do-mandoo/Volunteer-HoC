@@ -4,6 +4,7 @@ import { AUTHSTATE_INPUT_VALUE, CHANGE_FIELD } from '../../contexts/write';
 import { Auth, Post } from '../../contexts/store';
 import Write from '../../components/post/Write';
 const WritePageForm = () => {
+  
   const { AuthState } = useContext(Auth);
   const { PostState, PostDispatch } = useContext(Post);
   // console.log(AuthState);
@@ -19,15 +20,17 @@ const WritePageForm = () => {
           title: PostState.posts.title,
           body: PostState.posts.body,
           address: PostState.posts.address,
-          periodstart: PostState.posts.periodstart,
-          periodend: PostState.posts.periodend,
+          periodStart: PostState.posts.periodStart,
+          periodEnd: PostState.posts.periodEnd,
+          timeStart:PostState.posts.timeStart,
+          timeEnd:PostState.posts.timeEnd,
           gender:PostState.posts.gender,
           phoneNumber: PostState.posts.phoneNumber,
           number:PostState.posts.number,
           companyName:PostState.posts.companyName,
         }
       )
-    // console.log(response);
+    console.log(response);
     
 
     } catch(error) {

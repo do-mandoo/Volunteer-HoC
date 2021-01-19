@@ -13,28 +13,26 @@ import { AuthReducer, AuthInitial } from './contexts/auth';
 import { LoadingReducer, LoadingInitial } from './contexts/loading';
 import FindAddr from './lib/api/AddressApi';
 import MyPage from './pages/MyPage';
-import { PostInitial, PostReducer } from './contexts/post';
+import { PostInitial, PostReducer } from './contexts/write';
 import { ListInitial, ListReducer } from './contexts/list';
-
 function App() {
   const [AuthState, AuthDispatch] = useReducer(AuthReducer, AuthInitial);
   const [PostState, PostDispatch] = useReducer(PostReducer, PostInitial);
-  const [LoadingState, LoadingDispatch] = useReducer(
-    LoadingReducer,
-    LoadingInitial
-  );
-
+  // const [LoadingState, LoadingDispatch] = useReducer(
+  //   LoadingReducer,
+  //   LoadingInitial
+  // );
   const [ListState, ListDispatch] = useReducer(ListReducer, ListInitial);
   console.log(ListState);
   return (
     <>
-      <Loading.Provider value={{ LoadingState, LoadingDispatch }}>
+      <Post.Provider value={{ PostState, PostDispatch }}>
         <Auth.Provider value={{ AuthState, AuthDispatch }}>
-          <List.Provider value={{ListState,ListDispatch}}>
+          <List.Provider value={{ ListState, ListDispatch }}>
             <Route path={['/@:username', '/']} component={PostListPage} exact />
             <Route path="/login/company" component={LoginPage} />
             <Route path="/login/person" component={LoginPage} />
-            <Route path="/division" component={DivisionPage} />
+            <Route path={['/register', '/login']} component={DivisionPage} />
             <Route path="/register/company" exact component={RegisterPage} />
             <Route path="/register/person" exact component={RegisterPage} />
             <Route path="/write" component={WritePage} />
@@ -43,9 +41,8 @@ function App() {
             <Route path="/@:username/:postId" component={UserApplyPage} />
           </List.Provider>
         </Auth.Provider>
-      </Loading.Provider>
+      </Post.Provider>
     </>
   );
 }
-
 export default App;
