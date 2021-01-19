@@ -1,5 +1,10 @@
 {
   "dependencies": {
+<<<<<<< HEAD
     "esm": "^3.2.25"
+=======
+    "axios": "^0.21.1",
+    "styled-components": "^5.2.1"
+>>>>>>> e557cd8ea691645912238289f270b6e99d99af85
   }
 }

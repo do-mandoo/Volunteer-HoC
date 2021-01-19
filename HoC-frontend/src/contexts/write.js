@@ -1,59 +1,63 @@
-// action type 
+// action type
 export const POST_SUCCESS = 'POST_SUCCESS';
 export const POST_FAIL = 'POST_FAIL';
 export const CANCEL_SUCCESS = 'CANCEL_SUCCESS';
 export const CANCEL_FAIL = 'CANCEL_FAIL';
 export const CHANGE_FIELD = 'write/CHANGE_FIELD';
-export const AUTHSTATE_INPUT_VALUE = 'AUTHSTATE_INPUT_VALUE'
+export const AUTHSTATE_INPUT_VALUE = 'AUTHSTATE_INPUT_VALUE';
 
-// initialState 
+// initialState
 export const PostInitial = {
   posts: {
-    title:'',
+    title: '',
     body: '',
-    companyName:'',
-    address:'',
-    phoneNumber:'',
-    periodstart: '',
-    periodend:'',
-    gender:'',
-    number:'',
+    companyName: '',
+    address: '',
+    phoneNumber: '',
+    periodStart: '',
+    periodEnd: '',
+    timeStart: '',
+    timeEnd: '',
+    gender: '',
+    number: '',
   },
   loading: false,
-  error: null
+  error: null,
 };
 
 export function PostReducer(state, action) {
   switch (action.type) {
     case AUTHSTATE_INPUT_VALUE:
+      console.log(action);
       return {
         ...state,
-        posts : {
+        posts: {
           ...state.posts,
           address: action.address,
           companyName: action.companyName,
           phoneNumber: action.phoneNumber,
-        }
-      }
+        },
+      };
     case CHANGE_FIELD:
+      console.log(action);
       return {
         ...state,
-        posts : {
+        posts: {
           ...state.posts,
-          [action.key] : action.value,
+          [action.key]: action.value,
         },
       };
     case POST_SUCCESS:
       return {
         ...state,
-      }
+      };
     case POST_FAIL:
-      return {}
+      return {};
     case CANCEL_SUCCESS:
-      return {}
+      return {};
     case CANCEL_FAIL:
-      return {}
+      return {};
     default:
-      return state
+      return state;
   }
 }
