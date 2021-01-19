@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from 'react';
+import { withRouter } from 'react-router-dom'; 
 import axios from 'axios';
 import { AUTHSTATE_INPUT_VALUE, CHANGE_FIELD } from '../../contexts/write';
 import { Auth, Post } from '../../contexts/store';
 import Write from '../../components/post/Write';
-const WritePageForm = () => {
+const WritePageForm = ({history}) => {
   
   const { AuthState } = useContext(Auth);
   const { PostState, PostDispatch } = useContext(Post);
@@ -30,6 +31,7 @@ const WritePageForm = () => {
           companyName:PostState.posts.companyName,
         }
       )
+      await history.push('/')
     console.log(response);
     
 
@@ -72,4 +74,4 @@ const WritePageForm = () => {
     />
   );
 };
-export default WritePageForm;
+export default withRouter(WritePageForm);
