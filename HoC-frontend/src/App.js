@@ -13,7 +13,7 @@ import { AuthReducer, AuthInitial } from './contexts/auth';
 import { LoadingReducer, LoadingInitial } from './contexts/loading';
 import FindAddr from './lib/api/AddressApi';
 import MyPage from './pages/MyPage';
-import { PostInitial, PostReducer } from './contexts/post';
+import { PostInitial, PostReducer } from './contexts/write';
 import { ListInitial, ListReducer } from './contexts/list';
 
 function App() {
@@ -22,22 +22,25 @@ function App() {
     LoadingReducer,
     LoadingInitial
   );
-  const [ListState,ListDispatch] = useReducer(ListReducer,ListInitial)
+  const [PostState, PostDispatch] = useReducer(PostReducer,PostInitial);
+  const [ListState,ListDispatch] = useReducer(ListReducer,ListInitial);
   return (
     <>
       <Loading.Provider value={{ LoadingState, LoadingDispatch }}>
         <Auth.Provider value={{ AuthState, AuthDispatch }}>
           <List.Provider value={{ListState,ListDispatch}}>
-            <Route path={['/@:username', '/']} component={PostListPage} exact />
-            <Route path="/login/company" component={LoginPage} />
-            <Route path="/login/person" component={LoginPage} />
-            <Route path="/division" component={DivisionPage} />
-            <Route path="/register/company" exact component={RegisterPage} />
-            <Route path="/register/person" exact component={RegisterPage} />
-            <Route path="/write" component={WritePage} />
-            <Route path="/mypage" component={MyPage} />
-            <Route path="/address" component={FindAddr} />
-            <Route path="/@:username/:postId" component={UserApplyPage} />
+            <Post.Provider value={{PostState, PostDispatch}}>
+              <Route path={['/@:username', '/']} component={PostListPage} exact />
+              <Route path="/login/company" component={LoginPage} />
+              <Route path="/login/person" component={LoginPage} />
+              <Route path="/division" component={DivisionPage} />
+              <Route path="/register/company" exact component={RegisterPage} />
+              <Route path="/register/person" exact component={RegisterPage} />
+              <Route path="/write" component={WritePage} />
+              <Route path="/mypage" component={MyPage} />
+              <Route path="/address" component={FindAddr} />
+              <Route path="/@:username/:postId" component={UserApplyPage} />
+            </Post.Provider>
           </List.Provider>
         </Auth.Provider>
       </Loading.Provider>

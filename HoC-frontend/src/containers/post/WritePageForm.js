@@ -33,6 +33,7 @@ const WritePageForm = () => {
       key: name,
       value,
     });
+    console.log(PostState);
   };
 
   const onSubmit = async e => {
