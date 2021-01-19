@@ -8,10 +8,17 @@ import { withRouter } from 'react-router-dom';
 
 
 const UserApplyForm = ({match, history}) => {
-  console.log(match.params.postId);
+  console.log(match.url);
+  // const { postUrl } = match.url;
   const { postId } = match.params;
   console.log(postId);
   // console.log(match);
+  
+
+  const onEdit = async () => {
+    history.push(`/write`);
+  };
+  console.log(onEdit);
   
   const onRemove = async () => {
     try{
@@ -23,7 +30,7 @@ const UserApplyForm = ({match, history}) => {
     }catch(error) {
       console.log(error);
     }
-  }
+  };
   const [modal, setModal] = useState(false);
   const onRemoveClick = () => {
     // 모달창 열기
@@ -60,7 +67,7 @@ const UserApplyForm = ({match, history}) => {
   onRemoveClick={onRemoveClick}
   onCancel={onCancel}
   onConfirm={onConfirm}
-
+  onEdit={onEdit}
   />;
 };
 

@@ -73,8 +73,8 @@ const UserApplyPageContainer = styled.div`
 `
 
 
-const UserApply = ({ AuthState,post, modal, onCancel, onConfirm, onRemoveClick }) => {
-  
+const UserApply = ({ AuthState,post, modal, onCancel, onConfirm, onRemoveClick, onEdit }) => {
+  console.log(onEdit);
   return (
     <>
     <Header AuthState={AuthState} />
@@ -136,7 +136,7 @@ const UserApply = ({ AuthState,post, modal, onCancel, onConfirm, onRemoveClick }
           {/* {localStorage.getItem('token') && AuthState.company && AuthState.company.username === post.user._id && (<><Button>수정</Button> <Button onClick={onClick}>삭제</Button></>) } */}
           {localStorage.getItem('token') && AuthState.company && AuthState.company.username === post.user._id && (
           <>
-          <Button>수정</Button> 
+          <Button onClick={onEdit}>수정</Button> 
           <Button onClick={onRemoveClick}>삭제</Button>
           <AskRemoveModal 
             visible={modal}
