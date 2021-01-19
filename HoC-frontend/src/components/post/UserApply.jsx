@@ -120,7 +120,7 @@ const UserApply = ({ AuthState, post }) => {
                 
               </div>
                 <p>
-                 {post.body}
+                  {post.body}
                 </p>
               
             </div>
