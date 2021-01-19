@@ -5,7 +5,6 @@ import { Auth, List, Post } from '../../contexts/store';
 const UserApplyForm = () => {
   const url = window.location.pathname;
   const parse = url.split('/');
-  console.log(parse);
   const { AuthState } = useContext(Auth);
   const { ListState } = useContext(List);
 

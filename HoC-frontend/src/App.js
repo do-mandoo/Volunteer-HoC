@@ -18,32 +18,32 @@ import { ListInitial, ListReducer } from './contexts/list';
 
 function App() {
   const [AuthState, AuthDispatch] = useReducer(AuthReducer, AuthInitial);
-  const [PostState, PostDispatch] = useReducer(PostReducer, PostInitial);
-  // const [LoadingState, LoadingDispatch] = useReducer(
-  //   LoadingReducer,
-  //   LoadingInitial
-  // );
-
-  const [ListState, ListDispatch] = useReducer(ListReducer, ListInitial);
-
+  const [LoadingState, LoadingDispatch] = useReducer(
+    LoadingReducer,
+    LoadingInitial
+  );
+  const [ListState,ListDispatch] = useReducer(ListReducer,ListInitial);
+  const [PostState,PostDispatch] = useReducer(PostReducer,PostInitial)
   return (
     <>
-      <Post.Provider value={{ PostState, PostDispatch }}>
+      <Loading.Provider value={{ LoadingState, LoadingDispatch }}>
         <Auth.Provider value={{ AuthState, AuthDispatch }}>
-          <List.Provider value={{ ListState, ListDispatch }}>
+          <List.Provider value={{ListState,ListDispatch}}>
+            <Post.Provider value={{PostState,PostDispatch}}>
             <Route path={['/@:username', '/']} component={PostListPage} exact />
             <Route path="/login/company" component={LoginPage} />
             <Route path="/login/person" component={LoginPage} />
-            <Route path={['/register', '/login']} component={DivisionPage} />
+            <Route path="/division" component={DivisionPage} />
             <Route path="/register/company" exact component={RegisterPage} />
             <Route path="/register/person" exact component={RegisterPage} />
             <Route path="/write" component={WritePage} />
             <Route path="/mypage" component={MyPage} />
             <Route path="/address" component={FindAddr} />
             <Route path="/@:username/:postId" component={UserApplyPage} />
+            </Post.Provider>
           </List.Provider>
         </Auth.Provider>
-      </Post.Provider>
+      </Loading.Provider>
     </>
   );
 }

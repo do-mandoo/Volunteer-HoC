@@ -6,6 +6,7 @@ import Write from '../../components/post/Write';
 const WritePageForm = () => {
   const { AuthState } = useContext(Auth);
   const { PostState, PostDispatch } = useContext(Post);
+  console.log(PostState);
   const post = async () => {
     console.log(PostState.posts);
     try {

@@ -68,7 +68,8 @@ const UserApplyPageContainer = styled.div`
   }
 `
 
-const UserApply = ({ AuthState,post }) => {
+const UserApply = ({ AuthState, post }) => {
+  console.log(post);
   return (
     <>
     <Header AuthState={AuthState} />
@@ -124,12 +125,12 @@ const UserApply = ({ AuthState,post }) => {
                 
               </div>
                 <p>
-                 {post.body}
+                  {post.body}
                 </p>
               
             </div>
         </div>
-          {localStorage.getItem('token') && AuthState.company.username === post.user._id && (<><Button>수정</Button> <Button>삭제</Button></>) }
+          {localStorage.getItem('token') && AuthState.company && AuthState.company.username === post.user._id && (<><Button>수정</Button> <Button>삭제</Button></>) }
     </div>
     </UserApplyPageContainer>
     </StyledContainer>
