@@ -35,6 +35,7 @@ CompanySchema.methods.generateToken = function () {
     {
       _id: this.id,
       username: this.username,
+      address: this.address,
       position: this.position,
     },
     process.env.JWT_SECRET,
