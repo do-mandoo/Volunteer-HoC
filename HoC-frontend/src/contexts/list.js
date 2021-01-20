@@ -9,7 +9,7 @@ export const ListInitial = {
 };
 
 export const ListReducer = (state,action) => {
-    console.log(action);
+    // console.log(action);
     // console.log(address);
     switch (action.type) {
         case POST_SUCCESS:

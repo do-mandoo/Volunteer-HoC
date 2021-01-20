@@ -1,15 +1,23 @@
 import React, { useContext, useEffect } from 'react';
 import { withRouter } from 'react-router-dom'; 
 import axios from 'axios';
-import { AUTHSTATE_INPUT_VALUE, CHANGE_FIELD } from '../../contexts/write';
-import { Auth, Post } from '../../contexts/store';
+import { AUTHSTATE_INPUT_VALUE, CHANGE_FIELD, POST_SUCCESS } from '../../contexts/write';
+import { Auth, List, Post } from '../../contexts/store';
 import Write from '../../components/post/Write';
 const WritePageForm = ({history}) => {
   
   const { AuthState } = useContext(Auth);
+  // const { ListState } = useContext(List);
   const { PostState, PostDispatch } = useContext(Post);
+  // console.log(ListState);
+  
+  // const postReload = ListState.lists.find(
+  //   list => list._id === 
+  // );
+  // console.log(postReload);
+  
   const post = async () => {
-    console.log(PostState.posts);
+    // console.log(PostState.posts);
     try {
     const response =  await axios.post(
       'http://localhost:3000/api/posts',
@@ -25,10 +33,8 @@ const WritePageForm = ({history}) => {
           phoneNumber: PostState.posts.phoneNumber,
           number:PostState.posts.number,
           companyName:PostState.posts.companyName,
-        }
-      )
+        })
       await history.push('/')
-    console.log(response);
     
 
     } catch(error) {

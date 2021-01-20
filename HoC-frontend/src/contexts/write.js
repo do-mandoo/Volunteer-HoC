@@ -6,6 +6,7 @@ export const CANCEL_FAIL = 'CANCEL_FAIL';
 export const CHANGE_FIELD = 'write/CHANGE_FIELD';
 export const AUTHSTATE_INPUT_VALUE = 'AUTHSTATE_INPUT_VALUE';
 
+
 // initialState
 export const PostInitial = {
   posts: {
@@ -26,9 +27,11 @@ export const PostInitial = {
 };
 
 export function PostReducer(state, action) {
+  // console.log(state);
+  // console.log(action);
   switch (action.type) {
     case AUTHSTATE_INPUT_VALUE:
-      console.log(action);
+      // console.log(action);
       return {
         ...state,
         posts: {
@@ -39,7 +42,7 @@ export function PostReducer(state, action) {
         },
       };
     case CHANGE_FIELD:
-      console.log(action);
+      // console.log(action);
       return {
         ...state,
         posts: {

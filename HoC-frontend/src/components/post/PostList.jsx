@@ -52,8 +52,8 @@ const PostListBlock = styled.div`
   }
   `;
 function PostList({ AuthState, ListState }) {
-  console.log(ListState.lists);
-  console.log(AuthState);
+  // console.log(ListState.lists);
+  // console.log(AuthState);
   
   return (
     <div>

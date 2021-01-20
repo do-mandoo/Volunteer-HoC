@@ -40,7 +40,6 @@ function App() {
             <Route path="/mypage" component={MyPage} />
             <Route path="/address" component={FindAddr} />
             <Route path="/@:username/:postId" component={UserApplyPage} />
-            </Post.Provider>
           </List.Provider>
         </Auth.Provider>
       </Post.Provider>

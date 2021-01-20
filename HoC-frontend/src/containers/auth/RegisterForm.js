@@ -47,7 +47,7 @@ const RegisterForm = ({ history }) => {
   };
 
   const personRegister = async () => {
-    console.log(AuthState.person);
+    // console.log(AuthState.person);
     try {
       const response = await axios.post(
         'http://localhost:3000/api/auth/register/person',

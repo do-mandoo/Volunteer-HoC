@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import AskRemoveModal from './AskRemoveModal';
 
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 // import MapContainer from '../../lib/api/MapContainer';
 // import WritePageContainer from '../post/Write';
@@ -74,7 +74,6 @@ const UserApplyPageContainer = styled.div`
 
 
 const UserApply = ({ AuthState,post, modal, onCancel, onConfirm, onRemoveClick, onEdit }) => {
-  console.log(onEdit);
   return (
     <>
     <Header AuthState={AuthState} />
