@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { Link, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from './Button';
 import StyledContainer from './Container';
@@ -38,7 +39,16 @@ const UserInfo = styled.div`
   margin-right: 1rem;
 `;
 
-const Header = ({ AuthState }) => {
+const Header = ({ AuthState, history }) => {
+  const onClick = async e => {
+    try{
+      localStorage.removeItem('token');
+      await axios.post('http://localhost:3000/api/auth/logout/person')
+      await axios.post('http://localhost:3000/api/auth/logout/company')
+    }catch(e){
+      console.log(e);
+    }
+  }
   return (
     <HeaderBlock>
       <Wrapper>
@@ -46,7 +56,7 @@ const Header = ({ AuthState }) => {
         <div className="right">
           <UserInfo>{AuthState.login && AuthState.login.username}</UserInfo>
           {AuthState.login.username ? (
-            <Button to="/login">로그아웃</Button>
+            <Button onClick={onClick} as="a" href="/">로그아웃</Button>
           ) : (
             <Button as="a" href="/login">
               로그인
@@ -59,4 +69,4 @@ const Header = ({ AuthState }) => {
   );
 };
 
-export default Header;
+export default withRouter(Header);

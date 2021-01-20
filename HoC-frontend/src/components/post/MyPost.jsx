@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Header from '../common/Header';
 import StyledContainer from '../common/Container';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 const GlobalList = styled.div`
   h1{
@@ -47,29 +47,28 @@ const GlobalList = styled.div`
   }
 `;
 
-const MyPost = ({ AuthState, ListState }) => {
-  const localID = localStorage.getItem('token');
+const MyPost = ({ AuthState, ListState, tokenID,ListCompanyName }) => {
   return (
     <div>
       <Header AuthState={AuthState} />
       <StyledContainer>
         <GlobalList>
-          <h1> {ListState.componyName} 작성한 모집 공고</h1>
+          <h1>{ListCompanyName.companyName}(이/가)작성한 공고</h1>
           <ul>
             <li>
               <span className="ListTitle">제목</span>
               <span className="ListDetail">자세히 보기</span>
               <span className="ListMore">더보기</span>
             </li>
-            {ListState.lists.filter(list=>list.user._id === localID).map(list=>(
+            {ListState.lists.filter(list=>list.user._id === tokenID).map(list=>(
               <li key = {list._id}>
                 <span>{list.title}</span>
                 <span>{list.periodStart}~{list.periodEnd}</span>
-                <span><button><Link to='/write'>더보기</Link></button></span>
+                <span><button><Link to={`${AuthState.login.username && '/@'+AuthState.login.username}/${list._id}`}>더보기</Link></button></span>
               </li>
             ))}
-            {console.log('LOCAL', localID)}
-            {console.log('LISTSTATE',ListState.lists.filter(list=>list.user._id === localID))}
+            {console.log('LOCAL', tokenID)}
+            {console.log('LISTSTATE',ListState.lists.filter(list=>list.user._id === tokenID))}
             {console.log(ListState.lists)}
           </ul>
         </GlobalList>
@@ -78,4 +77,4 @@ const MyPost = ({ AuthState, ListState }) => {
   );
 };
 
-export default MyPost;
+export default withRouter(MyPost);
