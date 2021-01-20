@@ -6,7 +6,9 @@ import { Auth, List, Post } from '../../contexts/store';
 import { withRouter } from 'react-router-dom';
 
 const UserApplyForm = ({ match, history }) => {
+  console.log(match);
   const { postId } = match.params;
+  console.log(postId);
 
   const onRemove = async () => {
     try {

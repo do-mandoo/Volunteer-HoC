@@ -139,7 +139,7 @@ export const read = ctx => {
 };
 
 export const remove = async ctx => {
-  console.log('ctx', ctx.params);
+  console.log('ctx', ctx);
   const { id } = ctx.params;
   try {
     await Post.findByIdAndRemove({ _id: id }).exec();
