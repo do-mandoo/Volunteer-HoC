@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+import axios from 'axios';
+=======
 import { useContext, useEffect } from 'react';
+>>>>>>> a2caf8d6b772fd3dc65db360def45c048b2b13b3
 import { Link, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from '../../../../../../../node_modules/axios/index';
