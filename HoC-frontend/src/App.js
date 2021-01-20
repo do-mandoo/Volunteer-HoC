@@ -39,7 +39,7 @@ function App() {
               <Route path="/register" exact component={DivisionPage} />
               <Route path="/write" component={WritePage} />
               <Route path="/mypage" component={MyPage} />
-              <Route path="/:postId" component={UserApplyPage} />
+              <Route path="@:username/:postId" component={UserApplyPage} />
               <Route path="/address" component={FindAddr} />
               <Route path="/" component={PostListPage} exact />
             </Switch>

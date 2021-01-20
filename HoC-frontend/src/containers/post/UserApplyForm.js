@@ -5,8 +5,17 @@ import { Auth, List, Post } from '../../contexts/store';
 import { withRouter } from 'react-router-dom';
 
 const UserApplyForm = ({ match, history }) => {
+  console.log(match);
   const { postId } = match.params;
+  const url = window.location.pathname;
+  const parse = url.split('/');
+  console.log(postId);
   
+  console.log(parse);
+  
+  const { AuthState } = useContext(Auth);
+  const { ListState } = useContext(List);
+
   const onEdit = () => {
     history.push(`/write`);
 };
@@ -34,11 +43,6 @@ const UserApplyForm = ({ match, history }) => {
     setModal(false);
     onRemove(); 
   };
-  const url = window.location.pathname;
-  const parse = url.split('/');
-
-  const { AuthState } = useContext(Auth);
-  const { ListState } = useContext(List);
 
   const post =
     ListState.lists &&
