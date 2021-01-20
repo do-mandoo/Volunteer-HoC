@@ -37,6 +37,7 @@ const WritePageForm = ({ history }) => {
       key: name,
       value,
     });
+    console.log(PostState);
   };
 
   const onSubmit = async e => {

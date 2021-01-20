@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import AskRemoveModal from './AskRemoveModal';
 
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 // import MapContainer from '../../lib/api/MapContainer';
 // import WritePageContainer from '../post/Write';
@@ -73,7 +73,7 @@ const UserApplyPageContainer = styled.div`
 `
 
 
-const UserApply = ({ AuthState, post, modal, onCancel, onConfirm, onRemoveClick, onEdit }) => {
+const UserApply = ({ AuthState, post, modal, onCancel, onConfirm, onRemoveClick }) => {
   console.log("POST", post);
   return (
     <>
@@ -84,7 +84,7 @@ const UserApply = ({ AuthState, post, modal, onCancel, onConfirm, onRemoveClick,
     <div>
         <h2 className="a11y">모집 공고 상세 페이지</h2>
         <div >
-            <h2 className="user-title" htmlFor="post-title">제목: {post.title}</h2>
+            <h2 className="user-title" htmlFor="post-title">제목: {post && post.title}</h2>
             
             <div className="user-content-wrap">
               <div className="user-content-left">
@@ -95,48 +95,48 @@ const UserApply = ({ AuthState, post, modal, onCancel, onConfirm, onRemoveClick,
               <div className="user-content-right">
                 <dl>
                   <dt>업체명</dt>
-                  <dd>{post.companyName}</dd>
+                  <dd>{post && post.companyName}</dd>
                 </dl>
                   
                 <dl>
                   <dt>전화번호</dt>
-                  <dd>{post.phoneNumber}</dd>
+                  <dd>{post && post.phoneNumber}</dd>
                 </dl>
 
                 <dl>
                   <dt>주소</dt>
-                  <dd>{post.address}</dd>
+                  <dd>{post && post.address}</dd>
                 </dl>
 
                 <dl>
                   <dt>봉사 기간</dt>
-                  <dd>{post.periodStart} ~ {post.periodEnd}</dd>
+                  <dd>{post && post.periodStart} ~ {post && post.periodEnd}</dd>
                 </dl>
                 <dl>
                   <dt>봉사 시간</dt>
-                  <dd>{post.timeStart} ~ {post.timeEnd}</dd>
+                  <dd>{post && post.timeStart} ~ {post && post.timeEnd}</dd>
                 </dl>
 
                 <dl>
                   <dt>인원수</dt>
-                  <dd>{post.number}</dd>
+                  <dd>{post && post.number}</dd>
                 </dl>
 
                 <dl>
                   <dt>성별</dt>
-                  <dd>{post.gender}</dd>
+                  <dd>{post && post.gender}</dd>
                 </dl>
                 
               </div>
                 <p>
-                  {post.body}
+                  {post && post.body}
                 </p>
               
             </div>
         </div>
           {post.user._id === localStorage.getItem('token') && (
           <>
-          <Button onClick={onEdit}>수정</Button> 
+          <Button as={Link} to={`/write/${post._id}`}>수정</Button> 
           <Button onClick={onRemoveClick}>삭제</Button>
           <AskRemoveModal 
             visible={modal}
