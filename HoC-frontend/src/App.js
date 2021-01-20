@@ -1,5 +1,5 @@
 import './App.css';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Container from './components/common/Container';
 import PostListPage from './pages/PostListPage';
 import LoginPage from './pages/LoginPage';
@@ -30,6 +30,7 @@ function App() {
       <Post.Provider value={{ PostState, PostDispatch }}>
         <Auth.Provider value={{ AuthState, AuthDispatch }}>
           <List.Provider value={{ ListState, ListDispatch }}>
+<<<<<<< HEAD
             <Post.Provider value={{PostState, PostDispatch}}>
               <Route path={['/@:username', '/']} component={PostListPage} exact />
               <Route path="/login/company" component={LoginPage} />
@@ -42,6 +43,21 @@ function App() {
               <Route path="/address" component={FindAddr} />
               <Route path="/@:username/:postId" component={UserApplyPage} />
             </Post.Provider>
+=======
+            <Switch>
+              <Route path="/login/company" component={LoginPage} />
+              <Route path="/login/person" component={LoginPage} />
+              <Route path="/register/person" component={RegisterPage} />
+              <Route path="/register/company" component={RegisterPage} />
+              <Route path="/login" component={DivisionPage} />
+              <Route path="/register" exact component={DivisionPage} />
+              <Route path="/write" component={WritePage} />
+              <Route path="/mypage" component={MyPage} />
+              <Route path="/:postId" component={UserApplyPage} />
+              <Route path="/address" component={FindAddr} />
+              <Route path="/" component={PostListPage} exact />
+            </Switch>
+>>>>>>> a2caf8d6b772fd3dc65db360def45c048b2b13b3
           </List.Provider>
         </Auth.Provider>
       </Post.Provider>
@@ -50,4 +66,3 @@ function App() {
 }
 
 export default App;
-

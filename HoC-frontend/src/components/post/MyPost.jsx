@@ -47,7 +47,7 @@ const GlobalList = styled.div`
   }
 `;
 
-const MyPost = ({ AuthState, ListState, tokenID,ListCompanyName }) => {
+const MyPost = ({ AuthState, ListState, tokenID, ListCompanyName }) => {
   return (
     <div>
       <Header AuthState={AuthState} />

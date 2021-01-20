@@ -1,6 +1,14 @@
+<<<<<<< HEAD
 import axios from 'axios';
+=======
+import { useContext, useEffect } from 'react';
+>>>>>>> a2caf8d6b772fd3dc65db360def45c048b2b13b3
 import { Link, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
+import axios from '../../../../../../../node_modules/axios/index';
+import { CHANGE_FIELD, CHECK_LOGIN } from '../../contexts/auth';
+import { Auth } from '../../contexts/store';
+import { login } from '../../lib/api/auth';
 import Button from './Button';
 import StyledContainer from './Container';
 import Responsive from './Responsive';
@@ -39,16 +47,36 @@ const UserInfo = styled.div`
   margin-right: 1rem;
 `;
 
-const Header = ({ AuthState, history }) => {
-  const onClick = async e => {
-    try{
-      localStorage.removeItem('token');
-      await axios.post('http://localhost:3000/api/auth/logout/person')
-      await axios.post('http://localhost:3000/api/auth/logout/company')
-    }catch(e){
+const Header = () => {
+  const { AuthState, AuthDispatch } = useContext(Auth);
+  useEffect(() => {
+    const checkLogin = (async () => {
+      try {
+        const response =
+          (await axios.get('/api/auth/check/company')) ||
+          (await axios.get('/api/auth/check/person'));
+        await AuthDispatch({
+          type: CHECK_LOGIN,
+          id: response.data._id,
+          username: response.data.username,
+          position: response.data.position,
+        });
+      } catch (e) {
+        // console.log(e);
+      }
+    })();
+  }, [AuthDispatch]);
+
+  const onClick = async () => {
+    localStorage.removeItem('token');
+    try {
+      await axios.post('http://localhost:3000/api/auth/logout/person');
+      await axios.post('http://localhost:3000/api/auth/logout/company');
+    } catch (e) {
       console.log(e);
     }
-  }
+  };
+
   return (
     <HeaderBlock>
       <Wrapper>
@@ -56,7 +84,9 @@ const Header = ({ AuthState, history }) => {
         <div className="right">
           <UserInfo>{AuthState.login && AuthState.login.username}</UserInfo>
           {AuthState.login.username ? (
-            <Button onClick={onClick} as="a" href="/">로그아웃</Button>
+            <Button onClick={onClick} as="a" href="/">
+              로그아웃
+            </Button>
           ) : (
             <Button as="a" href="/login">
               로그인
@@ -69,4 +99,4 @@ const Header = ({ AuthState, history }) => {
   );
 };
 
-export default withRouter(Header);
+export default Header;

@@ -30,9 +30,6 @@ const LoginForm = ({ history }) => {
       });
 
       await localStorage.setItem('token', response.data._id);
-      await localStorage.setItem('companyName', response.data.companyName);
-      await localStorage.setItem('address', response.data.address);
-      await localStorage.setItem('phoneNumber', response.data.phoneNumber);
 
       await AuthDispatch({
         type: LOGIN_SUCCESS,
