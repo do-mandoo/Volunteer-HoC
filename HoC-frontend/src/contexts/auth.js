@@ -10,6 +10,8 @@ export const REGISTER_FAIL = 'REGISTER_FAIL';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 
+export const LOGOUT_SUCCESS ='LOGOUT_SUCCESS'
+
 // initialState
 export const AuthInitial = {
   company: {
@@ -70,10 +72,13 @@ export function AuthReducer(state, action) {   // dispatch에서 날린거 받�
 
     case LOGIN_SUCCESS:
       return { ...state, authError: null, auth: action.auth };
-
-    case LOGIN_FAIL:
-      return { ...state, authError: action.error };
-    default:
-      return state;
+      
+      case LOGIN_FAIL:
+        return { ...state, authError: action.error };
+      case LOGOUT_SUCCESS:
+        return { ...state,...AuthInitial};
+        default:
+          return state;
+          
   }
 }

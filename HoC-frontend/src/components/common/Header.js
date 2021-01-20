@@ -1,8 +1,11 @@
-import { Link } from 'react-router-dom';
+import { Link ,withRouter} from 'react-router-dom';
 import styled from 'styled-components';
+import { Auth } from '../../contexts/store';
 import Button from './Button';
-import StyledContainer from './Container';
 import Responsive from './Responsive';
+import React,{useContext} from 'react'
+import { LOGOUT_SUCCESS } from '../../contexts/auth';
+import axios from 'axios';
 
 const HeaderBlock = styled.div`
   width: 100%;
@@ -37,8 +40,9 @@ const UserInfo = styled.div`
   font-weight: 800;
   margin-right: 1rem;
 `;
+const Header = () => {
+  const {AuthState} = useContext(Auth)
 
-const Header = ({ AuthState }) => {
   return (
     <HeaderBlock>
       <Wrapper>
@@ -46,7 +50,7 @@ const Header = ({ AuthState }) => {
         <div className="right">
           <UserInfo>{AuthState.login && AuthState.login.username}</UserInfo>
           {AuthState.login.username ? (
-            <Button to="/login">로그아웃</Button>
+            <Button as="a" href="/">로그아웃</Button>
           ) : (
             <Button as="a" href="/login">
               로그인
@@ -59,4 +63,4 @@ const Header = ({ AuthState }) => {
   );
 };
 
-export default Header;
+export default withRouter(Header);

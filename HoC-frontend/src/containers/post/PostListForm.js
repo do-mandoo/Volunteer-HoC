@@ -23,11 +23,6 @@ const PostListForm = () => {
         type: POST_SUCCESS,
         data: response.data,
       });
-      console.log(response.data);
-      console.log(ListState);
-      console.log(response);
-      
-      
     } catch (e) {
       await ListDispatch({
         type: POST_FAIL,
