@@ -52,8 +52,7 @@ const PostListBlock = styled.div`
   }
   `;
 function PostList({ AuthState, ListState }) {
-  // console.log(ListState.lists);
-  // console.log(AuthState);
+  const { company, person } = AuthState;
   
   return (
     <div>
@@ -61,8 +60,8 @@ function PostList({ AuthState, ListState }) {
       <StyledContainer>
         <PostListBlock>
           <h1>봉사자 모집 공고</h1>
-          {AuthState.company && AuthState.company.username && <Button as={Link} to="/write">글쓰기</Button>}
-          {AuthState.company && AuthState.company.username && <Button as={Link} to="/mypage">내가쓴글</Button>}
+          {AuthState.login.position === 'company' && <Button as={Link} to="/write">글쓰기</Button>}
+          {AuthState.login.position === 'company' && <Button as={Link} to="/mypage">내가쓴글</Button>}
           <ul>
             <li>
               <span className="recruitTitle">회사이름</span>

@@ -73,7 +73,8 @@ const UserApplyPageContainer = styled.div`
 `
 
 
-const UserApply = ({ AuthState,post, modal, onCancel, onConfirm, onRemoveClick, onEdit }) => {
+const UserApply = ({ AuthState, post, modal, onCancel, onConfirm, onRemoveClick, onEdit }) => {
+  console.log("POST", post);
   return (
     <>
     <Header AuthState={AuthState} />
@@ -115,10 +116,6 @@ const UserApply = ({ AuthState,post, modal, onCancel, onConfirm, onRemoveClick, 
                   <dt>봉사 시간</dt>
                   <dd>{post.timeStart} ~ {post.timeEnd}</dd>
                 </dl>
-                <dl>
-                  <dt>봉사시간</dt>
-                  <dd>{post.timeStart} ~ {post.timeEnd} </dd>
-                </dl>
 
                 <dl>
                   <dt>인원수</dt>
@@ -137,8 +134,7 @@ const UserApply = ({ AuthState,post, modal, onCancel, onConfirm, onRemoveClick, 
               
             </div>
         </div>
-          {/* {localStorage.getItem('token') && AuthState.company && AuthState.company.username === post.user._id && (<><Button>수정</Button> <Button onClick={onClick}>삭제</Button></>) } */}
-          {localStorage.getItem('token') && AuthState.company && AuthState.company.username === post.user._id && (
+          {post.user._id === localStorage.getItem('token') && (
           <>
           <Button onClick={onEdit}>수정</Button> 
           <Button onClick={onRemoveClick}>삭제</Button>
