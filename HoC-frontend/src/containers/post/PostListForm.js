@@ -6,6 +6,7 @@ import PostList from '../../components/post/PostList';
 import { POST_FAIL, POST_LOADING, POST_SUCCESS } from '../../contexts/list';
 
 const PostListForm = () => {
+  
   const { AuthState } = useContext(Auth);
   const { ListState, ListDispatch } = useContext(List);
 
@@ -21,10 +22,10 @@ const PostListForm = () => {
         type: POST_SUCCESS,
         data: response.data,
       });
-      await console.log(ListState);
-    } catch (e) {
+    } catch (error) {
       await ListDispatch({
         type: POST_FAIL,
+        error
       });
     }
   }, [ListDispatch]);

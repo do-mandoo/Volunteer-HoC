@@ -16,25 +16,45 @@ import Responsive from './Responsive';
 const HeaderBlock = styled.div`
   width: 100%;
   height: 80px;
-  background: white;
+  background:#03c75a;
   box-shadow: 8px 2px 4px rgba(0, 0, 0, 0.08);
-`;
-
-const Wrapper = styled(Responsive)`
-  height: 4rem;
+  `;
+  
+  const Wrapper = styled(Responsive)`
+  @font-face {
+    font-family: 'BinggraeSamanco-Bold';
+    src: url('https://github.com/projectnoonnu/noonfonts_20-10/blob/main/BinggraeSamanco-Bold.woff')
+      format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   .logo {
     font-size: 1.125rem;
-    font-weight: 800;
     letter-spacing: 2px;
+    color:#fff;
+    line-height:80px;
   }
-
   .right {
     display: flex;
     align-items: center;
+  }
+  .headerButton{
+    padding:7px 25px;
+    border:none;
+    outline:none;
+    background:transparent;
+    border:3px solid #fff;
+    color:#fff;
+    border-radius:20px;
+    font-weight:700;
+    :hover{
+      background:#fff;
+      color:#03c75a;
+      border:3px solid #fff;
+    }
   }
 `;
 
@@ -88,11 +108,11 @@ const Header = () => {
         <div className="right">
           <UserInfo>{AuthState.login && AuthState.login.username}</UserInfo>
           {AuthState.login.username ? (
-            <Button onClick={onClick} as={Link} to="/">
+            <Button className="headerButton" onClick={onClick} as="a" href="/">
               로그아웃
             </Button>
           ) : (
-            <Button as={Link} to="/login">
+            <Button className="headerButton" as="a" href="/login">
               로그인
             </Button>
           )}

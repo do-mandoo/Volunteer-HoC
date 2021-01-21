@@ -8,31 +8,34 @@ export const ListInitial = {
   error: null,
 };
 
-export const ListReducer = (state, action) => {
-  switch (action.type) {
-    case POST_SUCCESS:
-      return {
-        ...state,
-        lists: action.data,
-        loading: false,
-        error: null,
-      };
+export const ListReducer = (state,action) => {
+    console.log(action);
+    // console.log(address);
+    switch (action.type) {
+        case POST_SUCCESS:
+          return {
+              ...state,
+              lists:action.data,
+              loading:false,
+              error:null
+            }
+            
+        case POST_LOADING:
+            return {
+                ...state,
+                lists:[],
+                loading:true,
+                error:null
+            }
+        case POST_FAIL:
+            return{
+                ...state,
+                lists:[],
+                loading:false,
+                error:action.error
+            }
+        default:
+            return state;   
+    }
 
-    case POST_LOADING:
-      return {
-        ...state,
-        lists: [],
-        loading: true,
-        error: null,
-      };
-    case POST_FAIL:
-      return {
-        ...state,
-        lists: [],
-        loading: false,
-        error: action.error,
-      };
-    default:
-      return state;
-  }
 };
