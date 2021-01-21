@@ -53,7 +53,7 @@ const MyPost = ({ AuthState, ListState, tokenID, ListCompanyName }) => {
       <Header AuthState={AuthState} />
       <StyledContainer>
         <GlobalList>
-          <h1>{ListCompanyName.companyName}(이/가)작성한 공고</h1>
+          {/* <h1>{ListCompanyName.companyName}(이/가)작성한 공고</h1> */}
           <ul>
             <li>
               <span className="ListTitle">제목</span>
