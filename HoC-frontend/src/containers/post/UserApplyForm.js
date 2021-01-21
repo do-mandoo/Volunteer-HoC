@@ -1,8 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import UserApply from '../../components/post/UserApply';
 import { Auth, List, Post } from '../../contexts/store';
 import { withRouter } from 'react-router-dom';
+import { INITAILIZE_FORM } from '../../contexts/write';
 
 const UserApplyForm = ({ match, history }) => {
   console.log(match);
@@ -15,10 +16,14 @@ const UserApplyForm = ({ match, history }) => {
   
   const { AuthState } = useContext(Auth);
   const { ListState } = useContext(List);
+  // const { PostState, PostDispatch } = useContext(Post);
 
-  const onEdit = () => {
-    history.push(`/write`);
-};
+//   const onEdit = () => {
+//     PostDispatch({
+//       type:INITAILIZE_FORM,
+
+//     })
+// };
 
   const onRemove = async () => {
     try {
@@ -59,7 +64,6 @@ const UserApplyForm = ({ match, history }) => {
       onRemoveClick={onRemoveClick}
       onCancel={onCancel}
       onConfirm={onConfirm}
-      onEdit={onEdit}
     />
   );
 };
