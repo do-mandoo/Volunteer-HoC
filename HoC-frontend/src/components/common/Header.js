@@ -77,7 +77,7 @@ const Header = () => {
   return (
     <HeaderBlock>
       <Wrapper>
-        <div className="logo">심봉사</div>
+        <div className="logo"><Link to="/">심봉사</Link></div>
         <div className="right">
           <UserInfo>{AuthState.login && AuthState.login.username}</UserInfo>
           {AuthState.login.username ? (

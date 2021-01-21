@@ -14,8 +14,8 @@ const GlobalList = styled.div`
   }
   button{
     margin-right:30px;
-    background-color:yellow;
-    color:black;
+    // background-color:yellow;
+    // color:black;
 
   }
   ul{
@@ -102,11 +102,7 @@ const MyPost = ({ AuthState, ListState, ListName, onChecking, tokenID, modal, on
                   />
               </li>
             ))}
-            {console.log(ListState.lists[0].publishedDate.length)}
-            {console.log('LOCAL', tokenID)}
-            {console.log('LISTSTATE',ListState.lists.filter(list=>list.user._id === tokenID))}
           </ul>
-          {/* <Button onClick={onClickAll}>전체선택</Button> */}
         </GlobalList>
       </StyledContainer>
     </div>

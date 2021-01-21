@@ -81,7 +81,7 @@ const RegisterForm = ({ history }) => {
         auth: response,
       });
 
-      await history.push('/');
+      await history.push('/login/person');
     } catch (error) {
       console.log(error);
       await AuthDispatch({
