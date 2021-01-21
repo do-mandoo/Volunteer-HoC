@@ -75,13 +75,14 @@ const RegisterForm = ({ history }) => {
           email: AuthState.person.email,
         }
       );
+      console.log(response);
       await AuthDispatch({
         // 디스패치날리면 리듀서로 날라감.
         type: REGISTER_SUCCESS,
         auth: response,
       });
 
-      await history.push('/');
+      await history.push('/login/person');
     } catch (error) {
       console.log(error);
       await AuthDispatch({

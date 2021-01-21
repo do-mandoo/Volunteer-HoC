@@ -2,7 +2,11 @@ import axios from 'axios';
 import { useContext, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
-import { CHANGE_FIELD, CHECK_LOGIN } from '../../contexts/auth';
+import {
+  CHANGE_FIELD,
+  CHECK_LOGIN,
+  INITAILIZE_FORM,
+} from '../../contexts/auth';
 import { Auth } from '../../contexts/store';
 import { login } from '../../lib/api/auth';
 import Button from './Button';
@@ -72,6 +76,9 @@ const Header = () => {
     } catch (e) {
       console.log(e);
     }
+    AuthDispatch({
+      type: INITAILIZE_FORM,
+    });
   };
 
   return (
@@ -81,11 +88,11 @@ const Header = () => {
         <div className="right">
           <UserInfo>{AuthState.login && AuthState.login.username}</UserInfo>
           {AuthState.login.username ? (
-            <Button onClick={onClick} as="a" href="/">
+            <Button onClick={onClick} as={Link} to="/">
               로그아웃
             </Button>
           ) : (
-            <Button as="a" href="/login">
+            <Button as={Link} to="/login">
               로그인
             </Button>
           )}

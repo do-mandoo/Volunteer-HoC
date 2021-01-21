@@ -93,6 +93,7 @@ export function AuthReducer(state, action) {
     case INITAILIZE_FORM:
       return {
         ...state,
+        ...AuthInitial,
       };
     case REGISTER_SUCCESS:
       return { ...state, authError: null, auth: action.auth }; // auth: action.auth === 153번 줄 auth:response.
