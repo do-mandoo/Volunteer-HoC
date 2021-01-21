@@ -2,6 +2,8 @@ import React from 'react';
 import emailjs from 'emailjs-com';
 
 export default function ContactUs({ post, closeModal, AuthState }) {
+  console.log(post);
+  
   function sendEmail(e) {
     e.preventDefault();
     emailjs

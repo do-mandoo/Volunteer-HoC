@@ -196,7 +196,7 @@ const UserApply = ({ AuthState, ListState, postId,modal, onCancel, onConfirm, on
           />
           </>
             )}
-            <Button onClick={openModal} >지원하기</Button>
+            <Button onClick={openModal}>지원하기</Button>
             <Modal open={modalOpen} close={closeModal} header="지원하기">
               <ContactUs post={post} AuthState={AuthState} closeModal={closeModal} />
               </Modal>

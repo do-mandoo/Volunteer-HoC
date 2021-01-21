@@ -3,7 +3,6 @@ export const POST_SUCCESS = 'POST_SUCCESS';
 export const CHANGE_FIELD = 'write/CHANGE_FIELD';
 export const AUTHSTATE_INPUT_VALUE = 'AUTHSTATE_INPUT_VALUE';
 export const MODIFY_FORM = 'MODIFY_FORM';
-
 // initialState
 export const PostInitial = {
   posts: {
@@ -23,13 +22,9 @@ export const PostInitial = {
   loading: false,
   error: null,
 };
-
 export function PostReducer(state, action) {
-  // console.log(state);
-  // console.log(action);
   switch (action.type) {
     case AUTHSTATE_INPUT_VALUE:
-      // console.log(action);
       return {
         ...state,
         posts: {
@@ -40,26 +35,7 @@ export function PostReducer(state, action) {
           email: action.email,
         },
       };
-      case POSTSTATE_INPUT_VALUE:
-      return {
-        ...state,
-        posts: {
-          ...state.posts,
-          body: action.body,
-          companyName: action.companyName,
-          gender: action.gender,
-          number: action.number,
-          periodEnd: action.periodEnd,
-          periodStart: action.periodStart,
-          phoneNumber: action.phoneNumber,
-          timeEnd: action.timeEnd,
-          timeStart: action.timeStart,
-          title: action.title,
-          address: action.address,
-        }
-      }
     case CHANGE_FIELD:
-      // console.log(action);
       return {
         ...state,
         posts: {
@@ -90,7 +66,6 @@ export function PostReducer(state, action) {
         ...state,
         ...PostInitial,
       };
-
     default:
       return state;
   }
