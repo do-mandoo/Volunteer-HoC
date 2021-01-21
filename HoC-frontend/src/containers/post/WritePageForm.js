@@ -4,7 +4,7 @@ import axios from 'axios';
 import { AUTHSTATE_INPUT_VALUE, CHANGE_FIELD, POST_SUCCESS } from '../../contexts/write';
 import { Auth, List, Post } from '../../contexts/store';
 import Write from '../../components/post/Write';
-import { CHECK_LOGIN, FILL_WRITE_INPUT } from '../../contexts/auth';
+import { CHECK_LOGIN, FILL_WRITE_INPUT, INITAILIZE_FORM } from '../../contexts/auth';
 
 const WritePageForm = ({ history }) => {
   const { AuthState, AuthDispatch } = useContext(Auth);
@@ -30,6 +30,8 @@ const WritePageForm = ({ history }) => {
       console.log(error);
     }
   };
+
+
   const onChange = e => {
     const { value, name } = e.target;
     PostDispatch({
@@ -46,27 +48,32 @@ const WritePageForm = ({ history }) => {
     history.push('/');
   };
 
-  useEffect(() => {
-    const checkLogin = (async () => {
-      const response = await axios.get('/api/auth/check/company');
-      console.log('RESPONSE', response);
-      await AuthDispatch({
-        type: FILL_WRITE_INPUT,
-        form: 'company',
-        id: response.data._id,
-        username: response.data.username,
-        companyName: response.data.companyName,
-        address: response.data.address,
-        phoneNumber: response.data.phoneNumber,
-      });
-      await PostDispatch({
-        type: AUTHSTATE_INPUT_VALUE,
-        address: response.data.address,
-        phoneNumber: response.data.phoneNumber,
-        companyName: response.data.companyName,
-      });
-    })();
-  }, [AuthDispatch]);
+  // useEffect(() => {
+  //   const checkLogin = (async () => {
+  //     const response = await axios.get('/api/auth/check/company');
+  //     console.log('RESPONSE', response);
+  //     await AuthDispatch({
+  //       type: FILL_WRITE_INPUT,
+  //       form: 'company',
+  //       id: response.data._id,
+  //       username: response.data.username,
+  //       companyName: response.data.companyName,
+  //       address: response.data.address,
+  //       phoneNumber: response.data.phoneNumber,
+  //     });
+  //     await PostDispatch({
+  //       type: AUTHSTATE_INPUT_VALUE,
+  //       address: response.data.address,
+  //       phoneNumber: response.data.phoneNumber,
+  //       companyName: response.data.companyName,
+  //     });
+  //   })();
+  //   console.log(AuthState);
+  //   console.log(PostState);
+    
+    
+  // }, [AuthDispatch]);
+  // 
 
   return (
     <Write

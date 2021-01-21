@@ -134,10 +134,15 @@ export const list = async ctx => {
   }
 };
 
-export const read = ctx => {
-  ctx.body = ctx.state.post;
+export const read = async ctx => {
+  const { id } = ctx.params;
+  try {
+    const post = await Post.find({ _id: id }).exec();
+    ctx.body = post;
+  } catch (e) {
+    ctx.throw(500, e);
+  }
 };
-
 export const remove = async ctx => {
   console.log('ctx', ctx);
   const { id } = ctx.params;
@@ -155,7 +160,15 @@ export const update = async ctx => {
   const schema = Joi.object().keys({
     title: Joi.string(),
     body: Joi.string(),
-    tags: Joi.array().items(Joi.string()),
+    address: Joi.string(),
+    companyName: Joi.string(),
+    gender: Joi.string(),
+    number: Joi.string(),
+    periodStart: Joi.string(),
+    periodEnd: Joi.string(),
+    timeStart: Joi.string(),
+    timeEnd: Joi.string(),
+    phoneNumber: Joi.string(),
   });
 
   const result = schema.validate(ctx.request.body);

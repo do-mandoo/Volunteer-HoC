@@ -5,6 +5,9 @@ export const CANCEL_SUCCESS = 'CANCEL_SUCCESS';
 export const CANCEL_FAIL = 'CANCEL_FAIL';
 export const CHANGE_FIELD = 'write/CHANGE_FIELD';
 export const AUTHSTATE_INPUT_VALUE = 'AUTHSTATE_INPUT_VALUE';
+export const POSTSTATE_INPUT_VALUE = 'POSTSTATE_INPUT_VALUE';
+export const INITAILIZE_FORM = 'write/INITAILIZE_FORM';
+
 
 
 // initialState
@@ -41,6 +44,24 @@ export function PostReducer(state, action) {
           phoneNumber: action.phoneNumber,
         },
       };
+      case POSTSTATE_INPUT_VALUE:
+      return {
+        ...state,
+        posts: {
+          ...state.posts,
+          body: action.body,
+          companyName: action.companyName,
+          gender: action.gender,
+          number: action.number,
+          periodEnd: action.periodEnd,
+          periodStart: action.periodStart,
+          phoneNumber: action.phoneNumber,
+          timeEnd: action.timeEnd,
+          timeStart: action.timeStart,
+          title: action.title,
+          address: action.address,
+        }
+      }
     case CHANGE_FIELD:
       // console.log(action);
       return {
@@ -50,6 +71,15 @@ export function PostReducer(state, action) {
           [action.key]: action.value,
         },
       };
+    case INITAILIZE_FORM:
+      // console.log(PostInitial.posts);
+      return {
+        ...state,
+        posts: {
+          // ...state.posts,
+          ...PostInitial.posts
+        }
+      }
     case POST_SUCCESS:
       return {
         ...state,

@@ -15,9 +15,9 @@ import FindAddr from './lib/api/AddressApi';
 import MyPage from './pages/MyPage';
 import { PostInitial, PostReducer } from './contexts/write';
 import { ListInitial, ListReducer } from './contexts/list';
+import ModifyPage from './pages/ModifyPage';
 function App() {
   const [AuthState, AuthDispatch] = useReducer(AuthReducer, AuthInitial);
-
   const [PostState, PostDispatch] = useReducer(PostReducer, PostInitial);
   // const [LoadingState, LoadingDispatch] = useReducer(
   //   LoadingReducer,
@@ -38,8 +38,9 @@ function App() {
               <Route path="/login" component={DivisionPage} />
               <Route path="/register" exact component={DivisionPage} />
               <Route path="/write" component={WritePage} />
+              <Route path="/modify/:postId" component={ModifyPage}/>
               <Route path="/mypage" component={MyPage} />
-              <Route path="@:username/:postId" component={UserApplyPage} />
+              <Route path="/:postId" component={UserApplyPage} />
               <Route path="/address" component={FindAddr} />
               <Route path="/" component={PostListPage} exact />
             </Switch>

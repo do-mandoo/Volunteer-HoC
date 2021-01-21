@@ -1,111 +1,23 @@
 import React from 'react';
-import styled from 'styled-components';
+import Header from '../common/Header';
+import StyledContainer from '../common/Container';
+import { WritePageContainer, StyledSelect, StyledTextarea } from './Write';
 import { StyledInput } from '../auth/Register';
 import MapContainer from '../../lib/api/MapContainer';
-import StyledContainer from '../common/Container';
-import palette from '../../lib/styles/palette';
-import Header from '../common/Header';
-export const WritePageContainer = styled.div`
-  position:relative;
-  background-color: skyblue;
-  width: 100%;
-  min-height: 700px;
-.a11y {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  margin: -1px;
-  clip-path: polygon(0 0, 0 0, 0 0);
-  clip: rect(0 0 0 0);
-  clip: rect(0, 0, 0, 0);
-}
-.post-content-wrap {
-  display:flex;
-  /* align-content:center; */
-  justify-content:center;
-  text-align:center;
-  background-color: #fff;
-}
-.post-content-left,
-.post-content-right {
-  width:50%;
-}
-.post-content-right {
-  display:flex;
-  flex-flow: row wrap;
-}
-.post-content-right label {
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  width:20%;
-}
-.post-content-right input,
-.post-content-right select {
-  width: 80%;
-}
-.period-wrap {
-  width:100%;
-  display: flex;
-  text-align:center;
-  justify-content:center;
-  align-items:center;
-  /* background-color: skyblue; */
-}
-.period-wrap label:first-child {
-  width:50%;
-}
-.period-wrap input {
-  /* width:70%; */
-}
-.btn-cancel,
-.btn-add {
-}
-.btn-cancel{
-  position:absolute;
-  top:0;
-  right:40px;
-}
-.btn-add{
-  position:absolute;
-  top:0;
-  right:0;
-}
-`
-export const StyledSelect = styled.select`
-  font-size: 1rem;
-  border: none;
-  border-bottom: 1px solid ${palette.gray[5]};
-  padding-bottom: 0.5rem;
-  outline: none;
-  color: rgb(118,118,118);
-  /* width: 100%; */
-  &:focus {
-    color: $oc-teal-7;
-    border-bottom: 1px solid ${palette.gray[7]};
-  }
-  & + & {
-    margin-top: 1rem;
-  }
-`;
-export const StyledTextarea = styled.textarea`
-  width:100%;
-  min-height: 500px;
-  resize:none;
-  outline:none;
-  border:none;
-`
-export const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
-  console.log("AuthState", AuthState);
-  console.log(1);
+
+const Modify = ({ PostState, AuthState, onChange, onSubmit }) => {
+  // console.log(AuthState);
+  // console.log(PostState);
+  console.log(PostState.posts);
+  // console.log(PostState.posts.address);
+  
   
   return (
-    <>
-    <Header AuthState={AuthState} />
-    <StyledContainer>
-    <WritePageContainer>
-    <div>
+      <>
+      <Header AuthState={AuthState} />
+      <StyledContainer>
+      <WritePageContainer>
+      <div>
         <h1 className="a11y">모집 공고 등록 페이지</h1>
         <h2>모집 공고 등록</h2>
         <form onSubmit={onSubmit}>
@@ -113,17 +25,18 @@ export const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
             <fieldset>
               <p>
                 <label className="a11y" htmlFor="post-title">공고 제목</label>
-                <StyledInput 
+                <StyledInput
                   id="post-title" 
                   name="title"
                   type="text" 
                   placeholder="모집 공고의 제목을 입력해 주세요"
+                  defaultValue={PostState.posts.title}
                   onChange={onChange} />
               </p>
               <div className="post-content-wrap">
                 <div className="post-content-left">
                 <MapContainer
-                    {...PostState.posts}
+                    {...AuthState}
                   />
                 </div>
                 <div className="post-content-right">
@@ -133,7 +46,7 @@ export const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
                   name="companyName"
                   type="text" 
                   placeholder="업체명을 입력해주세요." 
-                  defaultValue={AuthState.company.companyName}
+                  defaultValue={PostState.posts.companyName}
                   onChange={onChange}
                   />
                   <label htmlFor="post-phone">전화번호</label>
@@ -142,7 +55,7 @@ export const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
                   name="phoneNumber"
                   type="text" 
                   placeholder="전화번호를 입력해주세요."
-                  defaultValue={AuthState.company.phoneNumber}
+                  defaultValue={PostState.posts.phoneNumber}
                   onChange={onChange}
                   />
                   <label htmlFor="post-address">주소</label>
@@ -151,7 +64,7 @@ export const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
                   name="address"
                   type="text" 
                   placeholder="주소를 입력해주세요." 
-                  defaultValue={AuthState.company.address}
+                  defaultValue={PostState.posts.address}
                   onChange={onChange}
                   />
                   <div className="period-wrap">
@@ -160,13 +73,15 @@ export const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
                   id="post-period-start" 
                   name="periodStart"
                   type="date" 
+                  defaultValue={PostState.posts.periodStart}
                   onChange={onChange}
                   />
                   <label htmlFor="post-period-end">봉사 종료 기간</label>
                   <StyledInput 
                   id="post-period-end" 
                   name="periodEnd"
-                  type="date" 
+                  type="date"
+                  defaultValue={PostState.posts.periodEnd} 
                   onChange={onChange}
                         />
                 </div>
@@ -176,6 +91,7 @@ export const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
                   id="post-period-start" 
                   name="timeStart"
                   type="time" 
+                  defaultValue={PostState.posts.timeStart}
                   onChange={onChange}
                         />
                   <label htmlFor="post-period-start">봉사 종료 시간</label>
@@ -183,6 +99,7 @@ export const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
                   id="post-period-start" 
                   name="timeEnd"
                   type="time" 
+                  defaultValue={PostState.posts.timeEnd}
                   onChange={onChange}
                   />
                   </div>
@@ -197,6 +114,7 @@ export const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
                   id="post-people"
                   name="number"
                   onChange={onChange}
+                  defaultValue={PostState.posts.number}
                   >
                     <option value="">원하는 인원수를 입력해주세요</option>
                     <option value="1">1</option>
@@ -219,6 +137,7 @@ export const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
                   <StyledSelect 
                   id="post-gender"
                   name="gender"
+                  defaultValue={PostState.posts.gender}
                   onChange={onChange}>
                     <option value="">원하는 봉사자의 성별을 골라주세요</option>
                     <option value="남">남</option>
@@ -231,6 +150,7 @@ export const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
                 placeholder="봉사 활동 관련한 상세한 내용을 적어주세요."
                 name="body"
                 onChange={onChange}
+                defaultValue={PostState.posts.body}
                 ></StyledTextarea>
               <button 
                className="btn-cancel"
@@ -242,9 +162,10 @@ export const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
           </legend>
         </form>
     </div>
-  </WritePageContainer>
-    </StyledContainer>
-    </>
+      </WritePageContainer>
+      </StyledContainer>
+      </>
   );
 };
-export default Write;
+
+export default Modify;

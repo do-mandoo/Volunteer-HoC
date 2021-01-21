@@ -136,7 +136,10 @@ const UserApply = ({ AuthState, post, modal, onCancel, onConfirm, onRemoveClick 
         </div>
           {post.user._id === localStorage.getItem('token') && (
           <>
-          <Button as={Link} to={`/write/${post._id}`}>수정</Button> 
+          <Button 
+          as={Link} 
+          to={`/modify/${post._id}`}
+          >수정</Button> 
           <Button onClick={onRemoveClick}>삭제</Button>
           <AskRemoveModal 
             visible={modal}
