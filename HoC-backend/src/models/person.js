@@ -7,6 +7,7 @@ const PersonSchema = new Schema({
   hashedPassword: String,
   address: String,
   phoneNumber: String,
+  email: String,
 });
 
 PersonSchema.methods.setPassword = async function (password) {

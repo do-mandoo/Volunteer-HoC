@@ -11,7 +11,7 @@ const GlobalList = styled.div`
 
   }
   button{
-    margin-right:30px
+    margin-right:30px;
     background-color:yellow;
 
   }
@@ -47,13 +47,13 @@ const GlobalList = styled.div`
   }
 `;
 
-const MyPost = ({ AuthState, ListState, tokenID, ListCompanyName }) => {
+const MyPost = ({ AuthState, ListState, tokenID }) => {
   return (
     <div>
       <Header AuthState={AuthState} />
       <StyledContainer>
         <GlobalList>
-          {/* <h1>{ListCompanyName.companyName}(이/가)작성한 공고</h1> */}
+          <h1>{AuthState.login.username}(이/가)작성한 공고</h1>
           <ul>
             <li>
               <span className="ListTitle">제목</span>
@@ -64,12 +64,9 @@ const MyPost = ({ AuthState, ListState, tokenID, ListCompanyName }) => {
               <li key = {list._id}>
                 <span>{list.title}</span>
                 <span>{list.periodStart}~{list.periodEnd}</span>
-                <span><button><Link to={`${AuthState.login.username && '/@'+AuthState.login.username}/${list._id}`}>더보기</Link></button></span>
+                <span><button><Link to={`/${list._id}`}>더보기</Link></button></span>
               </li>
             ))}
-            {console.log('LOCAL', tokenID)}
-            {console.log('LISTSTATE',ListState.lists.filter(list=>list.user._id === tokenID))}
-            {console.log(ListState.lists)}
           </ul>
         </GlobalList>
       </StyledContainer>

@@ -1,14 +1,8 @@
 // action type
 export const POST_SUCCESS = 'POST_SUCCESS';
-export const POST_FAIL = 'POST_FAIL';
-export const CANCEL_SUCCESS = 'CANCEL_SUCCESS';
-export const CANCEL_FAIL = 'CANCEL_FAIL';
 export const CHANGE_FIELD = 'write/CHANGE_FIELD';
 export const AUTHSTATE_INPUT_VALUE = 'AUTHSTATE_INPUT_VALUE';
-export const POSTSTATE_INPUT_VALUE = 'POSTSTATE_INPUT_VALUE';
-export const INITAILIZE_FORM = 'write/INITAILIZE_FORM';
-
-
+export const MODIFY_FORM = 'MODIFY_FORM';
 
 // initialState
 export const PostInitial = {
@@ -43,8 +37,7 @@ export function PostReducer(state, action) {
           address: action.address,
           companyName: action.companyName,
           phoneNumber: action.phoneNumber,
-         email:action.email,
-          
+          email: action.email,
         },
       };
       case POSTSTATE_INPUT_VALUE:
@@ -74,25 +67,30 @@ export function PostReducer(state, action) {
           [action.key]: action.value,
         },
       };
-    case INITAILIZE_FORM:
-      // console.log(PostInitial.posts);
+    case MODIFY_FORM:
       return {
         ...state,
         posts: {
-          // ...state.posts,
-          ...PostInitial.posts
-        }
-      }
+          ...state.posts,
+          title: action.title,
+          body: action.body,
+          companyName: action.companyName,
+          gender: action.gender,
+          address: action.address,
+          number: action.number,
+          periodStart: action.periodStart,
+          periodEnd: action.periodEnd,
+          timeStart: action.timeStart,
+          timeEnd: action.timeEnd,
+          phoneNumber: action.phoneNumber,
+        },
+      };
     case POST_SUCCESS:
       return {
         ...state,
+        ...PostInitial,
       };
-    case POST_FAIL:
-      return {};
-    case CANCEL_SUCCESS:
-      return {};
-    case CANCEL_FAIL:
-      return {};
+
     default:
       return state;
   }

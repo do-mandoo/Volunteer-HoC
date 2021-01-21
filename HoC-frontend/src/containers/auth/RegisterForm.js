@@ -10,12 +10,26 @@ import { Auth } from '../../contexts/store';
 import Register from '../../components/auth/Register';
 import { withRouter } from 'react-router-dom';
 
-
 const RegisterForm = ({ history }) => {
   const url = window.location.pathname;
   const parse = url.split('/');
   const { AuthState, AuthDispatch } = useContext(Auth); //app.js에서 프로바이더로 내려준걸 디스트럭처링할당한거다.
   const [error, setError] = useState(null);
+
+  const [modal, setModal] = useState(false);
+  const onAddress = () => {
+    // 모달창 열기
+    setModal(true);
+  };
+  const onCancel = () => {
+    // 모달창 닫기
+    setModal(false);
+  };
+  const onConfirm = () => {
+    // 삭제하기 + 모달창 닫기
+    setModal(false);
+  };
+
   // 비동기
   const companyRegister = async () => {
     try {
@@ -29,13 +43,14 @@ const RegisterForm = ({ history }) => {
           companyName: AuthState.company.companyName,
           address: AuthState.company.address,
           phoneNumber: AuthState.company.phoneNumber,
+          email: AuthState.company.email,
         }
       );
       await AuthDispatch({
         type: REGISTER_SUCCESS,
         auth: response,
       });
-      await history.push('/');
+      await history.push('/login/company');
     } catch (error) {
       console.log(error);
       await AuthDispatch({
@@ -47,7 +62,6 @@ const RegisterForm = ({ history }) => {
   };
 
   const personRegister = async () => {
-    // console.log(AuthState.person);
     try {
       const response = await axios.post(
         'http://localhost:3000/api/auth/register/person',
@@ -58,10 +72,11 @@ const RegisterForm = ({ history }) => {
           position: parse[parse.length - 1],
           address: AuthState.person.address,
           phoneNumber: AuthState.person.phoneNumber,
+          email: AuthState.person.email,
         }
       );
-      console.log(response);
-      await AuthDispatch({ // 디스패치날리면 리듀서로 날라감.
+      await AuthDispatch({
+        // 디스패치날리면 리듀서로 날라감.
         type: REGISTER_SUCCESS,
         auth: response,
       });
@@ -98,7 +113,7 @@ const RegisterForm = ({ history }) => {
       type: INITAILIZE_FORM,
       form: parse[parse.length - 1],
     });
-  }, [AuthDispatch]);
+  }, []);
 
   return (
     <Register
@@ -107,6 +122,10 @@ const RegisterForm = ({ history }) => {
       onChange={onChange}
       onSubmit={onSubmit}
       error={error}
+      modal={modal}
+      onCancel={onCancel}
+      onConfirm={onConfirm}
+      onAddress={onAddress}
     />
   );
 };

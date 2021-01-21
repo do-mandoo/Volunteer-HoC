@@ -3,7 +3,7 @@ import ModifyForm from '../containers/post/ModifyForm';
 
 const ModifyPage = () => {
   return (
-      <ModifyForm />
+    <ModifyForm />
   );
 };
 

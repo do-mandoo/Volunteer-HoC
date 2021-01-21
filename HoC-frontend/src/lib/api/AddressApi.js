@@ -1,5 +1,8 @@
 import DaumPostcode from 'react-daum-postcode';
 const FindAddr = () => {
+  const onClick = e => {
+    console.log(e.target);
+  };
   const postCodeStyle = {
     display: 'block',
     position: 'absolute',
@@ -10,6 +13,7 @@ const FindAddr = () => {
     padding: '7px',
   };
   const handleComplete = data => {
+    console.log(data);
     let fullAddress = data.address;
     let extraAddress = '';
 

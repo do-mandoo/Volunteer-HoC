@@ -42,6 +42,7 @@ const LoginForm = ({ history }) => {
         username: response.data.username,
         address: response.data.address,
         phoneNumber: response.data.phoneNumber,
+        email: response.data.email,
         companyName: response.data.companyName || null,
       });
       await history.push('/');

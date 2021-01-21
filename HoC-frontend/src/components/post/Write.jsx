@@ -6,6 +6,7 @@ import StyledContainer from '../common/Container';
 import palette from '../../lib/styles/palette';
 import Header from '../common/Header';
 import Button from '../common/Button';
+import { withRouter } from 'react-router-dom';
 // import Select from 'react-select';
 export const WritePageContainer = styled.div`
   position:relative;
@@ -166,6 +167,7 @@ export const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
                   name="title"
                   type="text" 
                   placeholder="모집 공고의 제목을 입력해 주세요"
+                  defaultValue={PostState.posts.title}
                   onChange={onChange} />
               </p>
               <div className="post-content-wrap">
@@ -208,13 +210,15 @@ export const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
                   id="post-period-start" 
                   name="periodStart"
                   type="date" 
+                  defaultValue={PostState.posts.periodStart}
                   onChange={onChange}
                   />
                   <label htmlFor="post-period-end"> ~ </label>
                   <StyledInput 
                   id="post-period-end" 
                   name="periodEnd"
-                  type="date" 
+                  type="date"
+                  defaultValue={PostState.posts.periodEnd} 
                   onChange={onChange}
                         />
                 </div>
@@ -224,6 +228,7 @@ export const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
                   id="post-period-start" 
                   name="timeStart"
                   type="time" 
+                  defaultValue={PostState.posts.timeStart} 
                   onChange={onChange}
                         />
                   <label htmlFor="post-period-start"> ~ </label>
@@ -231,19 +236,16 @@ export const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
                   id="post-period-start" 
                   name="timeEnd"
                   type="time" 
+                  defaultValue={PostState.posts.timeEnd}
                   onChange={onChange}
                   />
                   </div>
                   <label 
                   htmlFor="post-people">인원수</label>
-                  {/* <StyledInput 
-                  id="post-people" 
-                  type="text" 
-                  placeholder="원하는 인원수를 입력해주세요." 
-                  /> */}
                   <StyledSelect 
                   id="post-people"
                   name="number"
+                  defaultValue={PostState.posts.number}
                   onChange={onChange}
                   >
                     <option value="">원하는 인원수를 입력해주세요</option>
@@ -257,16 +259,13 @@ export const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
                     <option value="8">8</option>
                     <option value="9">9</option>
                     <option value="10">10</option>
-                  </StyledSelect>
+                      </StyledSelect>
+                      
                   <label htmlFor="post-gender">성별</label>
-                  {/* <StyledInput 
-                  id="post-gender" 
-                  type="text" 
-                  placeholder="성별을 입력해주세요." 
-                  /> */}
                   <StyledSelect 
                   id="post-gender"
                   name="gender"
+                  defaultValue={PostState.posts.gender}
                   onChange={onChange}>
                     <option value="">원하는 봉사자의 성별을 골라주세요</option>
                     <option value="남">남</option>
@@ -278,6 +277,7 @@ export const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
                 <StyledTextarea
                 placeholder="봉사 활동 관련한 상세한 내용을 적어주세요."
                 name="body"
+                defaultValue={PostState.posts.body}
                 onChange={onChange}
                 ></StyledTextarea>
               <Button className="btn-add">등록</Button>
@@ -291,4 +291,4 @@ export const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
     </>
   );
 };
-export default Write;
+export default withRouter(Write);

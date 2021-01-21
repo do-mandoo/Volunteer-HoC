@@ -1,41 +1,19 @@
-import React, { useContext, useEffect } from 'react';
-import { Auth, Post } from '../../contexts/store';
-import Modify from '../../components/post/Modify';
-import axios from 'axios';
-import { INITAILIZE_FORM, CHANGE_FIELD } from '../../contexts/write';
-import { POSTSTATE_INPUT_VALUE } from '../../contexts/write';
+import React, { useCallback, useContext, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
+import axios from 'axios';
+import { Auth, Post } from '../../contexts/store';
+import { CHANGE_FIELD, MODIFY_FORM, POST_SUCCESS } from '../../contexts/write';
+import Write from '../../components/post/Write';
+import { REGISTER_INFO } from '../../contexts/auth';
 
-
-
-const ModifyForm = ({ match, history }) => {
-  const { postId } = match.params;
-  // const url = window.location.pathname;
-  // const parse = url.split('/');
-  
+const ModifyForm = ({ history, match }) => {
   const { AuthState, AuthDispatch } = useContext(Auth);
   const { PostState, PostDispatch } = useContext(Post);
-  console.log(PostState);
-  const onChange = e => {
-    const { value, name } = e.target;
-    PostDispatch({
-      type: CHANGE_FIELD,
-      key: name,
-      value,
-    });
-    console.log(PostState);
-  };
-  const onSubmit = async e => {
-    e.preventDefault();
-    patch();
-    // poststate 초기화하기
-    history.push('/');
-  };
+  const { postId } = match.params;
 
-  const patch = async () => {
-    // console.log(PostState.posts.title);
-    try{
-      const res = await axios.patch(
+  const modify = async () => {
+    try {
+      const response = await axios.patch(
         `http://localhost:3000/api/post/${postId}`,
         {
           title: PostState.posts.title,
@@ -50,50 +28,86 @@ const ModifyForm = ({ match, history }) => {
           number: PostState.posts.number,
           companyName: PostState.posts.companyName,
         }
-      )
-      console.log(res);
-      
-    } catch(error) {
+      );
+    } catch (error) {
       console.log(error);
     }
-  }
+  };
+
+  const onChange = e => {
+    const { value, name } = e.target;
+    PostDispatch({
+      type: CHANGE_FIELD,
+      key: name,
+      value,
+    });
+  };
+
+  const onSubmit = e => {
+    e.preventDefault();
+    modify();
+    PostDispatch({
+      type: POST_SUCCESS,
+    });
+    history.push('/');
+  };
+
+  const getPost = useCallback(async () => {
+    const response = await axios.get(
+      `http://localhost:3000/api/post/${postId}`
+    );
+    const {
+      title,
+      body,
+      address,
+      companyName,
+      gender,
+      number,
+      periodStart,
+      periodEnd,
+      timeStart,
+      timeEnd,
+      phoneNumber,
+    } = response.data['0'];
+    await PostDispatch({
+      type: MODIFY_FORM,
+      title,
+      body,
+      companyName,
+      address,
+      gender,
+      number,
+      periodStart,
+      periodEnd,
+      timeStart,
+      timeEnd,
+      phoneNumber,
+    });
+    await AuthDispatch({
+      type: REGISTER_INFO,
+      form: 'company',
+      companyName,
+      phoneNumber,
+      address,
+    });
+  }, [AuthDispatch, PostDispatch, postId]);
 
   useEffect(() => {
-    const checkLogin = (async () => {
-      const res = await axios.get(`/api/post/${postId}`);
-      await console.log(res);
-      // console.log(res.data[0].address);
-      await PostDispatch({
-        type: POSTSTATE_INPUT_VALUE,
-        body: res.data[0].body,
-        companyName: res.data[0].companyName,
-        gender: res.data[0].gender,
-        number: res.data[0].number,
-        periodEnd: res.data[0].periodEnd,
-        periodStart: res.data[0].periodStart,
-        phoneNumber: res.data[0].phoneNumber,
-        timeEnd: res.data[0].timeEnd,
-        timeStart: res.data[0].timeStart,
-        title: res.data[0].title,
-        address: res.data[0].address,
-      });
-      // await console.log(PostState);
-    })();
-    return() => {
-      console.log('얍');
+    getPost();
+    return () => {
       PostDispatch({
-        type: INITAILIZE_FORM,
-      })
-      // console.log(PostState);
+        type: POST_SUCCESS,
+      });
     };
-  }, []);
+  }, [getPost, PostDispatch]);
+
   return (
-      <Modify 
-      AuthState={AuthState}
+    <Write
       PostState={PostState}
+      AuthState={AuthState}
       onChange={onChange}
       onSubmit={onSubmit}
-      />
+    />
   );
 };
 

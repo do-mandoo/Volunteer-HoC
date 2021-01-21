@@ -37,7 +37,6 @@ export const checkOwnPost = (ctx, next) => {
 // };
 
 export const write = async ctx => {
-  console.log(1);
   const schema = Joi.object().keys({
     // Joi를 통해서 객체가 다음 필드를 가지고 있음을 검증한다.
     title: Joi.string().required(),
@@ -51,6 +50,7 @@ export const write = async ctx => {
     timeEnd: Joi.string().required(),
     number: Joi.string().required(),
     gender: Joi.string().required(),
+    email: Joi.string().required(),
     // tags: Joi.array().items(Joi.string()).required(),
   });
 
@@ -73,6 +73,7 @@ export const write = async ctx => {
     timeEnd,
     gender,
     number,
+    email,
     // tags,
   } = ctx.request.body;
   const post = new Post({
@@ -87,6 +88,7 @@ export const write = async ctx => {
     gender,
     phoneNumber,
     number,
+    email,
     // tags,
     user: ctx.state.user,
   });
@@ -144,7 +146,6 @@ export const read = async ctx => {
   }
 };
 export const remove = async ctx => {
-  console.log('ctx', ctx);
   const { id } = ctx.params;
   try {
     await Post.findByIdAndRemove({ _id: id }).exec();
@@ -169,6 +170,7 @@ export const update = async ctx => {
     timeStart: Joi.string(),
     timeEnd: Joi.string(),
     phoneNumber: Joi.string(),
+    email: Joi.string(),
   });
 
   const result = schema.validate(ctx.request.body);

@@ -19,4 +19,3 @@ post.delete('/:id', postsCtrl.remove);
 post.patch('/:id', postsCtrl.update);
 
 // posts.use('/:id', postsCtrl.getPostById, post.routes());
-

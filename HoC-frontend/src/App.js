@@ -7,15 +7,15 @@ import DivisionPage from './pages/DivisionPage';
 import RegisterPage from './pages/RegisterPage';
 import WritePage from './pages/WritePage';
 import UserApplyPage from './pages/UserApplyPage';
-import { Auth, Loading, Post, List } from './contexts/store';
+import { Auth, Post, List } from './contexts/store';
 import { useReducer } from 'react';
 import { AuthReducer, AuthInitial } from './contexts/auth';
-import { LoadingReducer, LoadingInitial } from './contexts/loading';
 import FindAddr from './lib/api/AddressApi';
 import MyPage from './pages/MyPage';
 import { PostInitial, PostReducer } from './contexts/write';
 import { ListInitial, ListReducer } from './contexts/list';
 import ModifyPage from './pages/ModifyPage';
+import Apply from './pages/Apply';
 function App() {
   const [AuthState, AuthDispatch] = useReducer(AuthReducer, AuthInitial);
   const [PostState, PostDispatch] = useReducer(PostReducer, PostInitial);
@@ -33,13 +33,15 @@ function App() {
             <Switch>
               <Route path="/login/company" component={LoginPage} />
               <Route path="/login/person" component={LoginPage} />
+              <Route path="/login" component={DivisionPage} />
               <Route path="/register/person" component={RegisterPage} />
               <Route path="/register/company" component={RegisterPage} />
-              <Route path="/login" component={DivisionPage} />
               <Route path="/register" exact component={DivisionPage} />
               <Route path="/write" component={WritePage} />
               <Route path="/modify/:postId" component={ModifyPage}/>
               <Route path="/mypage" component={MyPage} />
+              <Route path="/apply" component={Apply} />
+              <Route path="/modify/:postId" component={ModifyPage} />
               <Route path="/:postId" component={UserApplyPage} />
               <Route path="/address" component={FindAddr} />
               <Route path="/" component={PostListPage} exact />
