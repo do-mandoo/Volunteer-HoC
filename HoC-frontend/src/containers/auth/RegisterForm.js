@@ -39,7 +39,7 @@ const RegisterForm = ({ history }) => {
           username: AuthState.company.username,
           password: AuthState.company.password,
           passwordConfirm: AuthState.company.passwordConfirm,
-          position: parse[parse.length - 1],
+          position: 'company',
           companyName: AuthState.company.companyName,
           address: AuthState.company.address,
           phoneNumber: AuthState.company.phoneNumber,
@@ -69,12 +69,13 @@ const RegisterForm = ({ history }) => {
           username: AuthState.person.username,
           password: AuthState.person.password,
           passwordConfirm: AuthState.person.passwordConfirm,
-          position: parse[parse.length - 1],
+          position: 'person',
           address: AuthState.person.address,
           phoneNumber: AuthState.person.phoneNumber,
           email: AuthState.person.email,
         }
       );
+      console.log(response);
       await AuthDispatch({
         // 디스패치날리면 리듀서로 날라감.
         type: REGISTER_SUCCESS,

@@ -18,7 +18,6 @@ import ModifyPage from './pages/ModifyPage';
 import Apply from './pages/Apply';
 function App() {
   const [AuthState, AuthDispatch] = useReducer(AuthReducer, AuthInitial);
-
   const [PostState, PostDispatch] = useReducer(PostReducer, PostInitial);
   // const [LoadingState, LoadingDispatch] = useReducer(
   //   LoadingReducer,
@@ -39,6 +38,7 @@ function App() {
               <Route path="/register/company" component={RegisterPage} />
               <Route path="/register" exact component={DivisionPage} />
               <Route path="/write" component={WritePage} />
+              <Route path="/modify/:postId" component={ModifyPage}/>
               <Route path="/mypage" component={MyPage} />
               <Route path="/apply" component={Apply} />
               <Route path="/modify/:postId" component={ModifyPage} />

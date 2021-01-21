@@ -145,7 +145,6 @@ export const read = async ctx => {
     ctx.throw(500, e);
   }
 };
-
 export const remove = async ctx => {
   const { id } = ctx.params;
   try {
