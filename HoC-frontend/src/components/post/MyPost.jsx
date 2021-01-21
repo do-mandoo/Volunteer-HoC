@@ -1,16 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import Header from '../common/Header';
+import Button from '../../components/common/Button';
 import StyledContainer from '../common/Container';
 import { Link, withRouter } from 'react-router-dom';
 import AskRemoveModal from './AskRemoveModal';
-import Button from '../common/Button';
 
 const GlobalList = styled.div`
   h1{
     text-align:center;
     font-size:2rem;
-
   }
   button{
     margin-right:30px;

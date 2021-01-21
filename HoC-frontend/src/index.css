@@ -121,6 +121,7 @@ section {
 }
 body {
   line-height: 1;
+  background: rgba(244, 244, 244, 0.5);
 }
 ol,
 ul {
@@ -146,7 +147,9 @@ a {
   color: inherit;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -161,4 +164,11 @@ html {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Black+Han+Sans&display=swap&subset=korean');
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+* {
+  font-family: 'Noto Sans KR', sans-serif;
 }
