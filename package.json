@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "axios": "^0.21.1",
+    "emailjs-com": "^2.6.4",
+    "react-modal": "^3.12.1",
     "styled-components": "^5.2.1"
   }
 }

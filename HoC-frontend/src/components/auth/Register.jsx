@@ -1,8 +1,10 @@
 import React from 'react';
+import DaumPostcode from 'react-daum-postcode';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import Button from "../common/Button";
+import AskAddressModal from '../post/AskAddressModal';
 
 // 로그인 폼을 보여주는 컴포넌트
 
@@ -57,7 +59,7 @@ const ButtonWithMarginTop = styled(Button)`
   margin-top: 1rem;
 `;
 
-const Register = ({ position, onChange, onSubmit, form, error }) => {
+const Register = ({ position, onChange, onSubmit, form, error, onAddress, modal, onCancel, onConfirm }) => {
   return (
     <AuthFormBlock>
       {position === 'company' ?
@@ -93,6 +95,15 @@ const Register = ({ position, onChange, onSubmit, form, error }) => {
             value={form.passwordConfirm}
         />
 
+<label style={{fontWeight: 700}} htmlFor="username">이메일</label>
+        <StyledInput
+            autoComplete="email"
+            name="email"
+            placeholder="이메일 주소"
+            type="text"  
+            onChange={onChange}
+        />
+
       {position === 'company' && (
           <>
             <label style={{fontWeight: 700}} htmlFor="username">기관명</label>
@@ -116,6 +127,14 @@ const Register = ({ position, onChange, onSubmit, form, error }) => {
             onChange={onChange}
             value={form.address}
         />
+
+        {/* <Button onClick={onAddress}>주소 찾기</Button>
+        <AskAddressModal 
+            visible={modal}
+            onConfirm={onConfirm}
+            onCancel={onCancel} 
+          /> */}
+        
         <label style={{fontWeight: 700}} htmlFor="username">전화번호</label>
         <StyledInput
             autoComplete="phone-number"

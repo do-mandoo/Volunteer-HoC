@@ -13,7 +13,10 @@ const GlobalList = styled.div`
 
   }
   button{
-    margin-right:30px
+    margin-right:30px;
+    background-color:yellow;
+    color:black;
+
   }
   ul{
     margin-top:100px;
@@ -28,13 +31,14 @@ const GlobalList = styled.div`
     padding:0 5px
   }
 
-  .ListCheckbox, .ListDate, li input[type='checkbox']{
+  .ListCheckbox, li input[type='checkbox']{
     width:10%;
-    border : 1px solid blue;
+  }
+  .ListDate{
+    width:10%;
   }
   .link span:nth-child(1){
     width:10%
-    border : 1px solid black;
   }
   .ListTitle{
     width:40%;
@@ -42,7 +46,6 @@ const GlobalList = styled.div`
     white-space:nowrap;
     word-wrap:normal;
     overflow:hidden;
-    border : 1px solid yellow;
   }
   .link span:nth-child(2){
     width:40%;
@@ -51,23 +54,20 @@ const GlobalList = styled.div`
     word-wrap:normal;
     overflow:hidden;
     text-align:left;
-    border : 1px solid yellow;
+    margin-left : 20px;
   }
   .ListPeriod, .link span:nth-child(3){
     width:20%;
-    border : 1px solid white;
   }
   .ListRemove{
     width:10%;
-    border : 1px solid red;
   }
   li button{
     position: relative;
-    border : 1px solid red;
+    right: -15px;
   }
   li span.ListTitle{
     text-align:center
-    border : 1px solid red;
   }
 `;
 
@@ -77,7 +77,7 @@ const MyPost = ({ AuthState, ListState, ListName, onChecking, tokenID, modal, on
       <Header AuthState={AuthState} />
       <StyledContainer>
         <GlobalList>
-          <h1>{AuthState.companyName}(이/가)작성한 공고</h1>
+          <h1>{AuthState.login.username}(이/가)작성한 공고</h1>
           <ul>
             <li>
               <span className="ListCheckbox">체크박스</span>

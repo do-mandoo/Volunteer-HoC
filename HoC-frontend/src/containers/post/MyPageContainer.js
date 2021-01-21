@@ -6,11 +6,6 @@ import { Auth, List } from '../../contexts/store';
 const arr = [];
 
 const MyPageContainer = ({match, history}) => {
-  // console.log(match.params,555);
-  
-
-
-
   const [modal, setModal] = useState(false);
   const onRemoveClick = (e) => {
     // console.log(e.target.previousElementSibling,999);
@@ -74,8 +69,6 @@ const MyPageContainer = ({match, history}) => {
       console.log(e);
     }
   }
-
-
 
   return <MyPost 
     AuthState={AuthState} 

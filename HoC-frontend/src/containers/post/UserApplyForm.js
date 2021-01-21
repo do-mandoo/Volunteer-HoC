@@ -1,9 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import UserApply from '../../components/post/UserApply';
-import { Auth, List, Post } from '../../contexts/store';
+import { Auth, List } from '../../contexts/store';
 // import { removePost } from '../../lib/api/posts';
 import { withRouter } from 'react-router-dom';
+import { POST_SUCCESS } from '../../contexts/write';
 
 const UserApplyForm = ({ match, history }) => {
   const { postId } = match.params;
@@ -31,24 +32,26 @@ const UserApplyForm = ({ match, history }) => {
     setModal(false);
     onRemove();
   };
-  const url = window.location.pathname;
-  const parse = url.split('/');
 
   const { AuthState } = useContext(Auth);
-  const { ListState } = useContext(List);
+  const { ListState, ListDispatch } = useContext(List);
 
-  const post =
-    ListState.lists &&
-    ListState.lists.find(list => list._id === parse[parse.length - 1]);
-
-  console.log('POST', post);
+  useEffect(() => {
+    (async () => {
+      const response = await axios.get('http://localhost:3000/api/posts');
+      await ListDispatch({
+        type: POST_SUCCESS,
+        data: response.data,
+      });
+    })();
+  }, [ListDispatch]);
 
   return (
     <UserApply
       AuthState={AuthState}
-      post={post}
       ListState={ListState}
       modal={modal}
+      postId={postId}
       onRemoveClick={onRemoveClick}
       onCancel={onCancel}
       onConfirm={onConfirm}
