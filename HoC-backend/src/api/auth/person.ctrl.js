@@ -6,6 +6,12 @@ export const register = async ctx => {
   // Request Body
   const schema = Joi.object().keys({
     username: Joi.string().alphanum().min(3).max(20).required(),
+    email: Joi.string()
+      .email({
+        minDomainSegments: 2,
+        tlds: { allow: ['com', 'net'] },
+      })
+      .required(),
     password: Joi.string().required(),
     passwordConfirm: Joi.string().required(),
     address: Joi.string().required(),
@@ -25,6 +31,7 @@ export const register = async ctx => {
     address,
     phoneNumber,
     position,
+    email,
   } = ctx.request.body;
 
   try {
@@ -39,6 +46,7 @@ export const register = async ctx => {
       address,
       phoneNumber,
       position,
+      email,
     });
     await user.setPassword(password); // 비밀번호 설정
     await user.save(); // 데이터베이스 저장
@@ -100,12 +108,12 @@ export const login = async ctx => {
 export const check = async ctx => {
   const { user } = ctx.state;
   const users = await Person.findByUsername(user.username);
-  const { address, phoneNumber } = users;
+  const { address, phoneNumber, email } = users;
   if (!user) {
     ctx.status = 401;
     return;
   }
-  ctx.body = { ...user, position: 'person', address, phoneNumber };
+  ctx.body = { ...user, position: 'person', address, phoneNumber, email };
 };
 
 export const logout = async ctx => {

@@ -25,6 +25,7 @@ export const AuthInitial = {
     companyName: '',
     address: '',
     phoneNumber: '',
+    email: '',
   },
   person: {
     id: '',
@@ -33,6 +34,7 @@ export const AuthInitial = {
     passwordConfirm: '',
     address: '',
     phoneNumber: '',
+    email: '',
   },
   login: {
     username: '',
@@ -75,6 +77,7 @@ export function AuthReducer(state, action) {
           id: action.id,
           username: action.username,
           position: action.position,
+          email: action.email,
         },
       };
     case FILL_WRITE_INPUT:

@@ -1,7 +1,7 @@
+import axios from 'axios';
 import { useContext, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
-import axios from 'axios';
 import { CHANGE_FIELD, CHECK_LOGIN } from '../../contexts/auth';
 import { Auth } from '../../contexts/store';
 import { login } from '../../lib/api/auth';
@@ -66,7 +66,7 @@ const UserInfo = styled.div`
 const Header = () => {
   const { AuthState, AuthDispatch } = useContext(Auth);
   useEffect(() => {
-    const checkLogin = (async () => {
+    (async () => {
       try {
         const response =
           (await axios.get('/api/auth/check/company')) ||
@@ -76,6 +76,7 @@ const Header = () => {
           id: response.data._id,
           username: response.data.username,
           position: response.data.position,
+          email: response.data.email,
         });
       } catch (e) {
         // console.log(e);

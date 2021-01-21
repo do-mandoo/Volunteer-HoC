@@ -9,15 +9,14 @@ const PostListForm = () => {
   
   const { AuthState } = useContext(Auth);
   const { ListState, ListDispatch } = useContext(List);
-  console.log(ListState)
-  const fetchList = async () => {
+
+  const fetchList = useCallback(async () => {
     await ListDispatch({
       type: POST_LOADING,
       loading: true,
     });
     try {
       const response = await axios.get('http://localhost:3000/api/posts');
-
       await ListDispatch({
         type: POST_SUCCESS,
         data: response.data,
@@ -28,11 +27,11 @@ const PostListForm = () => {
         error
       });
     }
-  };
+  }, [ListDispatch]);
 
   useEffect(() => {
     fetchList();
-  }, []);
+  }, [fetchList]);
 
   return <PostList AuthState={AuthState} ListState={ListState} />;
 };

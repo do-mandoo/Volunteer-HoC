@@ -25,24 +25,24 @@ export function MyPageReducer(state, action){
       loading: false,
       error: null,
     }
-    // case MODIFY_SUCCESS :
-    // case MODIFY_ERROR :
-    //   return {
-    //     ...state,
-    //     lists:action.lists,
-    //     loading: action.loading,
-    //     error: action.error,
-    //   }
+    case MODIFY_SUCCESS :
+    case MODIFY_ERROR :
+      return {
+        ...state,
+        lists:action.lists,
+        loading: action.loading,
+        error: action.error,
+      }
 
-    // case DELETE_LOADING :
-    // case DELETE_SUCCESS : 
-    // case DELETE_ERROR : 
-    //   return{
-    //     ...state,
-    //     lists: action.lists,
-    //     loading:action.loading,
-    //     error:action.error,
-    //   }
+    case DELETE_LOADING :
+    case DELETE_SUCCESS : 
+    case DELETE_ERROR : 
+      return{
+        ...state,
+        lists: action.lists,
+        loading:action.loading,
+        error:action.error,
+      }
     default : 
       return state;
   }

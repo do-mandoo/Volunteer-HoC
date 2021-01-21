@@ -3,101 +3,75 @@ import styled from 'styled-components';
 import Header from '../common/Header';
 import Button from '../../components/common/Button';
 import StyledContainer from '../common/Container';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
-const MyPostBlock = styled.div`
-h1{
-  text-align:center;
-  font-size:2rem;
+const GlobalList = styled.div`
+  h1{
+    text-align:center;
+    font-size:2rem;
+  }
+  button{
+    margin-right:30px;
+    background-color:yellow;
 
-}
-button{
-  margin-right:30px
-}
-ul{
-  margin-top:100px;
-}
-li{
-  border-bottom:1px solid black;
-  padding:10px 0;
-}
-li>*{
-  text-align:center;
-  display:inline-block;
-}
-span{
-  display:inline-block;
-}
+  }
+  ul{
+    margin-top:100px;
+  }
+  li{
+    border-bottom:1px solid black;
+    padding:10px 0;
+    text-align:center
+  }
+  span{
+    display:inline-block;
+    padding:0 5px
+  }
+  li span:nth-child(1){
+    width:50%;
+  }
+  
+  li span:nth-child(2){
+    width:30%;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    word-wrap:normal;
+    overflow:hidden;
+    text-align:left;
+  }
+  li span:nth-child(3){
+    width:10%;
+  }
+  li span.ListTitle{
+    text-align:center
+  }
+`;
 
-
-li .listCheck{
-  width:5%;
-  text-align:center;
-}
-li .listRemove{
-  width:15%
-}
-
-li .listDate{
-  width:30%;
-}
-li .listTitle{
-  width:50%;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-  overflow:hidden;
-  text-align:left;
-}
-.removeButton{
-  width:40px;
-  margin:0 auto;
-  padding:5px;
-  background:transparent;
-  outline:none;
-  border:none;
-  border:1px solid green;
-  border-radius:5px;
-}
-li span.listTitle{
-  text-align:center
-}
-`
-
-const MyPost = ({ AuthState, ListState, tokenId }) => {
-  console.log(ListState);
-  const filterlist = ListState.lists.filter(list => list.user._id === tokenId);
+const MyPost = ({ AuthState, ListState, tokenID }) => {
   return (
-    <>
+    <div>
       <Header AuthState={AuthState} />
       <StyledContainer>
-        <MyPostBlock>
-          <h1>내가 작성한 모집 공고</h1>
+        <GlobalList>
+          <h1>{AuthState.login.username}(이/가)작성한 공고</h1>
           <ul>
-              <li>
-                <span className="listCheck">선택</span>
-                <span className="listDate">작성 일자</span>
-                <span className="listTitle">제목</span>
-                <span className="listRemove">선택삭제</span>
+            <li>
+              <span className="ListTitle">제목</span>
+              <span className="ListDetail">자세히 보기</span>
+              <span className="ListMore">더보기</span>
+            </li>
+            {ListState.lists.filter(list=>list.user._id === tokenID).map(list=>(
+              <li key = {list._id}>
+                <span>{list.title}</span>
+                <span>{list.periodStart}~{list.periodEnd}</span>
+                <span><button><Link to={`/${list._id}`}>더보기</Link></button></span>
               </li>
-              {filterlist.map(mylist=>(
-                <li key={mylist._id}>
-                  <label className="listCheck">
-                    <input type="checkbox" class="filled-in "/>
-                    {/* <span>Filled in</span> */}
-                  </label>
-                  <span className="listDate">{
-                  String(mylist.publishedDate).substring(0,10)}</span>
-                  <Link className="listTitle" to={`${AuthState.login.username && '/@' + AuthState.login.username}/${mylist._id}`}>
-                  <span >{mylist.title}</span>
-                  </Link>
-                  <span className="listRemove"><button className="removeButton">삭제</button></span>
-                </li>
-              ))}
+            ))}
           </ul>
-        </MyPostBlock>
+        </GlobalList>
       </StyledContainer>
-    </>
+    </div>
   );
 };
 
-export default MyPost;
+export default withRouter(MyPost);

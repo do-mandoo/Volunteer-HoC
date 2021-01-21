@@ -8,6 +8,7 @@ const CompanySchema = new Schema({
   companyName: String,
   address: String,
   phoneNumber: String,
+  email: String,
 });
 
 CompanySchema.methods.setPassword = async function (password) {
