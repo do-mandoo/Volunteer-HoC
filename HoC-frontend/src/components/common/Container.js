@@ -7,7 +7,8 @@ const Container = styled.div`
   padding: 50px;
   padding-left: 1rem;
   padding-right: 1rem;
-  background-color: yellowgreen;
+  /* background-color: yellowgreen; */
+  box-shadow: 10px 10px 10px 10px #eee;
   box-sizing:border-box;
 `;
 

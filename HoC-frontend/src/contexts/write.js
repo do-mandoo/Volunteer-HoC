@@ -3,7 +3,6 @@ export const POST_SUCCESS = 'POST_SUCCESS';
 export const CHANGE_FIELD = 'write/CHANGE_FIELD';
 export const AUTHSTATE_INPUT_VALUE = 'AUTHSTATE_INPUT_VALUE';
 export const MODIFY_FORM = 'MODIFY_FORM';
-
 // initialState
 export const PostInitial = {
   posts: {
@@ -23,7 +22,6 @@ export const PostInitial = {
   loading: false,
   error: null,
 };
-
 export function PostReducer(state, action) {
   switch (action.type) {
     case AUTHSTATE_INPUT_VALUE:
@@ -68,7 +66,6 @@ export function PostReducer(state, action) {
         ...state,
         ...PostInitial,
       };
-
     default:
       return state;
   }
