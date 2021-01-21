@@ -28,7 +28,6 @@ export const PostInitial = {
 export function PostReducer(state, action) {
   switch (action.type) {
     case AUTHSTATE_INPUT_VALUE:
-      console.log(action);
       return {
         ...state,
         posts: {
@@ -39,7 +38,6 @@ export function PostReducer(state, action) {
         },
       };
     case CHANGE_FIELD:
-      console.log(action);
       return {
         ...state,
         posts: {

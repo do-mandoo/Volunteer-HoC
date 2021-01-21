@@ -5,6 +5,10 @@ import MapContainer from '../../lib/api/MapContainer';
 import StyledContainer from '../common/Container';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
+import AskRemoveModal from './AskRemoveModal';
+
+import { Link, withRouter } from 'react-router-dom';
+
 // import MapContainer from '../../lib/api/MapContainer';
 // import WritePageContainer from '../post/Write';
 
@@ -68,8 +72,9 @@ const UserApplyPageContainer = styled.div`
   }
 `
 
-const UserApply = ({ AuthState, post }) => {
-  console.log(post);
+
+const UserApply = ({ AuthState, post, modal, onCancel, onConfirm, onRemoveClick }) => {
+  console.log("POST", post);
   return (
     <>
     <Header AuthState={AuthState} />
@@ -104,13 +109,12 @@ const UserApply = ({ AuthState, post }) => {
                 </dl>
 
                 <dl>
-                  <dt>봉사기간</dt>
-                  <dd>{post.periodStart} ~ {post.periodEnd} </dd>
+                  <dt>봉사 기간</dt>
+                  <dd>{post.periodStart} ~ {post.periodEnd}</dd>
                 </dl>
-
                 <dl>
-                  <dt>봉사시간</dt>
-                  <dd>{post.timeStart} ~ {post.timeEnd} </dd>
+                  <dt>봉사 시간</dt>
+                  <dd>{post.timeStart} ~ {post.timeEnd}</dd>
                 </dl>
 
                 <dl>
@@ -130,7 +134,18 @@ const UserApply = ({ AuthState, post }) => {
               
             </div>
         </div>
-          {localStorage.getItem('token') && AuthState.company && AuthState.company.username === post.user._id && (<><Button>수정</Button> <Button>삭제</Button></>) }
+          {post.user._id === localStorage.getItem('token') && (
+          <>
+                <Button onClick={onRemoveClick }>수정</Button> 
+          <Button onClick={onRemoveClick}>삭제</Button>
+          <AskRemoveModal 
+            visible={modal}
+            onConfirm={onConfirm}
+            onCancel={onCancel} 
+          />
+          </>
+          )}
+
     </div>
     </UserApplyPageContainer>
     </StyledContainer>
@@ -138,4 +153,4 @@ const UserApply = ({ AuthState, post }) => {
   );
 };
 
-export default UserApply;
+export default withRouter(UserApply);

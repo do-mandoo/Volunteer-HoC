@@ -103,11 +103,19 @@ export const login = async ctx => {
 
 export const check = async ctx => {
   const { user } = ctx.state;
+  const users = await Company.findByUsername(user.username);
+  const { companyName, address, phoneNumber } = users;
   if (!user) {
     ctx.status = 401;
     return;
   }
-  ctx.body = user;
+  ctx.body = {
+    ...user,
+    position: 'company',
+    companyName,
+    address,
+    phoneNumber,
+  };
 };
 
 export const logout = async ctx => {

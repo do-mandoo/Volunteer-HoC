@@ -9,16 +9,17 @@ export const ListInitial = {
 };
 
 export const ListReducer = (state,action) => {
-    // console.log(action);
+    console.log(action);
     // console.log(address);
     switch (action.type) {
         case POST_SUCCESS:
-            return {
-                ...state,
-                lists:action.data,
-                loading:false,
-                error:null
-                }
+          return {
+              ...state,
+              lists:action.data,
+              loading:false,
+              error:null
+            }
+            
         case POST_LOADING:
             return {
                 ...state,

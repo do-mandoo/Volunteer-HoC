@@ -96,8 +96,8 @@ const StyledTextarea = styled.textarea`
   outline:none;
   border:none;
 `
-const Write = ({ PostState, AuthState, onChange, onSubmit}) => {
-
+const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
+  console.log("POSTSTATE", PostState);
   return (
     <>
     <Header AuthState={AuthState} />
@@ -131,7 +131,7 @@ const Write = ({ PostState, AuthState, onChange, onSubmit}) => {
                   name="companyName"
                   type="text" 
                   placeholder="업체명을 입력해주세요." 
-                  defaultValue={PostState.posts.companyName}
+                  defaultValue={AuthState.company.companyName}
                   onChange={onChange}
                   />
                   <label htmlFor="post-phone">전화번호</label>
@@ -140,7 +140,7 @@ const Write = ({ PostState, AuthState, onChange, onSubmit}) => {
                   name="phoneNumber"
                   type="text" 
                   placeholder="전화번호를 입력해주세요."
-                  defaultValue={PostState.posts.phoneNumber}
+                  defaultValue={AuthState.company.phoneNumber}
                   onChange={onChange}
                   />
                   <label htmlFor="post-address">주소</label>
@@ -149,19 +149,18 @@ const Write = ({ PostState, AuthState, onChange, onSubmit}) => {
                   name="address"
                   type="text" 
                   placeholder="주소를 입력해주세요." 
-                  defaultValue={PostState.posts.address}
+                  defaultValue={AuthState.company.address}
                   onChange={onChange}
                   />
                   <div className="period-wrap">
-                  <label htmlFor="post-period-start">봉사 기간</label>
+                  <label htmlFor="post-period-start">봉사 시작 기간</label>
                   <StyledInput 
                   id="post-period-start" 
                   name="periodStart"
                   type="date" 
                   onChange={onChange}
                   />
-
-                  <label htmlFor="post-period-end">~</label>
+                  <label htmlFor="post-period-end">봉사 종료 기간</label>
                   <StyledInput 
                   id="post-period-end" 
                   name="periodEnd"
@@ -170,22 +169,20 @@ const Write = ({ PostState, AuthState, onChange, onSubmit}) => {
                         />
                 </div>
                 <div className="period-wrap">
-                  <label htmlFor="post-period-start">봉사 시간</label>
+                  <label htmlFor="post-period-start">봉사 시작 시간</label>
                   <StyledInput 
                   id="post-period-start" 
                   name="timeStart"
                   type="time" 
                   onChange={onChange}
                         />
-                        
-                  <label htmlFor="post-period-start">~</label>
+                  <label htmlFor="post-period-start">봉사 종료 시간</label>
                   <StyledInput 
                   id="post-period-start" 
                   name="timeEnd"
                   type="time" 
                   onChange={onChange}
                   />
-
                   </div>
                   <label 
                   htmlFor="post-people">인원수</label>

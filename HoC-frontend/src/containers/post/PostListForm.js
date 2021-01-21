@@ -5,12 +5,11 @@ import PostList from '../../components/post/PostList';
 
 import { POST_FAIL, POST_LOADING, POST_SUCCESS } from '../../contexts/list';
 
+const PostListForm = () => {
   
-const PostListForm = () => {  
-    
-  const {AuthState} = useContext(Auth);
-  const {ListState, ListDispatch} = useContext(List);
-
+  const { AuthState } = useContext(Auth);
+  const { ListState, ListDispatch } = useContext(List);
+  console.log(ListState)
   const fetchList = async () => {
     await ListDispatch({
       type: POST_LOADING,
@@ -18,27 +17,24 @@ const PostListForm = () => {
     });
     try {
       const response = await axios.get('http://localhost:3000/api/posts');
-      
+
       await ListDispatch({
         type: POST_SUCCESS,
         data: response.data,
       });
-    } catch (e) {
+    } catch (error) {
       await ListDispatch({
         type: POST_FAIL,
+        error
       });
     }
   };
 
-  useEffect(()=>{
-    fetchList()
-  },[])
-  
-  
-  return (
-    <PostList AuthState={AuthState} ListState={ListState}/>
-  );
+  useEffect(() => {
+    fetchList();
+  }, []);
 
-}
+  return <PostList AuthState={AuthState} ListState={ListState} />;
+};
 
 export default PostListForm;
