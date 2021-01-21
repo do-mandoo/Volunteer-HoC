@@ -1,13 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import { StyledInput } from '../auth/Register';
+// import { StyledInput } from '../auth/Register';
 import MapContainer from '../../lib/api/MapContainer';
 import StyledContainer from '../common/Container';
 import palette from '../../lib/styles/palette';
 import Header from '../common/Header';
+import Button from '../common/Button';
+// import Select from 'react-select';
 export const WritePageContainer = styled.div`
   position:relative;
-  background-color: skyblue;
+  font-family: 'MapoFlowerIsland';
   width: 100%;
   min-height: 700px;
 .a11y {
@@ -20,9 +22,17 @@ export const WritePageContainer = styled.div`
   clip: rect(0 0 0 0);
   clip: rect(0, 0, 0, 0);
 }
+.title{
+  font-family: 'Cafe24Oneprettynight';
+  font-size: 1.7rem;
+  text-align:center;
+}
+#post-title {
+  font-size: 1.5rem;
+  padding:10px;
+}
 .post-content-wrap {
   display:flex;
-  /* align-content:center; */
   justify-content:center;
   text-align:center;
   background-color: #fff;
@@ -40,18 +50,29 @@ export const WritePageContainer = styled.div`
   align-items:center;
   justify-content:center;
   width:20%;
+  color: ${palette.gray[6]};
 }
 .post-content-right input,
 .post-content-right select {
   width: 80%;
 }
+#post-people,
+#post-gender {
+  font-size: 1rem;
+  border: none;
+  border-bottom: 1px solid ${palette.gray[5]};
+  padding-bottom: 0.5rem;
+  outline: none;
+  color: rgb(118,118,118);
+  width:80%;
+}
+
 .period-wrap {
   width:100%;
   display: flex;
   text-align:center;
   justify-content:center;
   align-items:center;
-  /* background-color: skyblue; */
 }
 .period-wrap label:first-child {
   width:50%;
@@ -63,39 +84,66 @@ export const WritePageContainer = styled.div`
 .btn-add {
 }
 .btn-cancel{
-  position:absolute;
-  top:0;
-  right:40px;
+  float:right;
 }
 .btn-add{
-  position:absolute;
-  top:0;
-  right:0;
+  float:right;
+  margin-left:5px;
 }
+
+
 `
 export const StyledSelect = styled.select`
-  font-size: 1rem;
+  /* font-size: 1rem;
   border: none;
   border-bottom: 1px solid ${palette.gray[5]};
   padding-bottom: 0.5rem;
   outline: none;
-  color: rgb(118,118,118);
+  color: rgb(118,118,118); */
+  
   /* width: 100%; */
-  &:focus {
+  /* &:focus {
     color: $oc-teal-7;
     border-bottom: 1px solid ${palette.gray[7]};
   }
   & + & {
     margin-top: 1rem;
-  }
+  } */
 `;
 export const StyledTextarea = styled.textarea`
+  font-family: 'MapoFlowerIsland';
+  font-size: 1.5rem;
   width:100%;
   min-height: 500px;
   resize:none;
   outline:none;
+  /* border:1px solid #eee; */
   border:none;
-`
+  margin-top:10px;
+  padding: 10px;
+`;
+export const StyledInput = styled.input`
+  font-family: 'MapoFlowerIsland';
+  font-size: 1rem;
+  border: none;
+  background: #f8f8f8;
+  /* padding-bottom: 0.5rem; */
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  outline: none;
+  width: 100%;
+
+  &:focus {
+    color: $oc-teal-7;
+    /* border-bottom: 1px solid ${palette.gray[7]}; */
+  }
+
+  & + & {
+    /* margin-top: 1rem; */
+  }
+`;
+
+
 export const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
   console.log("AuthState", AuthState);
   console.log(1);
@@ -107,7 +155,7 @@ export const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
     <WritePageContainer>
     <div>
         <h1 className="a11y">모집 공고 등록 페이지</h1>
-        <h2>모집 공고 등록</h2>
+        <h2 className="title">모집 공고 등록</h2>
         <form onSubmit={onSubmit}>
           <legend>
             <fieldset>
@@ -155,14 +203,14 @@ export const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
                   onChange={onChange}
                   />
                   <div className="period-wrap">
-                  <label htmlFor="post-period-start">봉사 시작 기간</label>
+                  <label htmlFor="post-period-start">기간</label>
                   <StyledInput 
                   id="post-period-start" 
                   name="periodStart"
                   type="date" 
                   onChange={onChange}
                   />
-                  <label htmlFor="post-period-end">봉사 종료 기간</label>
+                  <label htmlFor="post-period-end"> ~ </label>
                   <StyledInput 
                   id="post-period-end" 
                   name="periodEnd"
@@ -171,14 +219,14 @@ export const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
                         />
                 </div>
                 <div className="period-wrap">
-                  <label htmlFor="post-period-start">봉사 시작 시간</label>
+                  <label htmlFor="post-period-start">시간</label>
                   <StyledInput 
                   id="post-period-start" 
                   name="timeStart"
                   type="time" 
                   onChange={onChange}
                         />
-                  <label htmlFor="post-period-start">봉사 종료 시간</label>
+                  <label htmlFor="post-period-start"> ~ </label>
                   <StyledInput 
                   id="post-period-start" 
                   name="timeEnd"
@@ -232,12 +280,8 @@ export const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
                 name="body"
                 onChange={onChange}
                 ></StyledTextarea>
-              <button 
-               className="btn-cancel"
-              >취소</button>
-              <button
-               className="btn-add"
-              >등록</button>
+              <Button className="btn-add">등록</Button>
+              <Button className="btn-cancel">취소</Button>
             </fieldset>
           </legend>
         </form>

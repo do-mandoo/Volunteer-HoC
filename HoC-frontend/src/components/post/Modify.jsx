@@ -2,8 +2,9 @@ import React from 'react';
 import Header from '../common/Header';
 import StyledContainer from '../common/Container';
 import { WritePageContainer, StyledSelect, StyledTextarea } from './Write';
-import { StyledInput } from '../auth/Register';
+import { StyledInput } from '../post/Write';
 import MapContainer from '../../lib/api/MapContainer';
+import Button from '../common/Button';
 
 const Modify = ({ PostState, AuthState, onChange, onSubmit }) => {
   // console.log(AuthState);
@@ -19,7 +20,7 @@ const Modify = ({ PostState, AuthState, onChange, onSubmit }) => {
       <WritePageContainer>
       <div>
         <h1 className="a11y">모집 공고 등록 페이지</h1>
-        <h2>모집 공고 등록</h2>
+        <h2 className="title">모집 공고 등록</h2>
         <form onSubmit={onSubmit}>
           <legend>
             <fieldset>
@@ -68,7 +69,7 @@ const Modify = ({ PostState, AuthState, onChange, onSubmit }) => {
                   onChange={onChange}
                   />
                   <div className="period-wrap">
-                  <label htmlFor="post-period-start">봉사 시작 기간</label>
+                  <label htmlFor="post-period-start">기간</label>
                   <StyledInput 
                   id="post-period-start" 
                   name="periodStart"
@@ -76,7 +77,7 @@ const Modify = ({ PostState, AuthState, onChange, onSubmit }) => {
                   defaultValue={PostState.posts.periodStart}
                   onChange={onChange}
                   />
-                  <label htmlFor="post-period-end">봉사 종료 기간</label>
+                  <label htmlFor="post-period-end"> ~ </label>
                   <StyledInput 
                   id="post-period-end" 
                   name="periodEnd"
@@ -86,7 +87,7 @@ const Modify = ({ PostState, AuthState, onChange, onSubmit }) => {
                         />
                 </div>
                 <div className="period-wrap">
-                  <label htmlFor="post-period-start">봉사 시작 시간</label>
+                  <label htmlFor="post-period-start">시간</label>
                   <StyledInput 
                   id="post-period-start" 
                   name="timeStart"
@@ -94,7 +95,7 @@ const Modify = ({ PostState, AuthState, onChange, onSubmit }) => {
                   defaultValue={PostState.posts.timeStart}
                   onChange={onChange}
                         />
-                  <label htmlFor="post-period-start">봉사 종료 시간</label>
+                  <label htmlFor="post-period-start"> ~ </label>
                   <StyledInput 
                   id="post-period-start" 
                   name="timeEnd"
@@ -152,12 +153,8 @@ const Modify = ({ PostState, AuthState, onChange, onSubmit }) => {
                 onChange={onChange}
                 defaultValue={PostState.posts.body}
                 ></StyledTextarea>
-              <button 
-               className="btn-cancel"
-              >취소</button>
-              <button
-               className="btn-add"
-              >등록</button>
+              <Button className="btn-add">등록</Button>
+              <Button className="btn-cancel">취소</Button>
             </fieldset>
           </legend>
         </form>

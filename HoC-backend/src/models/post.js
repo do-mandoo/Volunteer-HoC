@@ -15,6 +15,7 @@ const PostSchema = new Schema({
   timeEnd: String,
   number: String,
   gender: String,
+  emial: String,
   publishedDate: {
     type: Date,
     default: Date.now,

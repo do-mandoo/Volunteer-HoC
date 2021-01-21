@@ -14,7 +14,8 @@ import { withRouter, Link } from 'react-router-dom';
 
 const UserApplyPageContainer = styled.div`
   position:relative;
-  background-color: skyblue;
+  font-family: 'MapoFlowerIsland';
+  /* background-color: skyblue; */
   width: 100%;
   min-height: 700px;
 .a11y {
@@ -27,10 +28,15 @@ const UserApplyPageContainer = styled.div`
   clip: rect(0 0 0 0);
   clip: rect(0, 0, 0, 0);
 }
+.title{
+  font-family: 'Cafe24Oneprettynight';
+  font-size: 1.7rem;
+  text-align:center;
+}
 .user-title {
   font-size: 1rem;
   border: none;
-  border: 1px solid ${palette.gray[5]};
+  /* border: 1px solid ${palette.gray[5]}; */
   padding-bottom: 0.5rem;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
@@ -47,28 +53,54 @@ const UserApplyPageContainer = styled.div`
     width:50%;
   }
   .user-content-right {
-    /* margin-left:10px; */
-    line-height:1.5rem;
-    height:100%;
+    /* line-height:1.5rem;
+    height:100%; */
   }
   .user-content-right dl{
+    font-family: 'MapoFlowerIsland';
     font-size: 1rem;
-    text-align:center;
+    /* text-align:center; */
     display:flex;
+    /* justify-content:center; */
+    align-items:center;
     flex-flow: row nowrap;
+    height: 55px;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
     /* width:50%; */
-    border-bottom:1px solid ${palette.gray[5]};
+    /* border-bottom:1px solid ${palette.gray[5]}; */
   }
   .user-content-right dt {
-    width:30%;
-    background-color: ${palette.gray[5]};
+    text-align:center;
+    width:20%;
+    color: ${palette.gray[6]};
+
+    align-items:center;
   }
   .user-content-right dd {
-    width:70%;
+    background: #f8f8f8;
+    /* height:50px; */
+    line-height:50px;
+    width:80%;
   }
-  .user-content-right p {
+  .user-body {
+    display:block;
     width:100%;
     min-height: 500px;
+    margin-top:10px;
+    padding: 10px;
+    font-size: 1.5rem;
+  }
+  .btn-edit,
+  .btn-delete {
+    font-family: 'MapoFlowerIsland';
+    float:right;
+  }
+  .btn-edit {
+    line-height:normal;
+  }
+  .btn-delete{
+    margin-left:5px;
   }
 `
 
@@ -80,7 +112,7 @@ const UserApply = ({ AuthState, post, modal, onCancel, onConfirm, onRemoveClick 
     <Header AuthState={AuthState} />
     <StyledContainer>
     <UserApplyPageContainer>
-    <h1>봉사 정보에 대한 상세 내용</h1>
+    <h1 className="title">모집 공고</h1>
     <div>
         <h2 className="a11y">모집 공고 상세 페이지</h2>
         <div >
@@ -128,7 +160,7 @@ const UserApply = ({ AuthState, post, modal, onCancel, onConfirm, onRemoveClick 
                 </dl>
                 
               </div>
-                <p>
+                <p className="user-body">
                   {post && post.body}
                 </p>
               
@@ -136,11 +168,15 @@ const UserApply = ({ AuthState, post, modal, onCancel, onConfirm, onRemoveClick 
         </div>
           {post.user._id === localStorage.getItem('token') && (
           <>
-          <Button 
+          <Button
+           className="btn-delete"
+           onClick={onRemoveClick}>삭제</Button>
+          <Button
+          className="btn-edit"
           as={Link} 
           to={`/modify/${post._id}`}
-          >수정</Button> 
-          <Button onClick={onRemoveClick}>삭제</Button>
+          >수정
+          </Button> 
           <AskRemoveModal 
             visible={modal}
             onConfirm={onConfirm}

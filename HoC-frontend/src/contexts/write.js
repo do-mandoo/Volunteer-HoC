@@ -24,6 +24,7 @@ export const PostInitial = {
     timeEnd: '',
     gender: '',
     number: '',
+    email: '',
   },
   loading: false,
   error: null,
@@ -42,6 +43,8 @@ export function PostReducer(state, action) {
           address: action.address,
           companyName: action.companyName,
           phoneNumber: action.phoneNumber,
+         email:action.email,
+          
         },
       };
       case POSTSTATE_INPUT_VALUE:

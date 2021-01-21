@@ -48,32 +48,33 @@ const WritePageForm = ({ history }) => {
     history.push('/');
   };
 
-  // useEffect(() => {
-  //   const checkLogin = (async () => {
-  //     const response = await axios.get('/api/auth/check/company');
-  //     console.log('RESPONSE', response);
-  //     await AuthDispatch({
-  //       type: FILL_WRITE_INPUT,
-  //       form: 'company',
-  //       id: response.data._id,
-  //       username: response.data.username,
-  //       companyName: response.data.companyName,
-  //       address: response.data.address,
-  //       phoneNumber: response.data.phoneNumber,
-  //     });
-  //     await PostDispatch({
-  //       type: AUTHSTATE_INPUT_VALUE,
-  //       address: response.data.address,
-  //       phoneNumber: response.data.phoneNumber,
-  //       companyName: response.data.companyName,
-  //     });
-  //   })();
-  //   console.log(AuthState);
-  //   console.log(PostState);
+  useEffect(() => {
+    const checkLogin = (async () => {
+      const response = await axios.get('/api/auth/check/company');
+      console.log('RESPONSE', response);
+      await AuthDispatch({
+        type: FILL_WRITE_INPUT,
+        form: 'company',
+        id: response.data._id,
+        username: response.data.username,
+        companyName: response.data.companyName,
+        address: response.data.address,
+        phoneNumber: response.data.phoneNumber,
+      });
+      await PostDispatch({
+        type: AUTHSTATE_INPUT_VALUE,
+        address: response.data.address,
+        phoneNumber: response.data.phoneNumber,
+        companyName: response.data.companyName,
+        email:response.data.email,
+      });
+    })();
+    console.log(AuthState);
+    console.log(PostState);
     
     
-  // }, [AuthDispatch]);
-  // 
+  }, [AuthDispatch]);
+  
 
   return (
     <Write
