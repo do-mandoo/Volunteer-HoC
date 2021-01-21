@@ -1,6 +1,7 @@
 import React from 'react';
 import DaumPostcode from 'react-daum-postcode';
 import styled from 'styled-components';
+import FindAddr from '../../lib/api/AddressApi';
 import Button from './Button';
 
 const Fullscreen = styled.div`
@@ -44,31 +45,32 @@ const StyledButton = styled(Button)`
   }
 `;
 
-const AskModal = ({
+const AddressModal = ({
   visible,
   title,
-  description,
-
   confirmText = '확인',
   cancelText = '취소',
   onConfirm,
   onCancel,
 }) => {
+  const onClick = e => {
+    console.log(e.target);
+  };
   if (!visible) return null;
   return (
     <Fullscreen>
-      <AskModalBlock>
-        <h2>{title}</h2>
-        <p>{description}</p>
-        <div className="buttons">
+      {/* <AskModalBlock>
+        <h2>{title}</h2> */}
+      <FindAddr onClick={onClick} />
+      {/* <div className="buttons">
           <StyledButton onClick={onCancel}>{cancelText}</StyledButton>
           <StyledButton cyan onClick={onConfirm}>
             {confirmText}
           </StyledButton>
         </div>
-      </AskModalBlock>
+      </AskModalBlock> */}
     </Fullscreen>
   );
 };
 
-export default AskModal;
+export default AddressModal;

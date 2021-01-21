@@ -3,7 +3,7 @@ import PostListForm from '../containers/post/PostListForm';
 
 const PostListPage = () => {
   return (
-    <PostListForm />
+      <PostListForm />
   );
 };
 

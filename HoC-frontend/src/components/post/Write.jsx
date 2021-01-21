@@ -5,6 +5,7 @@ import MapContainer from '../../lib/api/MapContainer';
 import StyledContainer from '../common/Container';
 import palette from '../../lib/styles/palette';
 import Header from '../common/Header';
+import { withRouter } from 'react-router-dom';
 const WritePageContainer = styled.div`
   position:relative;
   background-color: skyblue;
@@ -97,7 +98,7 @@ const StyledTextarea = styled.textarea`
   border:none;
 `
 const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
-  console.log("POSTSTATE", PostState);
+  console.log(PostState.posts);
   return (
     <>
     <Header AuthState={AuthState} />
@@ -116,6 +117,7 @@ const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
                   name="title"
                   type="text" 
                   placeholder="모집 공고의 제목을 입력해 주세요"
+                  defaultValue={PostState.posts.title}
                   onChange={onChange} />
               </p>
               <div className="post-content-wrap">
@@ -158,13 +160,15 @@ const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
                   id="post-period-start" 
                   name="periodStart"
                   type="date" 
+                  defaultValue={PostState.posts.periodStart}
                   onChange={onChange}
                   />
                   <label htmlFor="post-period-end">봉사 종료 기간</label>
                   <StyledInput 
                   id="post-period-end" 
                   name="periodEnd"
-                  type="date" 
+                  type="date"
+                  defaultValue={PostState.posts.periodEnd} 
                   onChange={onChange}
                         />
                 </div>
@@ -174,6 +178,7 @@ const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
                   id="post-period-start" 
                   name="timeStart"
                   type="time" 
+                  defaultValue={PostState.posts.timeStart} 
                   onChange={onChange}
                         />
                   <label htmlFor="post-period-start">봉사 종료 시간</label>
@@ -181,19 +186,16 @@ const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
                   id="post-period-start" 
                   name="timeEnd"
                   type="time" 
+                  defaultValue={PostState.posts.timeEnd}
                   onChange={onChange}
                   />
                   </div>
                   <label 
                   htmlFor="post-people">인원수</label>
-                  {/* <StyledInput 
-                  id="post-people" 
-                  type="text" 
-                  placeholder="원하는 인원수를 입력해주세요." 
-                  /> */}
                   <StyledSelect 
                   id="post-people"
                   name="number"
+                  defaultValue={PostState.posts.number}
                   onChange={onChange}
                   >
                     <option value="">원하는 인원수를 입력해주세요</option>
@@ -207,16 +209,13 @@ const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
                     <option value="8">8</option>
                     <option value="9">9</option>
                     <option value="10">10</option>
-                  </StyledSelect>
+                      </StyledSelect>
+                      
                   <label htmlFor="post-gender">성별</label>
-                  {/* <StyledInput 
-                  id="post-gender" 
-                  type="text" 
-                  placeholder="성별을 입력해주세요." 
-                  /> */}
                   <StyledSelect 
                   id="post-gender"
                   name="gender"
+                  defaultValue={PostState.posts.gender}
                   onChange={onChange}>
                     <option value="">원하는 봉사자의 성별을 골라주세요</option>
                     <option value="남">남</option>
@@ -228,6 +227,7 @@ const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
                 <StyledTextarea
                 placeholder="봉사 활동 관련한 상세한 내용을 적어주세요."
                 name="body"
+                defaultValue={PostState.posts.body}
                 onChange={onChange}
                 ></StyledTextarea>
               <button 
@@ -245,4 +245,4 @@ const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
     </>
   );
 };
-export default Write;
+export default withRouter(Write);

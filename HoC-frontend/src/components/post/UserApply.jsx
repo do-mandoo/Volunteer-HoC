@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../common/Header';
 import Button from '../common/Button';
 import MapContainer from '../../lib/api/MapContainer';
@@ -8,6 +8,8 @@ import palette from '../../lib/styles/palette';
 import AskRemoveModal from './AskRemoveModal';
 
 import { Link, withRouter } from 'react-router-dom';
+import Modal from '../common/Modal';
+import ContactUs from '../../lib/api/email';
 
 // import MapContainer from '../../lib/api/MapContainer';
 // import WritePageContainer from '../post/Write';
@@ -73,8 +75,18 @@ const UserApplyPageContainer = styled.div`
 `
 
 
-const UserApply = ({ AuthState, post, modal, onCancel, onConfirm, onRemoveClick }) => {
-  console.log("POST", post);
+const UserApply = ({ AuthState, ListState, postId,modal, onCancel, onConfirm, onRemoveClick }) => {
+  const [modalOpen, setModalOpen] = useState(false);
+  console.log(ListState);
+  const post =
+  ListState.lists && ListState.lists.find(list => list._id === postId);
+
+  const openModal = () => {
+      setModalOpen(true);
+  }
+  const closeModal = () => {
+      setModalOpen(false);
+  }
   return (
     <>
     <Header AuthState={AuthState} />
@@ -134,9 +146,9 @@ const UserApply = ({ AuthState, post, modal, onCancel, onConfirm, onRemoveClick 
               
             </div>
         </div>
-          {post.user._id === localStorage.getItem('token') && (
+          {post && post.user._id === localStorage.getItem('token') && (
           <>
-          <Button as={Link} to={`/write/${post._id}`}>수정</Button> 
+          <Button as={Link} to={`/modify/${post._id}`}>수정</Button> 
           <Button onClick={onRemoveClick}>삭제</Button>
           <AskRemoveModal 
             visible={modal}
@@ -144,7 +156,11 @@ const UserApply = ({ AuthState, post, modal, onCancel, onConfirm, onRemoveClick 
             onCancel={onCancel} 
           />
           </>
-          )}
+            )}
+            <Button onClick={openModal} >지원하기</Button>
+            <Modal open={modalOpen} close={closeModal} header="지원하기">
+              <ContactUs post={post} AuthState={AuthState} closeModal={closeModal} />
+              </Modal>
 
     </div>
     </UserApplyPageContainer>

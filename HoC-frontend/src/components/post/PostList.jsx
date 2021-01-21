@@ -53,7 +53,7 @@ const PostListBlock = styled.div`
   `;
 function PostList({ AuthState, ListState }) {
   const { company, person } = AuthState;
-  
+  console.log(AuthState);
   return (
     <div>
       <Header AuthState={AuthState} />
