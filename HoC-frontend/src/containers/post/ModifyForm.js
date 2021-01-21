@@ -49,6 +49,7 @@ const ModifyForm = ({ history, match }) => {
     PostDispatch({
       type: POST_SUCCESS,
     });
+    console.log(PostState);
     history.push('/');
   };
 

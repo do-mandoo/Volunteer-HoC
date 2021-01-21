@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import { withRouter } from 'react-router-dom'; 
 import axios from 'axios';
 import {
   AUTHSTATE_INPUT_VALUE,
@@ -7,8 +8,7 @@ import {
 } from '../../contexts/write';
 import { Auth, Post } from '../../contexts/store';
 import Write from '../../components/post/Write';
-import { CHECK_LOGIN, FILL_WRITE_INPUT } from '../../contexts/auth';
-import { withRouter } from 'react-router-dom';
+import { CHECK_LOGIN, FILL_WRITE_INPUT, INITAILIZE_FORM } from '../../contexts/auth';
 
 const WritePageForm = ({ history }) => {
   const { AuthState, AuthDispatch } = useContext(Auth);
@@ -49,6 +49,8 @@ const WritePageForm = ({ history }) => {
       console.log(error);
     }
   };
+
+
   const onChange = e => {
     const { value, name } = e.target;
     PostDispatch({
@@ -97,6 +99,7 @@ const WritePageForm = ({ history }) => {
       });
     };
   }, [AuthDispatch]);
+  
 
   return (
     <Write

@@ -8,6 +8,8 @@ import { POST_SUCCESS } from '../../contexts/write';
 
 const UserApplyForm = ({ match, history }) => {
   const { postId } = match.params;
+  const { AuthState } = useContext(Auth);
+  const { ListState, ListDispatch } = useContext(List);
 
   const onRemove = async () => {
     try {
@@ -30,11 +32,9 @@ const UserApplyForm = ({ match, history }) => {
   const onConfirm = () => {
     // 삭제하기 + 모달창 닫기
     setModal(false);
-    onRemove();
+    onRemove(); 
   };
 
-  const { AuthState } = useContext(Auth);
-  const { ListState, ListDispatch } = useContext(List);
 
   useEffect(() => {
     (async () => {
