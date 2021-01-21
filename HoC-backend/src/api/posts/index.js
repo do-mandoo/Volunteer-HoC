@@ -7,6 +7,7 @@ export const posts = new Router();
 posts.get('/', postsCtrl.list);
 posts.post('/', checkLoggedIn, postsCtrl.write);
 
+
 export const post = new Router(); // api/posts/:id
 post.get('/:id', postsCtrl.read);
 post.delete('/:id', postsCtrl.remove);

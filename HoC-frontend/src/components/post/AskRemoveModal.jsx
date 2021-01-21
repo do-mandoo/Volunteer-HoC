@@ -1,6 +1,6 @@
 import React from 'react';
 import AskModal from '../common/AskModal';
-
+// 모달 팝업창의 view 역할
 const AskRemoveModal = ({ visible, onConfirm, onCancel }) => {
   return (
     <AskModal 
