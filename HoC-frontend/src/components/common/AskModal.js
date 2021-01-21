@@ -57,15 +57,12 @@ const AskModal = ({
   return (
     <Fullscreen>
       <AskModalBlock>
-         <h2>{title}</h2>
-         <p>{description}</p>
-         <div className="buttons">
+        <h2>{title}</h2>
+        <p>{description}</p>
+        <div className="buttons">
           <StyledButton onClick={onCancel}>{cancelText}</StyledButton>
-          <StyledButton cyan onClick={onConfirm}>
-            {confirmText}
-          </StyledButton>
-         </div>
-
+          <StyledButton cyan onClick={onConfirm}>{confirmText}</StyledButton>
+        </div>
       </AskModalBlock>
     </Fullscreen>
   );

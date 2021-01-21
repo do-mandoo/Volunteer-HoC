@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import Header from '../common/Header';
 import StyledContainer from '../common/Container';
 import { Link, withRouter } from 'react-router-dom';
+import AskRemoveModal from './AskRemoveModal';
+import Button from '../common/Button';
 
 const GlobalList = styled.div`
   h1{
@@ -12,8 +14,6 @@ const GlobalList = styled.div`
   }
   button{
     margin-right:30px
-    background-color:yellow;
-
   }
   ul{
     margin-top:100px;
@@ -21,56 +21,92 @@ const GlobalList = styled.div`
   li{
     border-bottom:1px solid black;
     padding:10px 0;
-    text-align:center
+    text-align:center;
   }
   span{
     display:inline-block;
     padding:0 5px
   }
-  li span:nth-child(1){
-    width:50%;
+
+  .ListCheckbox, .ListDate, li input[type='checkbox']{
+    width:10%;
+    border : 1px solid blue;
   }
-  
-  li span:nth-child(2){
-    width:30%;
+  .link span:nth-child(1){
+    width:10%
+    border : 1px solid black;
+  }
+  .ListTitle{
+    width:40%;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    word-wrap:normal;
+    overflow:hidden;
+    border : 1px solid yellow;
+  }
+  .link span:nth-child(2){
+    width:40%;
     text-overflow:ellipsis;
     white-space:nowrap;
     word-wrap:normal;
     overflow:hidden;
     text-align:left;
+    border : 1px solid yellow;
   }
-  li span:nth-child(3){
+  .ListPeriod, .link span:nth-child(3){
+    width:20%;
+    border : 1px solid white;
+  }
+  .ListRemove{
     width:10%;
+    border : 1px solid red;
+  }
+  li button{
+    position: relative;
+    border : 1px solid red;
   }
   li span.ListTitle{
     text-align:center
+    border : 1px solid red;
   }
 `;
 
-const MyPost = ({ AuthState, ListState, tokenID, ListCompanyName }) => {
+const MyPost = ({ AuthState, ListState, ListName, onChecking, tokenID, modal, onConfirm, onCancel, onRemoveClick }) => {
   return (
     <div>
       <Header AuthState={AuthState} />
       <StyledContainer>
         <GlobalList>
-          <h1>{ListCompanyName.companyName}(이/가)작성한 공고</h1>
+          <h1>{AuthState.companyName}(이/가)작성한 공고</h1>
           <ul>
             <li>
+              <span className="ListCheckbox">체크박스</span>
+              <span className="ListDate">작성날짜</span>
               <span className="ListTitle">제목</span>
-              <span className="ListDetail">자세히 보기</span>
-              <span className="ListMore">더보기</span>
+              <span className="ListPeriod">모집기간</span>
+              <span className="ListRemove">삭제</span>
             </li>
-            {ListState.lists.filter(list=>list.user._id === tokenID).map(list=>(
-              <li key = {list._id}>
-                <span>{list.title}</span>
-                <span>{list.periodStart}~{list.periodEnd}</span>
-                <span><button><Link to={`${AuthState.login.username && '/@'+AuthState.login.username}/${list._id}`}>더보기</Link></button></span>
+            {ListName.map(list=>(
+              <li key = {list._id} id={list._id}>
+                <input type="checkbox" onClick={onChecking}></input>
+                <Link to ={`/${list._id}`} className="link">
+                  <span>{list.publishedDate.slice(0,10)}</span>
+                  <span >{list.title}</span>
+                  <span>{list.periodStart}~{list.periodEnd}</span>
+                </Link>
+                <Button onClick={onRemoveClick}>선택삭제</Button>
+                <AskRemoveModal 
+                  visible ={modal}
+                  onConfirm={onConfirm}
+                  onCancel={onCancel}
+                  />
               </li>
             ))}
+            {console.log(ListState.lists[0].publishedDate.length)}
             {console.log('LOCAL', tokenID)}
             {console.log('LISTSTATE',ListState.lists.filter(list=>list.user._id === tokenID))}
-            {console.log(ListState.lists)}
           </ul>
+          {/* <Button onClick={onClickAll}>전체선택</Button> */}
         </GlobalList>
       </StyledContainer>
     </div>
