@@ -5,7 +5,6 @@ import Button from '../../components/common/Button';
 import StyledContainer from '../common/Container';
 import { Link, withRouter } from 'react-router-dom';
 import AskRemoveModal from './AskRemoveModal';
-import Button from '../common/Button';
 
 const GlobalList = styled.div`
   h1{
@@ -102,9 +101,6 @@ const MyPost = ({ AuthState, ListState, ListName, onChecking, tokenID, modal, on
                   />
               </li>
             ))}
-            {console.log(ListState.lists[0].publishedDate.length)}
-            {console.log('LOCAL', tokenID)}
-            {console.log('LISTSTATE',ListState.lists.filter(list=>list.user._id === tokenID))}
           </ul>
           {/* <Button onClick={onClickAll}>전체선택</Button> */}
         </GlobalList>
