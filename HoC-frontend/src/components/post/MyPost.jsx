@@ -5,7 +5,6 @@ import Button from '../../components/common/Button';
 import StyledContainer from '../common/Container';
 import { Link, withRouter } from 'react-router-dom';
 import AskRemoveModal from './AskRemoveModal';
-import Button from '../common/Button';
 
 const GlobalList = styled.div`
   h1{
