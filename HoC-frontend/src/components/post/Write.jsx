@@ -148,7 +148,7 @@ export const StyledInput = styled.input`
 `;
 
 
-export const Write = ({ PostState, AuthState, onChange, onSubmit, modalOpen, closeModal }) => {
+export const Write = ({ PostState, AuthState, onChange, onSubmit, modalOpen, closeModal, handlePrompt }) => {
   console.log("AuthState", AuthState);
   console.log(1);
   
@@ -291,7 +291,9 @@ export const Write = ({ PostState, AuthState, onChange, onSubmit, modalOpen, clo
     </div>
   </WritePageContainer>
       </StyledContainer>
-      <AskPostModal visible />
+        <AskPostModal visible={modalOpen}>
+      <Prompt when={modalOpen} message={handlePrompt} />
+      </AskPostModal>
     </>
   );
 };

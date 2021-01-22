@@ -15,11 +15,15 @@ import {
 } from '../../contexts/auth';
 import { useState } from 'react';
 
-const WritePageForm = ({ history }) => {
+const WritePageForm = ({ history, match, location }) => {
+  console.log(location);
   const { AuthState, AuthDispatch } = useContext(Auth);
   const { PostState, PostDispatch } = useContext(Post);
 
   const [modalOpen, setModalOpen] = useState(false);
+  const [shouldConfirm, setShouldConfirm] = useState(false);
+  const [isLeave, setIsLeave] = useState(false);
+  const [lastLocation, setLastLocation] = useState(null);
 
   const openModal = () => {
     setModalOpen(true);
@@ -80,6 +84,15 @@ const WritePageForm = ({ history }) => {
     history.push('/');
   };
 
+  const handlePrompt = location => {
+    if (!isLeave && shouldConfirm) {
+      // setNextLocation(location.pathname);
+      // setShowConfirmModal(true);
+      return false;
+    }
+    return true;
+  };
+
   useEffect(() => {
     (async () => {
       const response = await axios.get('/api/auth/check/company');
@@ -104,13 +117,20 @@ const WritePageForm = ({ history }) => {
       await console.log(PostState);
     })();
 
+    if (isLeave) {
+      setShouldConfirm(false);
+      // return history.push(nextLocation);
+    }
+
+    // const unblock = history.block('정말 나가시겠습니까?');
     return () => {
+      setModalOpen(true);
       PostDispatch({
         type: POST_SUCCESS,
       });
-      openModal();
+      // unblock();
     };
-  }, []);
+  }, [isLeave, history]);
 
   return (
     <Write
@@ -120,6 +140,7 @@ const WritePageForm = ({ history }) => {
       onSubmit={onSubmit}
       modalOpen={modalOpen}
       closeModal={closeModal}
+      handlePrompt={handlePrompt}
     />
   );
 };
