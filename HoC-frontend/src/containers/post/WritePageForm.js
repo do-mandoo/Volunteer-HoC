@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { withRouter } from 'react-router-dom'; 
+import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import {
   AUTHSTATE_INPUT_VALUE,
@@ -8,11 +8,26 @@ import {
 } from '../../contexts/write';
 import { Auth, Post } from '../../contexts/store';
 import Write from '../../components/post/Write';
-import { CHECK_LOGIN, FILL_WRITE_INPUT, INITAILIZE_FORM } from '../../contexts/auth';
+import {
+  CHECK_LOGIN,
+  FILL_WRITE_INPUT,
+  INITAILIZE_FORM,
+} from '../../contexts/auth';
+import { useState } from 'react';
 
 const WritePageForm = ({ history }) => {
   const { AuthState, AuthDispatch } = useContext(Auth);
   const { PostState, PostDispatch } = useContext(Post);
+
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+    history.push('/');
+  };
 
   const post = async () => {
     console.log(PostState);
@@ -50,7 +65,6 @@ const WritePageForm = ({ history }) => {
     }
   };
 
-
   const onChange = e => {
     const { value, name } = e.target;
     PostDispatch({
@@ -64,12 +78,9 @@ const WritePageForm = ({ history }) => {
     e.preventDefault();
     post();
     history.push('/');
-    
-  
   };
 
   useEffect(() => {
-    console.log(PostState);
     (async () => {
       const response = await axios.get('/api/auth/check/company');
       console.log('RESPONSE', response);
@@ -97,9 +108,9 @@ const WritePageForm = ({ history }) => {
       PostDispatch({
         type: POST_SUCCESS,
       });
+      openModal();
     };
-  }, [AuthDispatch]);
-  
+  }, []);
 
   return (
     <Write
@@ -107,6 +118,8 @@ const WritePageForm = ({ history }) => {
       PostState={PostState}
       onChange={onChange}
       onSubmit={onSubmit}
+      modalOpen={modalOpen}
+      closeModal={closeModal}
     />
   );
 };

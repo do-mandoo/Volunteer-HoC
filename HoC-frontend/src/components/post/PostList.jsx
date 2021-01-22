@@ -123,8 +123,8 @@ function PostList({ AuthState, ListState }) {
             </li>
             {ListState.lists.map((list,index,thisList) => (
               <li key={list._id}>
-                <Link to={`${AuthState.login.username && '/@' + AuthState.login.username}/${list._id}`}>
-                  <span>{thisList.length-index}</span>
+                <Link to={`/${list._id}`}>
+                <span>{thisList.length-index}</span>
                   <span>{list.companyName}</span>
                   <span>{list.title}</span>
                   <span>{list.number}</span>

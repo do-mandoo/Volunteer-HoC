@@ -101,9 +101,6 @@ const MyPost = ({ AuthState, ListState, ListName, onChecking, tokenID, modal, on
                   />
               </li>
             ))}
-            {console.log(ListState.lists[0].publishedDate.length)}
-            {console.log('LOCAL', tokenID)}
-            {console.log('LISTSTATE',ListState.lists.filter(list=>list.user._id === tokenID))}
           </ul>
           {/* <Button onClick={onClickAll}>전체선택</Button> */}
         </GlobalList>
