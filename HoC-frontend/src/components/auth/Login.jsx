@@ -99,7 +99,7 @@ const Login = ({ onChange, onSubmit, form, error }) => {
         <ButtonWithMarginTop green fullWidth>로그인</ButtonWithMarginTop>
       </form>
       <Footer>
-          <Link to="/login">로그인</Link>
+          <Link to="/register">회원가입</Link>
       </Footer>
     </AuthFormBlock>
   );

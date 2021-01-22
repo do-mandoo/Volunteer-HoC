@@ -6,7 +6,10 @@ import StyledContainer from '../common/Container';
 import palette from '../../lib/styles/palette';
 import Header from '../common/Header';
 import Button from '../common/Button';
-import { withRouter } from 'react-router-dom';
+import { Prompt, withRouter } from 'react-router-dom';
+import Modal from '../common/Modal';
+import AskModal from '../common/AskModal';
+import AskPostModal from './AskPostModal';
 // import Select from 'react-select';
 export const WritePageContainer = styled.div`
   position:relative;
@@ -145,7 +148,7 @@ export const StyledInput = styled.input`
 `;
 
 
-export const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
+export const Write = ({ PostState, AuthState, onChange, onSubmit, modalOpen, closeModal, handlePrompt }) => {
   console.log("AuthState", AuthState);
   console.log(1);
   
@@ -287,7 +290,10 @@ export const Write = ({ PostState, AuthState, onChange, onSubmit }) => {
         </form>
     </div>
   </WritePageContainer>
-    </StyledContainer>
+      </StyledContainer>
+        <AskPostModal visible={modalOpen}>
+      <Prompt when={modalOpen} message={handlePrompt} />
+      </AskPostModal>
     </>
   );
 };

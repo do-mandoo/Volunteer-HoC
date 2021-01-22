@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { withRouter } from 'react-router-dom'; 
+import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import {
   AUTHSTATE_INPUT_VALUE,
@@ -8,11 +8,30 @@ import {
 } from '../../contexts/write';
 import { Auth, Post } from '../../contexts/store';
 import Write from '../../components/post/Write';
-import { CHECK_LOGIN, FILL_WRITE_INPUT, INITAILIZE_FORM } from '../../contexts/auth';
+import {
+  CHECK_LOGIN,
+  FILL_WRITE_INPUT,
+  INITAILIZE_FORM,
+} from '../../contexts/auth';
+import { useState } from 'react';
 
-const WritePageForm = ({ history }) => {
+const WritePageForm = ({ history, match, location }) => {
+  console.log(location);
   const { AuthState, AuthDispatch } = useContext(Auth);
   const { PostState, PostDispatch } = useContext(Post);
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [shouldConfirm, setShouldConfirm] = useState(false);
+  const [isLeave, setIsLeave] = useState(false);
+  const [lastLocation, setLastLocation] = useState(null);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+    history.push('/');
+  };
 
   const post = async () => {
     console.log(PostState);
@@ -50,7 +69,6 @@ const WritePageForm = ({ history }) => {
     }
   };
 
-
   const onChange = e => {
     const { value, name } = e.target;
     PostDispatch({
@@ -64,12 +82,18 @@ const WritePageForm = ({ history }) => {
     e.preventDefault();
     post();
     history.push('/');
-    
-  
+  };
+
+  const handlePrompt = location => {
+    if (!isLeave && shouldConfirm) {
+      // setNextLocation(location.pathname);
+      // setShowConfirmModal(true);
+      return false;
+    }
+    return true;
   };
 
   useEffect(() => {
-    console.log(PostState);
     (async () => {
       const response = await axios.get('/api/auth/check/company');
       console.log('RESPONSE', response);
@@ -93,13 +117,20 @@ const WritePageForm = ({ history }) => {
       await console.log(PostState);
     })();
 
+    if (isLeave) {
+      setShouldConfirm(false);
+      // return history.push(nextLocation);
+    }
+
+    // const unblock = history.block('정말 나가시겠습니까?');
     return () => {
+      setModalOpen(true);
       PostDispatch({
         type: POST_SUCCESS,
       });
+      // unblock();
     };
-  }, [AuthDispatch]);
-  
+  }, [isLeave, history]);
 
   return (
     <Write
@@ -107,6 +138,9 @@ const WritePageForm = ({ history }) => {
       PostState={PostState}
       onChange={onChange}
       onSubmit={onSubmit}
+      modalOpen={modalOpen}
+      closeModal={closeModal}
+      handlePrompt={handlePrompt}
     />
   );
 };

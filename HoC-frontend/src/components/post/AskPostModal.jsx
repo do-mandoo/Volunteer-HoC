@@ -1,8 +1,8 @@
 import React from 'react';
-import DaumPostcode from 'react-daum-postcode';
 import styled from 'styled-components';
-import Button from './Button';
-
+import AskModal from '../common/AskModal';
+import Button from '../common/Button';
+// 모달 팝업창의 view 역할
 const Fullscreen = styled.div`
   position: fixed;
   z-index: 30;
@@ -43,32 +43,23 @@ const StyledButton = styled(Button)`
     margin-left: 0.75rem;
   }
 `;
-
-const AskModal = ({
-  visible,
-  title,
-  description,
-
-  confirmText = '확인',
-  cancelText = '취소',
-  onConfirm,
-  onCancel,
-}) => {
-  if (!visible) return null;
-  return (
-    <Fullscreen>
-      <AskModalBlock>
-        <h2>{title || null}</h2>
-        <p>{description}</p>
-        <div className="buttons">
-          <StyledButton onClick={onCancel}>{cancelText}</StyledButton>
-          <StyledButton cyan onClick={onConfirm}>
-            {confirmText}
-          </StyledButton>
-        </div>
-      </AskModalBlock>
-    </Fullscreen>
-  );
+const AskPostModal = ({ visible, onConfirm, onCancel }) => {
+  
+    if (!visible) return null;
+    return (
+      <Fullscreen>
+        <AskModalBlock>
+          <p>변경 사항이 저장되지 않습니다. 정말로 나가시겠습니까?</p>
+          <div className="buttons">
+            <StyledButton onClick={onCancel}>취소</StyledButton>
+            <StyledButton cyan onClick={onConfirm}>
+              나가기
+            </StyledButton>
+          </div>
+        </AskModalBlock>
+      </Fullscreen>
+    );
+  
 };
 
-export default AskModal;
+export default AskPostModal;

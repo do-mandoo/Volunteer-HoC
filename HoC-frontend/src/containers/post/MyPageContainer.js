@@ -1,25 +1,25 @@
 import axios from 'axios';
-import React, { useContext, useRef, useState} from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import MyPost from '../../components/post/MyPost';
 import { POST_SUCCESS } from '../../contexts/list';
 import { Auth, List } from '../../contexts/store';
 const arr = [];
 
-const MyPageContainer = ({match, history}) => {
+const MyPageContainer = ({ match, history }) => {
   const [modal, setModal] = useState(false);
   const onRemoveClick = (e) => {
     // 모달창 열기
     setModal(true);
-  }
+  };
   const onCancel = () => {
     // 모달창 닫기
     setModal(false);
-  }
+  };
   const onConfirm = () => {
     // 삭제+ 모달창 닫기
     setModal(false);
     AllRemove();
-  }
+  };
 
   const { AuthState, AuthDispatch } = useContext(Auth);
   const { ListState, ListDispatch } = useContext(List);
@@ -52,11 +52,20 @@ const MyPageContainer = ({match, history}) => {
       })
 
       await history.push('/mypage');
-      console.log(arr,33);
-    } catch(e){
+    } catch (e) {
       console.log(e);
     }
-  }
+  };
+
+  useEffect(() => {
+    (async () => {
+      const response = await axios.get('http://localhost:3000/api/posts');
+      await ListDispatch({
+        type: POST_SUCCESS,
+        data: response.data,
+      });
+    })();
+  }, [ListDispatch]);
 
   return <MyPost 
     AuthState={AuthState} 

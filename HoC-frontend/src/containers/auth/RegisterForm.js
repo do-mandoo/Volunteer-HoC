@@ -16,18 +16,14 @@ const RegisterForm = ({ history }) => {
   const { AuthState, AuthDispatch } = useContext(Auth); //app.js에서 프로바이더로 내려준걸 디스트럭처링할당한거다.
   const [error, setError] = useState(null);
 
-  const [modal, setModal] = useState(false);
-  const onAddress = () => {
-    // 모달창 열기
-    setModal(true);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
   };
-  const onCancel = () => {
-    // 모달창 닫기
-    setModal(false);
-  };
-  const onConfirm = () => {
-    // 삭제하기 + 모달창 닫기
-    setModal(false);
+  const closeModal = () => {
+    setModalOpen(false);
+    history.push('/login');
   };
 
   // 비동기
@@ -50,7 +46,7 @@ const RegisterForm = ({ history }) => {
         type: REGISTER_SUCCESS,
         auth: response,
       });
-      await history.push('/login/company');
+      await openModal();
     } catch (error) {
       console.log(error);
       await AuthDispatch({
@@ -75,14 +71,13 @@ const RegisterForm = ({ history }) => {
           email: AuthState.person.email,
         }
       );
-      console.log(response);
+
       await AuthDispatch({
         // 디스패치날리면 리듀서로 날라감.
         type: REGISTER_SUCCESS,
         auth: response,
       });
-
-      await history.push('/login/person');
+      await openModal();
     } catch (error) {
       console.log(error);
       await AuthDispatch({
@@ -95,6 +90,7 @@ const RegisterForm = ({ history }) => {
 
   const onChange = e => {
     const { value, name } = e.target;
+
     AuthDispatch({
       type: CHANGE_FIELD,
       form: parse[parse.length - 1],
@@ -123,10 +119,9 @@ const RegisterForm = ({ history }) => {
       onChange={onChange}
       onSubmit={onSubmit}
       error={error}
-      modal={modal}
-      onCancel={onCancel}
-      onConfirm={onConfirm}
-      onAddress={onAddress}
+      modalOpen={modalOpen}
+      openModal={openModal}
+      closeModal={closeModal}
     />
   );
 };

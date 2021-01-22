@@ -12,7 +12,7 @@ import { login } from '../../lib/api/auth';
 import Button from './Button';
 import StyledContainer from './Container';
 import Responsive from './Responsive';
-
+import logo1 from '../images/logo1.png'
 const HeaderBlock = styled.div`
   width: 100%;
   height: 80px;
@@ -32,10 +32,23 @@ const HeaderBlock = styled.div`
   align-items: center;
   justify-content: space-between;
   .logo {
-    font-size: 1.125rem;
-    letter-spacing: 2px;
-    color:#fff;
+    width:70px;
+    height:80px;
+    background:url(${logo1}) no-repeat;
+    background-size:contain;
+    background-position:center;
+    color:transparent;
     line-height:80px;
+    .a11y {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      margin: -1px;
+      clip-path: polygon(0 0, 0 0, 0 0);
+      clip: rect(0 0 0 0);
+      clip: rect(0, 0, 0, 0);
+    }
   }
   .right {
     display: flex;
@@ -104,7 +117,7 @@ const Header = () => {
   return (
     <HeaderBlock>
       <Wrapper>
-        <div className="logo"><Link to="/">심봉사</Link></div>
+        <Link to="/"><div className="logo a11y">심봉사</div></Link>
         <div className="right">
           <UserInfo>{AuthState.login && AuthState.login.username}</UserInfo>
           {AuthState.login.username ? (
