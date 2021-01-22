@@ -13,25 +13,42 @@ const ErrorMessage = styled.div`
   margin-top: 1rem;
 `;
 
-const AuthFormBlock = styled.div`
-  h3 {
-    margin: 0;
-    color: ${palette.gray[8]};
-    margin-bottom: 1rem;
-  }
+export const AuthFormBlock = styled.div`
+  position:relative;
+  // h3 {
+  //   margin: 0;
+  //   color: ${palette.gray[8]};
+  //   margin-bottom: 1rem;
+  // }
+  .a11y {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    margin: -1px;
+    clip-path: polygon(0 0, 0 0, 0 0);
+    clip: rect(0 0 0 0);
+    clip: rect(0, 0, 0, 0);
 `;
 
 const StyledInput = styled.input`
   font-size: 1rem;
-  border: none;
-  border-bottom: 1px solid ${palette.gray[5]};
-  padding-bottom: 0.5rem;
+  border-radius: 0px;
+  border : 1px solid ${palette.gray[7]};
+  padding: 0.5rem;
   outline: none;
   width: 100%;
+  
+  &::placeholder{
+    font-weight: 300 ;
+    color:${palette.gray[6]};
+  }
 
   &:focus {
     color: $oc-teal-7;
-    border-bottom: 1px solid ${palette.gray[7]};
+    outline:2px solid ${palette.gray[5]};
+    border : 1px solid ${palette.gray[7]};
+    outline : none;
   }
 
   & + & {
@@ -53,13 +70,14 @@ const Footer = styled.div`
 
 const ButtonWithMarginTop = styled(Button)`
   margin-top: 1rem;
+  border-radius: 0px;
 `;
 
 
 const Login = ({ onChange, onSubmit, form, error }) => {
   return (
     <AuthFormBlock>
-      <h3>로그인</h3>
+      <h3 className="a11y">로그인</h3>
       <form onSubmit={onSubmit}>
         <StyledInput
           authoComplete="username"

@@ -1,21 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
 import Header from '../common/Header';
+import Button from '../../components/common/Button';
 import StyledContainer from '../common/Container';
 import { Link, withRouter } from 'react-router-dom';
 import AskRemoveModal from './AskRemoveModal';
-import Button from '../common/Button';
 
 const GlobalList = styled.div`
   h1{
     text-align:center;
     font-size:2rem;
-
   }
   button{
     margin-right:30px;
-    background-color:yellow;
-    color:black;
+    // background-color:yellow;
+    // color:black;
 
   }
   ul{
@@ -35,20 +34,20 @@ const GlobalList = styled.div`
     width:10%;
   }
   .ListDate{
-    width:10%;
+    width:15%;
   }
   .link span:nth-child(1){
-    width:10%
+    width:15%
   }
   .ListTitle{
-    width:40%;
+    width:30%;
     text-overflow:ellipsis;
     white-space:nowrap;
     word-wrap:normal;
     overflow:hidden;
   }
   .link span:nth-child(2){
-    width:40%;
+    width:30%;
     text-overflow:ellipsis;
     white-space:nowrap;
     word-wrap:normal;
@@ -57,7 +56,7 @@ const GlobalList = styled.div`
     margin-left : 20px;
   }
   .ListPeriod, .link span:nth-child(3){
-    width:20%;
+    width:25%;
   }
   .ListRemove{
     width:10%;
@@ -71,7 +70,7 @@ const GlobalList = styled.div`
   }
 `;
 
-const MyPost = ({ AuthState, ListState, ListName, onChecking, tokenID, modal, onConfirm, onCancel, onRemoveClick }) => {
+const MyPost = ({ AuthState, ListName, onChecking, modal, onConfirm, onCancel, onRemoveClick, onAllClick }) => {
   return (
     <div>
       <Header AuthState={AuthState} />
@@ -88,25 +87,23 @@ const MyPost = ({ AuthState, ListState, ListName, onChecking, tokenID, modal, on
             </li>
             {ListName.map(list=>(
               <li key = {list._id} id={list._id}>
-                <input type="checkbox" onClick={onChecking}></input>
+                <input type="checkbox" onChange={onChecking}></input>
                 <Link to ={`/${list._id}`} className="link">
                   <span>{list.publishedDate.slice(0,10)}</span>
                   <span >{list.title}</span>
                   <span>{list.periodStart}~{list.periodEnd}</span>
                 </Link>
-                <Button onClick={onRemoveClick}>선택삭제</Button>
-                <AskRemoveModal 
-                  visible ={modal}
-                  onConfirm={onConfirm}
-                  onCancel={onCancel}
-                  />
+                <button>삭제</button>
               </li>
             ))}
-            {console.log(ListState.lists[0].publishedDate.length)}
-            {console.log('LOCAL', tokenID)}
-            {console.log('LISTSTATE',ListState.lists.filter(list=>list.user._id === tokenID))}
           </ul>
-          {/* <Button onClick={onClickAll}>전체선택</Button> */}
+          {/* <Button onClick={onAllClick}>전체선택</Button> */}
+          <Button onClick={onRemoveClick}>선택삭제</Button>
+          <AskRemoveModal 
+            visible ={modal}
+            onConfirm={onConfirm}
+            onCancel={onCancel}
+            />
         </GlobalList>
       </StyledContainer>
     </div>

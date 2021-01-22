@@ -64,6 +64,8 @@ const WritePageForm = ({ history }) => {
     e.preventDefault();
     post();
     history.push('/');
+    
+  
   };
 
   useEffect(() => {
