@@ -100,8 +100,7 @@ text-align:center;
   display:inline-block;
   `
 function PostList({ AuthState, ListState }) {
-  const { company, person } = AuthState;
-  console.log(AuthState);
+  
   return (
     <div>
       <Header AuthState={AuthState} />
